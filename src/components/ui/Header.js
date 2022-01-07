@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const Header = props => {
+const Header = () => {
     const classes = useStyles();
     const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -80,7 +80,7 @@ const Header = props => {
         setSelectedIndex(index);
     }
 
-    const handleClose = event => {
+    const handleClose = () => {
         setAnchorEl(null);
         setOpen(false);
     }
