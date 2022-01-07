@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {AppBar, makeStyles, Toolbar, useScrollTrigger, Tab, Tabs, Button} from "@material-ui/core";
+import {AppBar, makeStyles, Toolbar, useScrollTrigger, Tab, Tabs, Button, Menu, MenuItem} from "@material-ui/core";
 import logo from "../../assets/logo.svg"
 import {Link} from "react-router-dom";
 
@@ -42,15 +42,40 @@ const useStyles = makeStyles(theme => ({
     logoContainer: {
         padding: 0,
         "&:hover": "transparent"
+    },
+    menu: {
+        backgroundColor: theme.palette.common.blue,
+        borderRadius: 0,
+        color: "white"
+    },
+    menuItem: {
+        ...theme.typography.tab,
+        opacity: 0.7,
+        "&:hover":{
+            opacity: 1
+        }
     }
+
 }))
 
 const Header = props => {
     const classes = useStyles();
     const [value, setValue] = useState(0);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [open, setOpen] = useState(false);
 
     const handleChange = (e, value) => {
-        setValue(value)
+        setValue(value);
+    }
+
+    const handleClick = e => {
+        setAnchorEl(e.currentTarget);
+        setOpen(true);
+    }
+
+    const handleClose = e => {
+        setAnchorEl(null);
+        setOpen(false);
     }
 
     useEffect(() => {
@@ -88,7 +113,15 @@ const Header = props => {
                             value={value}
                         >
                             <Tab className={classes.tab} component={Link} label="Home" to="/" on/>
-                            <Tab className={classes.tab} component={Link} label="Services" to="/services"/>
+                            <Tab
+                                aria-owns={anchorEl ? "simple-menu" : undefined}
+                                aria-haspopup={anchorEl ? true : undefined}
+                                className={classes.tab}
+                                component={Link}
+                                label="Services"
+                                onMouseOver={event => handleClick(event)}
+                                to="/services"
+                            />
                             <Tab className={classes.tab} component={Link} label="The Revolution" to="/revolution"/>
                             <Tab className={classes.tab} component={Link} label="About Us" to="/about"/>
                             <Tab className={classes.tab} component={Link} label="Contact Us" to="/contact"/>
@@ -96,6 +129,60 @@ const Header = props => {
                         <Button color="secondary" className={classes.button} variant="contained">
                             Free Estimate
                         </Button>
+                        <Menu
+                            anchorEl={anchorEl}
+                            classes={{paper: classes.menu}}
+                            elevation={0}
+                            id="simple-menu"
+                            MenuListProps={{onMouseLeave: handleClose}}
+                            onClose={handleClose}
+                            open={open}
+                        >
+                            <MenuItem
+                                component={Link}
+                                classes={{root: classes.menuItem}}
+                                onClick={() => {
+                                    handleClose();
+                                    setValue(1);
+                                }}
+                                to="/services"
+                            >
+                                Services
+                            </MenuItem>
+                            <MenuItem
+                                component={Link}
+                                classes={{root: classes.menuItem}}
+                                onClick={() => {
+                                    handleClose();
+                                    setValue(1);
+                                }}
+                                to="/custom-software"
+                            >
+                                Custom software development
+                            </MenuItem>
+                            <MenuItem
+                                component={Link}
+                                classes={{root: classes.menuItem}}
+                                onClick={() => {
+                                    handleClose();
+                                    setValue(1);
+                                }}
+                                to="/mobile-apps"
+                            >
+                                Mobile app development
+                            </MenuItem>
+                            <MenuItem
+                                component={Link}
+                                classes={{root: classes.menuItem}}
+                                onClick={() => {
+                                    handleClose();
+                                    setValue(1);
+                                }}
+                                to="/websites"
+                            >
+                                Website development
+                            </MenuItem>
+                        </Menu>
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
