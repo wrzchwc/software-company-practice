@@ -4,6 +4,7 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import theme from "./ui/Theme"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PlaceHolder from "./PlaceHolder";
+import {Footer} from "./ui/Footer";
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/contact" element={<PlaceHolder label="Contact Us"/>}/>
                     <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
                 </Routes>
+                <Footer/>
             </BrowserRouter>
         </ThemeProvider>
     );
