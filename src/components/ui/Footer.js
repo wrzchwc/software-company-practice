@@ -13,66 +13,174 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export const Footer = () => {
+export const Footer = ({setValue, setSelectedIndex}) => {
     const classes = useStyles();
     return (
         <footer className={`${classes.footer} footer`}>
             <Grid className={"mainContainer"} container justify={"center"}>
                 <Grid className={classes.gridItem} item>
                     <Grid container direction={"column"} spacing={2}>
-                        <Grid component={Link} className={"link"} item to={"/"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={() => {
+                                setValue(0);
+                            }}
+                            to={"/"}
+                        >
                             Home
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid className={classes.gridItem} item>
                     <Grid container direction={"column"} spacing={2}>
-                        <Grid component={Link} className={"link"} item to={"/services"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={() => {
+                                setValue(1);
+                                setSelectedIndex(0);
+                            }}
+                            to={"/services"}
+                        >
                             Services
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/custom-software"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={() => {
+                                setValue(1);
+                                setSelectedIndex(1);
+                            }}
+                            to={"/custom-software"}
+                        >
                             Custom Software Development
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/mobile-apps"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={() => {
+                                setValue(1);
+                                setSelectedIndex(2);
+                            }}
+                            to={"/mobile-apps"}
+                        >
                             Mobile App Development
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/websites"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(1);
+                                setSelectedIndex(3);
+                            }}
+                            to={"/websites"}
+                        >
                             Website Development
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid className={classes.gridItem} item>
                     <Grid container direction={"column"} spacing={2}>
-                        <Grid component={Link} className={"link"} item to={"/revolution"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(2);
+                            }}
+                            to={"/revolution"}
+                        >
                             The Revolution
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/revolution"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(2);
+                            }}
+                            to={"/revolution"}
+                        >
                             Vision
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/revolution"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(2);
+                            }}
+                            to={"/revolution"}
+                        >
                             Technology
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/revolution"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(2);
+                            }}
+                            to={"/revolution"}
+                        >
                             Process
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid className={classes.gridItem} item>
                     <Grid container direction={"column"} spacing={2}>
-                        <Grid component={Link} className={"link"} item to={"/about"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(3);
+                            }}
+                            to={"/about"}
+                        >
                             About us
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/about"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(3);
+                            }}
+                            to={"/about"}
+                        >
                             History
                         </Grid>
-                        <Grid component={Link} className={"link"} item to={"/about"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(3);
+                            }}
+                            to={"/about"}
+                        >
                             Team
                         </Grid>
                     </Grid>
                 </Grid>
                 <Grid className={classes.gridItem} item>
                     <Grid container direction={"column"} spacing={2}>
-                        <Grid component={Link} className={"link"} item to={"/contact"}>
+                        <Grid
+                            component={Link}
+                            className={"link"}
+                            item
+                            onClick={()=>{
+                                setValue(4);
+                            }}
+                            to={"/contact"}
+                        >
                             Contact us
                         </Grid>
                     </Grid>

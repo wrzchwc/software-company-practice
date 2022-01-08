@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./ui/Header";
 import {ThemeProvider} from "@material-ui/core/styles";
 import theme from "./ui/Theme"
@@ -8,10 +8,18 @@ import {Footer} from "./ui/Footer";
 
 
 const App = () => {
+    const [value, setValue] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Header/>
+                <Header
+                    selectedIndex={selectedIndex}
+                    setSelectedIndex={setSelectedIndex}
+                    setValue={setValue}
+                    value={value}
+                />
                 <Routes>
                     <Route path="/" element={<PlaceHolder label="Home"/>}/>
                     <Route path="/services" element={<PlaceHolder label="Services"/>}/>
@@ -23,7 +31,12 @@ const App = () => {
                     <Route path="/contact" element={<PlaceHolder label="Contact Us"/>}/>
                     <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
                 </Routes>
-                <Footer/>
+                <Footer
+                    selectedIndex={selectedIndex}
+                    setSelectedIndex={setSelectedIndex}
+                    setValue={setValue}
+                    value={value}
+                />
             </BrowserRouter>
         </ThemeProvider>
     );

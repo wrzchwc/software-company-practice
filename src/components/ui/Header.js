@@ -58,12 +58,10 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const Header = () => {
+const Header =({selectedIndex, setSelectedIndex, setValue, value})=> {
     const classes = useStyles();
-    const [value, setValue] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setOpen] = useState(false);
-    const [selectedIndex, setSelectedIndex] = useState(0);
 
     const handleChange = (event, value) => {
         setValue(value);
@@ -110,7 +108,7 @@ const Header = () => {
             setValue(0)
         } else if (pathname === "/services" && value !== 1) {
             setValue(1);
-            setSelectedIndex(1);
+            setSelectedIndex(0);
         } else if (pathname === "/revolution" && value !== 2) {
             setValue(2);
         } else if (pathname === "/about" && value !== 3) {
@@ -129,7 +127,7 @@ const Header = () => {
         } else if (pathname === "/estimate" && value !== 5){
             setValue(5);
         }
-    }, [value]);
+    }, [setSelectedIndex, setValue, value]);
 
     return (
         <>
