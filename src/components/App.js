@@ -5,6 +5,7 @@ import theme from "./ui/Theme"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
+import {Contact} from "./Contact";
 
 
 const App = () => {
@@ -28,7 +29,7 @@ const App = () => {
                     <Route path="/websites" element={<PlaceHolder label="Websites"/>}/>
                     <Route path="/revolution" element={<PlaceHolder label="Revolution"/>}/>
                     <Route path="/about" element={<PlaceHolder label="About Us"/>}/>
-                    <Route path="/contact" element={<PlaceHolder label="Contact Us"/>}/>
+                    <Route path="/contact" element={<Contact/>}/>
                     <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
                 </Routes>
                 <Footer
