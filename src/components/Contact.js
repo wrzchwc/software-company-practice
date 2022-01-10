@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Button, Grid, makeStyles, useTheme, TextField, Typography} from '@material-ui/core';
+import {Button, Dialog, DialogContent, Grid, makeStyles, useTheme, TextField, Typography} from '@material-ui/core';
 import background from "../assets/background.jpg";
 import phoneIcon from "../assets/phone.svg";
 import emailIcon from "../assets/email.svg";
@@ -50,6 +50,7 @@ export const Contact = () => {
     const [phone, setPhone] = useState('');
     const [phoneHelper, setPhoneHelper] = useState('');
     const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
 
     const onChange = event => {
         let valid;
@@ -167,7 +168,14 @@ export const Contact = () => {
                             />
                         </Grid>
                         <Grid item container justify={"center"} style={{marginTop: "2em"}}>
-                            <Button variant={"contained"} disabled={canBeSent()} className={classes.sendButton}>
+                            <Button
+                                variant={"contained"}
+                                disabled={canBeSent()}
+                                className={classes.sendButton}
+                                onClick={() => {
+                                    setOpen(true)
+                                }}
+                            >
                                 Send message
                                 <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
                             </Button>
@@ -175,6 +183,87 @@ export const Contact = () => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+                PaperProps={{style: {padding: "5em"}}}
+                style={{zIndex: 1302}}
+            >
+                <DialogContent>
+                    <Grid container direction={"column"}>
+                        <Grid item>
+                            <Typography variant={"h4"} gutterBottom align={"center"}>Confirm Message</Typography>
+                        </Grid>
+                        <Grid item style={{marginBottom: "0.5em"}}>
+                            <TextField
+                                label={"name"}
+                                id={"name"}
+                                value={name}
+                                fullWidth
+                                onChange={event => {
+                                    setName(event.target.value)
+                                }}
+                            />
+                        </Grid>
+                        <Grid item style={{marginBottom: "0.5em"}}>
+                            <TextField
+                                label={"email"}
+                                id={"email"}
+                                error={emailHelper.length !== 0}
+                                helperText={emailHelper}
+                                value={email}
+                                fullWidth
+                                onChange={onChange}
+                            />
+                        </Grid>
+                        <Grid item style={{marginBottom: "0.5em"}}>
+                            <TextField
+                                label={"phone"}
+                                id={"phone"}
+                                value={phone}
+                                error={phoneHelper.length !== 0}
+                                helperText={phoneHelper}
+                                fullWidth
+                                onChange={onChange}
+                            />
+                        </Grid>
+                        <Grid item style={{maxWidth: "20em"}}>
+                            <TextField
+                                inputProps={{disableUnderline: true}}
+                                value={message}
+                                className={classes.message}
+                                fullWidth
+                                id={"message"}
+                                multiline
+                                rows={10}
+                                onChange={event => {
+                                    setMessage(event.target.value)
+                                }}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid item container style={{marginTop: "2em"}} alignItems={"center"}>
+                        <Grid item>
+                            <Button color={"primary"} onClick={()=>{setOpen(false)}} style={{fontWeight: 300}}>
+                                Cancel
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant={"contained"}
+                                disabled={canBeSent()}
+                                className={classes.sendButton}
+                                onClick={() => {
+                                    setOpen(true)
+                                }}
+                            >
+                                Send message
+                                <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </DialogContent>
+            </Dialog>
             <Grid item container className={classes.background} lg={8} xl={9}/>
         </Grid>
     );
