@@ -46,8 +46,38 @@ export const Contact = () => {
     const theme = useTheme();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [emailHelper, setEmailHelper] = useState('');
     const [phone, setPhone] = useState('');
+    const [phoneHelper, setPhoneHelper] = useState('');
     const [message, setMessage] = useState('');
+
+    const onChange = event => {
+        let valid;
+        let {id, value} = event.target;
+        switch (id) {
+            case "email":
+                setEmail(value);
+                valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value);
+                setEmailHelper(!valid ? "Invalid email" : "");
+                break;
+            case "phone":
+                setPhone(value);
+                valid = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+                setPhoneHelper(!valid ? "Invalid phone" : "");
+                break;
+            default:
+                break;
+        }
+    }
+
+    const canBeSent = () => {
+        return name.length === 0 ||
+            message.length === 0 ||
+            phoneHelper.length !== 0 ||
+            emailHelper.length !== 0 ||
+            email.length === 0 ||
+            phone.length === 0;
+    }
 
     return (
         <Grid container direction={"row"}>
@@ -56,8 +86,9 @@ export const Contact = () => {
                     <Grid container direction={"column"}>
                         <Grid item>
                             <Typography variant={"h2"} style={{lineHeight: 1}}>Contact Us</Typography>
-                            <Typography variant={"body1"} style={{color: theme.palette.common.blue}}>We're
-                                waiting</Typography>
+                            <Typography variant={"body1"} style={{color: theme.palette.common.blue}}>
+                                We're waiting
+                            </Typography>
                         </Grid>
                         <Grid item container style={{marginTop: "2em"}}>
                             <Grid item>
@@ -65,7 +96,9 @@ export const Contact = () => {
                             </Grid>
                             <Grid item>
                                 <Typography variant={"body1"} className={classes.contactInfo}>
-                                    (555) 555-5555
+                                    <a href="tel:5555555555" style={{color: "inherit", textDecoration: "none"}}>
+                                        (555) 555-5555
+                                    </a>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -75,7 +108,12 @@ export const Contact = () => {
                             </Grid>
                             <Grid item>
                                 <Typography variant={"body1"} className={classes.contactInfo}>
-                                    zachary@gmail.com
+                                    <a
+                                        href="mailto:zachary@gmail.com"
+                                        style={{color: "inherit", textDecoration: "none"}}
+                                    >
+                                        zachary@gmail.com
+                                    </a>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -95,11 +133,11 @@ export const Contact = () => {
                                 <TextField
                                     label={"email"}
                                     id={"email"}
+                                    error={emailHelper.length !== 0}
+                                    helperText={emailHelper}
                                     value={email}
                                     fullWidth
-                                    onChange={event => {
-                                        setEmail(event.target.value)
-                                    }}
+                                    onChange={onChange}
                                 />
                             </Grid>
                             <Grid item style={{marginBottom: "0.5em"}}>
@@ -107,10 +145,10 @@ export const Contact = () => {
                                     label={"phone"}
                                     id={"phone"}
                                     value={phone}
+                                    error={phoneHelper.length !== 0}
+                                    helperText={phoneHelper}
                                     fullWidth
-                                    onChange={event => {
-                                        setPhone(event.target.value)
-                                    }}
+                                    onChange={onChange}
                                 />
                             </Grid>
                         </Grid>
@@ -129,7 +167,7 @@ export const Contact = () => {
                             />
                         </Grid>
                         <Grid item container justify={"center"} style={{marginTop: "2em"}}>
-                            <Button variant={"contained"} className={classes.sendButton}>
+                            <Button variant={"contained"} disabled={canBeSent()} className={classes.sendButton}>
                                 Send message
                                 <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
                             </Button>
