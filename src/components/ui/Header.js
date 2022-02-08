@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {AppBar, makeStyles, Toolbar, useScrollTrigger, Tab, Tabs, Button, Menu, MenuItem} from "@material-ui/core";
 import logo from "../../assets/logo.svg"
 import {Link} from "react-router-dom";
+import {useMediaQuery} from "@material-ui/core";
+import {useTheme} from "@material-ui/core";
 
 const ElevationScroll = props => {
     const {children} = props;
@@ -19,10 +21,22 @@ const ElevationScroll = props => {
 const useStyles = makeStyles(theme => ({
     toolbarMargin: {
         ...theme.mixins.toolbar,
-        marginBottom: "3em"
+        marginBottom: "3em",
+        [theme.breakpoints.down("md")]: {
+            marginBottom: "2em"
+        },
+        [theme.breakpoints.down("xs")]:{
+            marginBottom:"1.25em"
+        }
     },
     logo: {
-        height: "8em"
+        height: "8em",
+        [theme.breakpoints.down("md")]: {
+            height: "7em"
+        },
+        [theme.breakpoints.down("xs")]:{
+            height:"5.5em"
+        }
     },
     tabContainer: {
         marginLeft: "auto"
@@ -58,8 +72,10 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-const Header =({selectedIndex, setSelectedIndex, setValue, value})=> {
+const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
     const classes = useStyles();
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.down("md"));
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setOpen] = useState(false);
 
@@ -115,19 +131,77 @@ const Header =({selectedIndex, setSelectedIndex, setValue, value})=> {
             setValue(3);
         } else if (pathname === "/contact" && value !== 4) {
             setValue(4);
-        } else if (pathname === "/custom-software" && value !== 1){
+        } else if (pathname === "/custom-software" && value !== 1) {
             setValue(1);
             setSelectedIndex(1);
-        } else if (pathname === "/mobile-apps" && value !== 1){
+        } else if (pathname === "/mobile-apps" && value !== 1) {
             setValue(1);
             setSelectedIndex(2);
-        } else if(pathname === "/websites" && value !== 1){
+        } else if (pathname === "/websites" && value !== 1) {
             setValue(1);
             setSelectedIndex(3);
-        } else if (pathname === "/estimate" && value !== 5){
+        } else if (pathname === "/estimate" && value !== 5) {
             setValue(5);
         }
     }, [setSelectedIndex, setValue, value]);
+
+    const tabs = (
+        <>
+            <Tabs
+                className={classes.tabContainer}
+                indicatorColor="primary"
+                onChange={handleChange}
+                value={value}
+            >
+                <Tab className={classes.tab} component={Link} label="Home" to="/" on/>
+                <Tab
+                    aria-owns={anchorEl ? "simple-menu" : undefined}
+                    aria-haspopup={anchorEl ? true : undefined}
+                    className={classes.tab}
+                    component={Link}
+                    label="Services"
+                    onMouseOver={event => handleClick(event)}
+                    to="/services"
+                />
+                <Tab className={classes.tab} component={Link} label="The Revolution" to="/revolution"/>
+                <Tab className={classes.tab} component={Link} label="About Us" to="/about"/>
+                <Tab className={classes.tab} component={Link} label="Contact Us" to="/contact"/>
+            </Tabs>
+            <Button color="secondary" className={classes.button} variant="contained">
+                Free Estimate
+            </Button>
+            <Menu
+                anchorEl={anchorEl}
+                classes={{paper: classes.menu}}
+                elevation={0}
+                id="simple-menu"
+                MenuListProps={{onMouseLeave: handleClose}}
+                onClose={handleClose}
+                open={open}
+            >
+                {
+                    menuOptions.map((option, i) => {
+                        return (
+                            <MenuItem
+                                classes={{root: classes.menuItem}}
+                                component={Link}
+                                onClick={event => {
+                                    handleMenuItemClick(event, i);
+                                    setValue(1);
+                                    handleClose()
+                                }}
+                                key={option}
+                                selected={i === selectedIndex && value === 1}
+                                to={option.link}
+                            >
+                                {option.name}
+                            </MenuItem>
+                        );
+                    })
+                }
+            </Menu>
+        </>
+    )
 
     return (
         <>
@@ -143,59 +217,7 @@ const Header =({selectedIndex, setSelectedIndex, setValue, value})=> {
                         >
                             <img src={logo} alt="company logo" className={classes.logo}/>
                         </Button>
-                        <Tabs
-                            className={classes.tabContainer}
-                            indicatorColor="primary"
-                            onChange={handleChange}
-                            value={value}
-                        >
-                            <Tab className={classes.tab} component={Link} label="Home" to="/" on/>
-                            <Tab
-                                aria-owns={anchorEl ? "simple-menu" : undefined}
-                                aria-haspopup={anchorEl ? true : undefined}
-                                className={classes.tab}
-                                component={Link}
-                                label="Services"
-                                onMouseOver={event => handleClick(event)}
-                                to="/services"
-                            />
-                            <Tab className={classes.tab} component={Link} label="The Revolution" to="/revolution"/>
-                            <Tab className={classes.tab} component={Link} label="About Us" to="/about"/>
-                            <Tab className={classes.tab} component={Link} label="Contact Us" to="/contact"/>
-                        </Tabs>
-                        <Button color="secondary" className={classes.button} variant="contained">
-                            Free Estimate
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl}
-                            classes={{paper: classes.menu}}
-                            elevation={0}
-                            id="simple-menu"
-                            MenuListProps={{onMouseLeave: handleClose}}
-                            onClose={handleClose}
-                            open={open}
-                        >
-                            {
-                                menuOptions.map((option, i) => {
-                                    return (
-                                        <MenuItem
-                                            classes={{root: classes.menuItem}}
-                                            component={Link}
-                                            onClick={event => {
-                                                handleMenuItemClick(event, i);
-                                                setValue(1);
-                                                handleClose()
-                                            }}
-                                            key={option}
-                                            selected={i === selectedIndex && value === 1}
-                                            to={option.link}
-                                        >
-                                            {option.name}
-                                        </MenuItem>
-                                    );
-                                })
-                            }
-                        </Menu>
+                        {matches ? null : tabs}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
