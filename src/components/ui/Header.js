@@ -135,48 +135,70 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
     const menuOptions = [
         {
             name: "Services",
-            link: "/services"
+            link: "/services",
+            activeIndex: 1,
+            selectedIndex: 0
         },
         {
             name: "Custom software development",
-            link: "/custom-software"
+            link: "/custom-software",
+            activeIndex: 1,
+            selectedIndex: 1
         },
         {
             name: "Mobile app development",
-            link: "/mobile-apps"
+            link: "/mobile-apps",
+            activeIndex: 1,
+            selectedIndex: 2
         },
         {
             name: "Website development",
-            link: "/websites"
+            link: "/websites",
+            activeIndex: 1,
+            selectedIndex: 3
         }
     ];
 
-    useEffect(() => {
-        let {pathname} = window.location;
-        if (pathname === "/" && value !== 0) {
-            setValue(0)
-        } else if (pathname === "/services" && value !== 1) {
-            setValue(1);
-            setSelectedIndex(0);
-        } else if (pathname === "/revolution" && value !== 2) {
-            setValue(2);
-        } else if (pathname === "/about" && value !== 3) {
-            setValue(3);
-        } else if (pathname === "/contact" && value !== 4) {
-            setValue(4);
-        } else if (pathname === "/custom-software" && value !== 1) {
-            setValue(1);
-            setSelectedIndex(1);
-        } else if (pathname === "/mobile-apps" && value !== 1) {
-            setValue(1);
-            setSelectedIndex(2);
-        } else if (pathname === "/websites" && value !== 1) {
-            setValue(1);
-            setSelectedIndex(3);
-        } else if (pathname === "/estimate" && value !== 5) {
-            setValue(5);
+    const routes = [
+        {
+            name: "Home",
+            link: "/",
+            activeIndex: 0
+        },
+        {
+            name: "Services",
+            link: "/services",
+            activeIndex: 1
+        },
+        {
+            name: "The Revolution",
+            link: "/revolution",
+            activeIndex: 2
+        },
+        {
+            name: "About Us",
+            link: "/about",
+            activeIndex: 3
+        },
+        {
+            name: "Contact Us",
+            link: "/contact",
+            activeIndex: 4
         }
-    }, [setSelectedIndex, setValue, value]);
+    ]
+
+    useEffect(() => {
+        [...menuOptions, ...routes].forEach(route => {
+            if (window.location.pathname === `${route.link}`) {
+                if (value !== route.activeIndex) {
+                    setValue(route.activeIndex);
+                    if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
+                        setSelectedIndex(route.selectedIndex);
+                    }
+                }
+            }
+        })
+    }, [menuOptions, routes, selectedIndex, setSelectedIndex, setValue, value]);
 
     const tabs = (
         <>
@@ -264,7 +286,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 0?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             Home
                         </ListItemText>
@@ -282,7 +304,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 1?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             Services
                         </ListItemText>
@@ -300,7 +322,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 2?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             Revolution
                         </ListItemText>
@@ -318,7 +340,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 3?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             About Us
                         </ListItemText>
@@ -336,7 +358,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 4?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             Contact Us
                         </ListItemText>
@@ -355,7 +377,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 5?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                            className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
                         >
                             Free Estimate
                         </ListItemText>
