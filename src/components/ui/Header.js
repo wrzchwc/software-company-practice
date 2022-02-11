@@ -168,7 +168,10 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
         {
             name: "Services",
             link: "/services",
-            activeIndex: 1
+            activeIndex: 1,
+            ariaOwns: anchorEl ? "simple-menu" : undefined,
+            ariaPopup: anchorEl ? true : undefined,
+            mouseOver: event => handleClick(event)
         },
         {
             name: "The Revolution",
@@ -208,19 +211,17 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 onChange={handleChange}
                 value={value}
             >
-                <Tab className={classes.tab} component={Link} label="Home" to="/" on/>
-                <Tab
-                    aria-owns={anchorEl ? "simple-menu" : undefined}
-                    aria-haspopup={anchorEl ? true : undefined}
-                    className={classes.tab}
-                    component={Link}
-                    label="Services"
-                    onMouseOver={event => handleClick(event)}
-                    to="/services"
-                />
-                <Tab className={classes.tab} component={Link} label="The Revolution" to="/revolution"/>
-                <Tab className={classes.tab} component={Link} label="About Us" to="/about"/>
-                <Tab className={classes.tab} component={Link} label="Contact Us" to="/contact"/>
+                {routes.map((route, index) => (
+                    <Tab
+                        className={classes.tab}
+                        component={Link}
+                        to={route.link}
+                        label={route.name}
+                        aria-owns={route.ariaOwns}
+                        aria-haspopup={route.ariaPopup}
+                        onMouseOver={route.mouseOver}
+                    />
+                ))}
             </Tabs>
             <Button color="secondary" className={classes.button} variant="contained">
                 Free Estimate
