@@ -1,9 +1,23 @@
 import React, {Fragment, useEffect, useState} from "react";
-import {AppBar, makeStyles, Toolbar, useScrollTrigger, Tab, Tabs, Button, Menu, MenuItem} from "@material-ui/core";
+import {
+    AppBar,
+    makeStyles,
+    Toolbar,
+    useScrollTrigger,
+    Tab,
+    Tabs,
+    Button,
+    Menu,
+    MenuItem,
+    IconButton
+} from "@material-ui/core";
 import logo from "../../assets/logo.svg"
 import {Link} from "react-router-dom";
 import {useMediaQuery} from "@material-ui/core";
 import {useTheme} from "@material-ui/core";
+import {SwipeableDrawer, List, ListItem, ListItemText} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+
 
 const ElevationScroll = props => {
     const {children} = props;
@@ -23,10 +37,10 @@ const useStyles = makeStyles(theme => ({
         ...theme.mixins.toolbar,
         marginBottom: "3em",
         [theme.breakpoints.down("md")]: {
-            marginBottom: "2em"
+            marginBottom: "2.25em"
         },
-        [theme.breakpoints.down("xs")]:{
-            marginBottom:"1.25em"
+        [theme.breakpoints.down("xs")]: {
+            marginBottom: "1.25em"
         }
     },
     logo: {
@@ -34,8 +48,8 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("md")]: {
             height: "7em"
         },
-        [theme.breakpoints.down("xs")]:{
-            height:"5.5em"
+        [theme.breakpoints.down("xs")]: {
+            height: "5.5em"
         }
     },
     tabContainer: {
@@ -68,35 +82,54 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             opacity: 1
         }
+    },
+    drawerIconContainer: {
+        marginLeft: "auto",
+        "&:hover": {
+            backgroundColor: "transparent"
+        }
+    },
+    drawerIcon: {
+        height: "100px",
+        width: "100px"
+    },
+    drawerItem: {
+        ...theme.typography.tab,
+        color: "white",
+        opacity: 0.7
+    },
+    drawerItemSelected: {
+        opacity: 1
     }
-
 }))
 
 const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
     const classes = useStyles();
     const theme = useTheme();
+    const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
     const matches = useMediaQuery(theme.breakpoints.down("md"));
     const [anchorEl, setAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
+    const [openMenu, setOpenMenu] = useState(false);
+    const [openDrawer, setOpenDrawer] = useState(false);
 
-    const handleChange = (event, value) => {
-        setValue(value);
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
     }
 
     const handleClick = event => {
         setAnchorEl(event.currentTarget);
-        setOpen(true);
+        setOpenMenu(true);
     }
 
     const handleMenuItemClick = (event, index) => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
         setSelectedIndex(index);
     }
 
     const handleClose = () => {
         setAnchorEl(null);
-        setOpen(false);
+        setOpenMenu(false);
     }
 
     const menuOptions = [
@@ -177,7 +210,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 id="simple-menu"
                 MenuListProps={{onMouseLeave: handleClose}}
                 onClose={handleClose}
-                open={open}
+                open={openMenu}
             >
                 {
                     menuOptions.map((option, i) => {
@@ -203,6 +236,139 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
         </>
     )
 
+    const drawer = (
+        <React.Fragment>
+            <SwipeableDrawer
+                disableBackdropTransition={!iOS}
+                disableDiscovery={iOS}
+                open={openDrawer}
+                onClose={() => setOpenDrawer(false)}
+                onOpen={() => setOpenDrawer(true)}
+                PaperProps={{
+                    sx: {
+                        backgroundColor: theme.palette.common.blue
+                    }
+                }}
+            >
+                <List disablePadding>
+                    <ListItem
+                        component={Link}
+                        to={"/"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(0);
+                        }}
+                        selected={value === 0}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 0?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            Home
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem
+                        component={Link}
+                        to={"/services"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(1);
+                        }}
+                        selected={value === 1}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 1?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            Services
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem
+                        component={Link}
+                        to={"/revolution"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(2);
+                        }}
+                        selected={value === 2}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 2?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            Revolution
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem
+                        component={Link}
+                        to={"/about"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(3);
+                        }}
+                        selected={value === 3}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 3?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            About Us
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem
+                        component={Link}
+                        to={"/contact"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(4);
+                        }}
+                        selected={value === 4}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 4?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            Contact Us
+                        </ListItemText>
+                    </ListItem>
+                    <ListItem
+                        component={Link}
+                        to={"/estimate"}
+                        divider
+                        button
+                        onClick={() => {
+                            setOpenDrawer(false);
+                            setValue(5);
+                        }}
+                        style={{backgroundColor: theme.palette.common.orange}}
+                        selected={value === 5}
+                    >
+                        <ListItemText
+                            disableTypography
+                            className={value === 5?[classes.drawerItem, classes.drawerItemSelected]:classes.drawerItem}
+                        >
+                            Free Estimate
+                        </ListItemText>
+                    </ListItem>
+                </List>
+            </SwipeableDrawer>
+            <IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)}
+                        disableRipple>
+                <MenuIcon fontSize={"large"}/>
+            </IconButton>
+        </React.Fragment>
+    )
+
     return (
         <>
             <ElevationScroll>
@@ -217,7 +383,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                         >
                             <img src={logo} alt="company logo" className={classes.logo}/>
                         </Button>
-                        {matches ? null : tabs}
+                        {matches ? drawer : tabs}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
