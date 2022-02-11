@@ -213,6 +213,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
             >
                 {routes.map((route, index) => (
                     <Tab
+                        key={`${route}${index}`}
                         className={classes.tab}
                         component={Link}
                         to={route.link}
@@ -234,6 +235,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 MenuListProps={{onMouseLeave: handleClose}}
                 onClose={handleClose}
                 open={openMenu}
+                keepMounted
             >
                 {
                     menuOptions.map((option, i) => {
@@ -274,96 +276,29 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 }}
             >
                 <List disablePadding>
-                    <ListItem
-                        component={Link}
-                        to={"/"}
-                        divider
-                        button
-                        onClick={() => {
-                            setOpenDrawer(false);
-                            setValue(0);
-                        }}
-                        selected={value === 0}
-                    >
-                        <ListItemText
-                            disableTypography
-                            className={value === 0 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
-                        >
-                            Home
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/services"}
-                        divider
-                        button
-                        onClick={() => {
-                            setOpenDrawer(false);
-                            setValue(1);
-                        }}
-                        selected={value === 1}
-                    >
-                        <ListItemText
-                            disableTypography
-                            className={value === 1 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
-                        >
-                            Services
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/revolution"}
-                        divider
-                        button
-                        onClick={() => {
-                            setOpenDrawer(false);
-                            setValue(2);
-                        }}
-                        selected={value === 2}
-                    >
-                        <ListItemText
-                            disableTypography
-                            className={value === 2 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
-                        >
-                            Revolution
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/about"}
-                        divider
-                        button
-                        onClick={() => {
-                            setOpenDrawer(false);
-                            setValue(3);
-                        }}
-                        selected={value === 3}
-                    >
-                        <ListItemText
-                            disableTypography
-                            className={value === 3 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
-                        >
-                            About Us
-                        </ListItemText>
-                    </ListItem>
-                    <ListItem
-                        component={Link}
-                        to={"/contact"}
-                        divider
-                        button
-                        onClick={() => {
-                            setOpenDrawer(false);
-                            setValue(4);
-                        }}
-                        selected={value === 4}
-                    >
-                        <ListItemText
-                            disableTypography
-                            className={value === 4 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
-                        >
-                            Contact Us
-                        </ListItemText>
-                    </ListItem>
+                    {routes.map((route, index) => (
+                        <ListItem
+                            key={`${route}${route.activeIndex}`}
+                            button
+                            divider
+                            component={Link}
+                            to={route.link}
+                            selected={value === route.activeIndex}
+                            onClick={() => {
+                                setOpenDrawer(false);
+                                setValue(route.activeIndex);
+                            }}>
+                            <ListItemText
+                                disableTypography
+                                className={
+                                    value === route.activeIndex ?
+                                        [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem
+                                }
+                            >
+                                {route.name}
+                            </ListItemText>
+                        </ListItem>
+                    ))}
                     <ListItem
                         component={Link}
                         to={"/estimate"}
