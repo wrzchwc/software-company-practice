@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
+import {LandingPage} from "./LandingPage";
 
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
                     value={value}
                 />
                 <Routes>
-                    <Route path="/" element={<PlaceHolder label="Home"/>}/>
+                    <Route path="/" element={<LandingPage/>}/>
                     <Route path="/services" element={<PlaceHolder label="Services"/>}/>
                     <Route path="/custom-software" element={<PlaceHolder label="Custom software"/>}/>
                     <Route path="/mobile-apps" element={<PlaceHolder label="Mobile apps"/>}/>

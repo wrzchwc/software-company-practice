@@ -65,7 +65,10 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "50px",
         height: "45px",
         marginLeft: "25px",
-        marginRight: "50px"
+        marginRight: "50px",
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.main
+        }
     },
     logoContainer: {
         padding: 0,
@@ -99,7 +102,12 @@ const useStyles = makeStyles(theme => ({
         opacity: 0.7
     },
     drawerItemSelected: {
-        opacity: 1
+        "& .MuiListItemText-root":{
+            opacity: 1
+        },
+    },
+    appbar: {
+        zIndex: theme.zIndex.modal + 1
     }
 }))
 
@@ -236,6 +244,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 onClose={handleClose}
                 open={openMenu}
                 keepMounted
+                style={{zIndex: 1302}}
             >
                 {
                     menuOptions.map((option, i) => {
@@ -248,7 +257,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                                     setValue(1);
                                     handleClose()
                                 }}
-                                key={option}
+                                key={`${option}${i}`}
                                 selected={i === selectedIndex && value === 1}
                                 to={option.link}
                             >
@@ -275,6 +284,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                     }
                 }}
             >
+                <div className={classes.toolbarMargin}/>
                 <List disablePadding>
                     {routes.map((route, index) => (
                         <ListItem
@@ -284,19 +294,12 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                             component={Link}
                             to={route.link}
                             selected={value === route.activeIndex}
+                            classes={{selected: classes.drawerItemSelected}}
                             onClick={() => {
                                 setOpenDrawer(false);
                                 setValue(route.activeIndex);
                             }}>
-                            <ListItemText
-                                disableTypography
-                                className={
-                                    value === route.activeIndex ?
-                                        [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem
-                                }
-                            >
-                                {route.name}
-                            </ListItemText>
+                            <ListItemText disableTypography className={classes.drawerItem}>{route.name}</ListItemText>
                         </ListItem>
                     ))}
                     <ListItem
@@ -310,10 +313,11 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                         }}
                         style={{backgroundColor: theme.palette.common.orange}}
                         selected={value === 5}
+                        classes={{selected: classes.drawerItemSelected}}
                     >
                         <ListItemText
                             disableTypography
-                            className={value === 5 ? [classes.drawerItem, classes.drawerItemSelected] : classes.drawerItem}
+                            className={classes.drawerItem}
                         >
                             Free Estimate
                         </ListItemText>
@@ -330,7 +334,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
     return (
         <>
             <ElevationScroll>
-                <AppBar position="fixed">
+                <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar disableGutters>
                         <Button
                             className={classes.logoContainer}

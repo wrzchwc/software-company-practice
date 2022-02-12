@@ -155,7 +155,7 @@ export const Contact = () => {
                         </Grid>
                         <Grid item style={{maxWidth: "20em"}}>
                             <TextField
-                                inputProps={{disableUnderline: true}}
+                                InputProps={{disableUnderline: true}}
                                 value={message}
                                 className={classes.message}
                                 fullWidth
