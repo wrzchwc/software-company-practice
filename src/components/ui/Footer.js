@@ -85,7 +85,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                                 }}
                                 to={"/mobile-apps"}
                             >
-                                Mobile App Development
+                                iOS/Android App Development
                             </Grid>
                             <Grid
                                 component={Link}

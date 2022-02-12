@@ -154,7 +154,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
             selectedIndex: 1
         },
         {
-            name: "Mobile app development",
+            name: "iOS/Android app development",
             link: "/mobile-apps",
             activeIndex: 1,
             selectedIndex: 2
