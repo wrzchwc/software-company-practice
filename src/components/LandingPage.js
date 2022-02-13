@@ -9,6 +9,7 @@ import {Button} from "@material-ui/core"
 import animationData from '../animations/landinganimation/data';
 import customSoftwareIcon from '../assets/Custom Software Icon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
+import websitesIcon from '../assets/websiteIcon.svg';
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -65,7 +66,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: "0.7rem",
         height: 35,
         padding: 5,
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             marginBottom: "2em"
         }
     },
@@ -80,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     },
     serviceContainer: {
         marginTop: "12em",
-        [theme.breakpoints.down("sm")]:{
+        [theme.breakpoints.down("sm")]: {
             padding: 25
         }
     }
@@ -138,9 +139,7 @@ export const LandingPage = () => {
                             textAlign: matchesSM ? "center" : undefined
                         }}
                     >
-                        <Typography variant={"h4"}>
-                            Custom Software Development
-                        </Typography>
+                        <Typography variant={"h4"}>Custom Software Development</Typography>
                         <Typography variant={"subtitle1"} className={classes.subtitle}>
                             Save Energy. Save Time. Save Money.
                         </Typography>
@@ -155,6 +154,27 @@ export const LandingPage = () => {
                     </Grid>
                     <Grid item>
                         <img src={customSoftwareIcon} alt={"custom software icon"} className={classes.icon}/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item>
+                <Grid container className={classes.serviceContainer} justifyContent={matchesSM ? "center" : "flex-end"}>
+                    <Grid item style={{textAlign: matchesSM ? "center" : undefined}}>
+                        <Typography variant={"h4"}>iOS/Android App Development</Typography>
+                        <Typography variant={"subtitle1"} className={classes.subtitle}>
+                            Extend Functionality. Extend Access. Increase Engagement.
+                        </Typography>
+                        <Typography variant={"subtitle1"}>
+                            Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}with
+                            either mobile platform.
+                        </Typography>
+                        <Button variant={"outlined"} className={classes.learnButton}>
+                            <span style={{marginRight: 10}}>Learn More</span>
+                            <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
+                        </Button>
+                    </Grid>
+                    <Grid item style={{marginRight: matchesSM ? 0 : "5em",}}>
+                        <img src={mobileAppsIcon} alt={"mobile phone icon"} className={classes.icon}/>
                     </Grid>
                 </Grid>
             </Grid>
