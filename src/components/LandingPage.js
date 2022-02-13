@@ -11,6 +11,8 @@ import customSoftwareIcon from '../assets/Custom Software Icon.svg';
 import mobileAppsIcon from '../assets/mobileIcon.svg';
 import websitesIcon from '../assets/websiteIcon.svg';
 import revolutionBackground from '../assets/repeatingBackground.svg';
+import infoBackground from '../assets/infoBackground.svg';
+import {LearnMoreButton} from "./ui/LearnMoreButton";
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -104,6 +106,14 @@ const useStyles = makeStyles(theme => ({
             borderRadius: 0,
             width: "100%"
         }
+    },
+    infoBackground: {
+        backgroundImage: `url(${infoBackground})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100%",
+        width: "100%"
     }
 }));
 
@@ -138,10 +148,7 @@ export const LandingPage = () => {
                                 </Button>
                             </Grid>
                             <Grid item>
-                                <Button variant={"outlined"} className={classes.learnButtonHero}>
-                                    <span style={{marginRight: 10}}>Learn More</span>
-                                    <ButtonArrow width={15} height={15} fill={theme.palette.common.blue}/>
-                                </Button>
+                                <LearnMoreButton className={classes.learnButtonHero} height={15} width={15}/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -167,10 +174,7 @@ export const LandingPage = () => {
                             Complete digital solutions, from investigation to{" "}
                             <span className={classes.specialText}>celebration.</span>
                         </Typography>
-                        <Button variant={"outlined"} className={classes.learnButton}>
-                            <span style={{marginRight: 10}}>Learn More</span>
-                            <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
-                        </Button>
+                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
                     </Grid>
                     <Grid item>
                         <img src={customSoftwareIcon} alt={"custom software icon"} className={classes.icon}/>
@@ -188,10 +192,7 @@ export const LandingPage = () => {
                             Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}with
                             either mobile platform.
                         </Typography>
-                        <Button variant={"outlined"} className={classes.learnButton}>
-                            <span style={{marginRight: 10}}>Learn More</span>
-                            <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
-                        </Button>
+                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
                     </Grid>
                     <Grid item style={{marginRight: matchesSM ? 0 : "5em"}}>
                         <img src={mobileAppsIcon} alt={"mobile phone icon"} className={classes.icon}/>
@@ -212,10 +213,7 @@ export const LandingPage = () => {
                             Reach More. Discover More. Sell More.
                         </Typography>
                         <Typography variant={"subtitle1"}>Optimized for Search Engines, built for speed.</Typography>
-                        <Button variant={"outlined"} className={classes.learnButton}>
-                            <span style={{marginRight: 10}}>Learn More</span>
-                            <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
-                        </Button>
+                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
                     </Grid>
                     <Grid item>
                         <img src={websitesIcon} alt={"website icon"} className={classes.icon}/>
@@ -242,15 +240,30 @@ export const LandingPage = () => {
                                     <Typography variant={"subtitle1"}>
                                         Visionary insights coupled with cutting-edge technology is a recipe for revolution
                                     </Typography>
-                                    <Button variant={"outlined"} className={classes.learnButtonHero}>
-                                        <span style={{marginRight: 10}}>Learn More</span>
-                                        <ButtonArrow width={15} height={15} fill={theme.palette.common.blue}/>
-                                    </Button>
+                                    <LearnMoreButton className={classes.learnButtonHero} height={15} width={15}/>
                                 </Grid>
                             </Grid>
                         </CardContent>
                     </Card>
                     <div className={classes.revolutionBackground}/>
+                </Grid>
+            </Grid>
+            <Grid item>
+                <Grid container style={{height: "80em"}} alignItems={"center"}>
+                    <Grid
+                        item
+                        style={{
+                            position: "absolute",
+                            marginLeft: "5em"
+                        }}
+                    >
+                        <Grid container direction={"column"}>
+                            <Typography variant={"h2"} style={{color: "white"}}>About Us</Typography>
+                            <Typography variant={"subtitle2"}>Let's get personal</Typography>
+                            <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+                        </Grid>
+                    </Grid>
+                    <div className={classes.infoBackground}/>
                 </Grid>
             </Grid>
         </Grid>
