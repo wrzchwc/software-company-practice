@@ -173,8 +173,32 @@ export const LandingPage = () => {
                             <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
                         </Button>
                     </Grid>
-                    <Grid item style={{marginRight: matchesSM ? 0 : "5em",}}>
+                    <Grid item style={{marginRight: matchesSM ? 0 : "5em"}}>
                         <img src={mobileAppsIcon} alt={"mobile phone icon"} className={classes.icon}/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item>
+                <Grid container className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
+                    <Grid
+                        item
+                        style={{
+                            textAlign: matchesSM ? "center" : undefined,
+                            marginLeft: matchesSM ? 0 : "5em"
+                        }}
+                    >
+                        <Typography variant={"h4"}>Website Development</Typography>
+                        <Typography variant={"subtitle1"} className={classes.subtitle}>
+                            Reach More. Discover More. Sell More.
+                        </Typography>
+                        <Typography variant={"subtitle1"}>Optimized for Search Engines, built for speed.</Typography>
+                        <Button variant={"outlined"} className={classes.learnButton}>
+                            <span style={{marginRight: 10}}>Learn More</span>
+                            <ButtonArrow width={10} height={10} fill={theme.palette.common.blue}/>
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <img src={websitesIcon} alt={"website icon"} className={classes.icon}/>
                     </Grid>
                 </Grid>
             </Grid>
