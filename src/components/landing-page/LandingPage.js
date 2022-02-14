@@ -195,56 +195,6 @@ export const LandingPage = () => {
         }
     ]
 
-    const renderServiceBlocks = () => {
-        return services.map(service => {
-            return (
-                <ServiceBlock
-                    key={services.indexOf(service)}
-                    matchesSM={matchesSM}
-                    src={service.src}
-                    alt={service.alt}
-                    rightAligned={service.rightAligned}
-                    title={service.title}
-                    shortSubtitle={service.shortSubtitle}
-                    longSubtitle={service.longSubtitle}
-                >
-                    <LearnMoreButton
-                        className={classes.learnButton}
-                        height={10}
-                        width={10}
-                        fill={theme.palette.common.blue}
-                        spanStyle={{marginRight: 10}}
-                    />
-                </ServiceBlock>
-            );
-        })
-    }
-
-    const renderContactInformation = () => {
-        return contactInformation.map(information => {
-            return (
-                <ContactBlock
-                    key={contactInformation.indexOf(information)}
-                    style={information.style}
-                    title={information.title}
-                    subtitle={information.subtitle}
-                >
-                    <LearnMoreButton
-                        className={classes.learnButton}
-                        height={10}
-                        width={10}
-                        fill={"white"}
-                        style={{
-                            color: "white",
-                            borderColor: "white"
-                        }}
-                        spanStyle={{marginRight: 10}}
-                    />
-                </ContactBlock>
-            );
-        })
-    }
-
     return (
         <Grid container direction={"column"} className={classes.mainContainer}>
             <Grid item>
@@ -277,7 +227,30 @@ export const LandingPage = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            {renderServiceBlocks()}
+            {
+                services.map(service => {
+                    return (
+                        <ServiceBlock
+                            key={services.indexOf(service)}
+                            matchesSM={matchesSM}
+                            src={service.src}
+                            alt={service.alt}
+                            rightAligned={service.rightAligned}
+                            title={service.title}
+                            shortSubtitle={service.shortSubtitle}
+                            longSubtitle={service.longSubtitle}
+                        >
+                            <LearnMoreButton
+                                className={classes.learnButton}
+                                height={10}
+                                width={10}
+                                fill={theme.palette.common.blue}
+                                spanStyle={{marginRight: 10}}
+                            />
+                        </ServiceBlock>
+                    );
+                })
+            }
             <Grid item>
                 <Grid
                     container
@@ -325,7 +298,30 @@ export const LandingPage = () => {
                         direction={matchesXS ? "column" : "row"}
                         spacing={matchesXS ? 10 : 0}
                     >
-                        {renderContactInformation()}
+                        {
+                            contactInformation.map(information => {
+                                return (
+                                    <ContactBlock
+                                        key={contactInformation.indexOf(information)}
+                                        style={information.style}
+                                        title={information.title}
+                                        subtitle={information.subtitle}
+                                    >
+                                        <LearnMoreButton
+                                            className={classes.learnButton}
+                                            height={10}
+                                            width={10}
+                                            fill={"white"}
+                                            style={{
+                                                color: "white",
+                                                borderColor: "white"
+                                            }}
+                                            spanStyle={{marginRight: 10}}
+                                        />
+                                    </ContactBlock>
+                                );
+                            })
+                        }
                     </Grid>
                     <div className={classes.infoBackground}/>
                 </Grid>
