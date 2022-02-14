@@ -223,7 +223,12 @@ export const LandingPage = () => {
     const renderContactInformation = () => {
         return contactInformation.map(information => {
             return (
-                <ContactBlock style={information.style} title={information.title} subtitle={information.subtitle}>
+                <ContactBlock
+                    key={contactInformation.indexOf(information)}
+                    style={information.style}
+                    title={information.title}
+                    subtitle={information.subtitle}
+                >
                     <LearnMoreButton
                         className={classes.learnButton}
                         height={10}

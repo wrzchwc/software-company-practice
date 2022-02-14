@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Grid, makeStyles, Typography, useTheme} from '@material-ui/core';
+import {Button, Grid, makeStyles, Typography, useTheme, useMediaQuery} from '@material-ui/core';
 import {LearnMoreButton} from "../landing-page/LearnMoreButton";
 
 import background from '../../assets/background.jpg';
@@ -11,10 +11,12 @@ const useStyles = makeStyles(theme => ({
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment:'fixed',
         height: "60em",
         width: "100%",
         [theme.breakpoints.down('md')]: {
-            backgroundImage: `url(${mobileBackground})`
+            backgroundImage: `url(${mobileBackground})`,
+            backgroundAttachment: 'inherit'
         }
     },
     estimateButton: {
@@ -24,7 +26,10 @@ const useStyles = makeStyles(theme => ({
         width: 205,
         backgroundColor: theme.palette.common.orange,
         fontSize: '1.5rem',
-        marginRight: '5em'
+        margin: '0 5em 0 2em',
+        [theme.breakpoints.down('sm')]: {
+            margin: 0
+        }
     },
     learnButton: {
         ...theme.typography.learnButton,
@@ -40,22 +45,30 @@ const useStyles = makeStyles(theme => ({
 export const CallToAction = () => {
     const classes = useStyles();
     const theme = useTheme();
+    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <Grid
             container
             alignItems={'center'}
-            justify={'space-between'}
+            justify={matchesSM ? 'center' : 'space-between'}
             className={classes.background}
+            direction={matchesSM ? 'column' : 'row'}
         >
-            <Grid item style={{marginLeft: '5em'}}>
+            <Grid
+                item
+                style={{
+                    marginLeft: matchesSM ? 0 : '5em',
+                    textAlign: matchesSM ? 'center' : 'inherit'
+                }}
+            >
                 <Grid container direction={"column"}>
                     <Grid item>
                         <Typography variant={"h2"}>Simple Software.<br/>Revolutionary Results.</Typography>
                         <Typography variant={"subtitle2"} style={{fontSize: '1.5rem'}}>
                             Take advantage of the 21st Century.
                         </Typography>
-                        <Grid container item>
+                        <Grid container item justify={matchesSM ? 'center' : undefined}>
                             <LearnMoreButton
                                 className={classes.learnButton}
                                 fill={theme.palette.common.blue}
