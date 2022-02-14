@@ -134,10 +134,10 @@ export const LandingPage = () => {
     const getLongSubtitle = mobile => {
         if (mobile) {
             return (
-              <>
-                  Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}
-                  with either mobile platform.
-              </>
+                <>
+                    Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}
+                    with either mobile platform.
+                </>
             );
         }
         return (
@@ -148,8 +148,8 @@ export const LandingPage = () => {
         );
     }
 
-    const services = {
-        custom: {
+    const services = [
+        {
             title: 'Custom Software Development',
             shortSubtitle: 'Save Energy. Save Time. Save Money.',
             longSubtitle: getLongSubtitle(false),
@@ -157,7 +157,7 @@ export const LandingPage = () => {
             alt: 'custom software icon',
             rightAligned: false
         },
-        mobile: {
+        {
             title: 'iOS/Android App Development',
             shortSubtitle: 'Extend Functionality. Extend Access. Increase Engagement.',
             longSubtitle: getLongSubtitle(true),
@@ -165,7 +165,7 @@ export const LandingPage = () => {
             alt: 'mobile phone icon',
             rightAligned: true
         },
-        website: {
+        {
             title: 'Website Development',
             shortSubtitle: 'Reach More. Discover More. Sell More.',
             longSubtitle: 'Optimized for Search Engines, built for speed.',
@@ -173,6 +173,25 @@ export const LandingPage = () => {
             alt: 'website icon',
             rightAligned: false
         }
+    ]
+
+    const renderServiceBlocks = () => {
+        return services.map(service => {
+            return (
+                <ServiceBlock
+                    key={services.indexOf(service)}
+                    matchesSM={matchesSM}
+                    src={service.src}
+                    alt={service.alt}
+                    rightAligned={service.rightAligned}
+                    title={service.title}
+                    shortSubtitle={service.shortSubtitle}
+                    longSubtitle={service.longSubtitle}
+                >
+                    <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+                </ServiceBlock>
+            );
+        })
     }
 
 
@@ -202,39 +221,7 @@ export const LandingPage = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <ServiceBlock
-                matchesSM={matchesSM}
-                src={services.custom.src}
-                alt={services.custom.alt}
-                rightAligned={services.custom.rightAligned}
-                title={services.custom.title}
-                shortSubtitle={services.custom.shortSubtitle}
-                longSubtitle={services.custom.longSubtitle}
-            >
-                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-            </ServiceBlock>
-            <ServiceBlock
-                matchesSM={matchesSM}
-                src={services.mobile.src}
-                alt={services.mobile.alt}
-                rightAligned={services.mobile.rightAligned}
-                title={services.mobile.title}
-                shortSubtitle={services.mobile.shortSubtitle}
-                longSubtitle={services.mobile.longSubtitle}
-            >
-                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-            </ServiceBlock>
-            <ServiceBlock
-                matchesSM={matchesSM}
-                src={services.website.src}
-                alt={services.website.alt}
-                rightAligned={services.website.rightAligned}
-                title={services.website.title}
-                shortSubtitle={services.website.shortSubtitle}
-                longSubtitle={services.website.longSubtitle}
-            >
-                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-            </ServiceBlock>
+            {renderServiceBlocks()}
             <Grid item>
                 <Grid
                     container

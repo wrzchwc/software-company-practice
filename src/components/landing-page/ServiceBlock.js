@@ -2,7 +2,6 @@ import React from 'react';
 import {Grid} from "@mui/material";
 import {Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core";
-import {matches} from "@testing-library/jest-dom/dist/utils";
 
 const useStyles = makeStyles(theme => ({
     icon: {
