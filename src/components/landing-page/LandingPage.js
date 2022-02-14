@@ -177,6 +177,22 @@ export const LandingPage = () => {
         }
     ]
 
+    const contactInformation = [
+        {
+            title: 'About Us',
+            subtitle: "Let's get personal",
+            style: {marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"}
+        },
+        {
+            title: 'Contact Us',
+            subtitle: <>Say hello! <span role={"img"} aria-label={"waving hand"}>👋🏼</span></>,
+            style: {
+                marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
+                textAlign: matchesXS ? "center" : "right"
+            }
+        }
+    ]
+
     const renderServiceBlocks = () => {
         return services.map(service => {
             return (
@@ -197,6 +213,25 @@ export const LandingPage = () => {
                         fill={theme.palette.common.blue}
                     />
                 </ServiceBlock>
+            );
+        })
+    }
+
+    const renderContactInformation = () => {
+        return contactInformation.map(information => {
+            return (
+                <ContactBlock style={information.style} title={information.title} subtitle={information.subtitle}>
+                    <LearnMoreButton
+                        className={classes.learnButton}
+                        height={10}
+                        width={10}
+                        fill={"white"}
+                        style={{
+                            color: "white",
+                            borderColor: "white"
+                        }}
+                    />
+                </ContactBlock>
             );
         })
     }
@@ -280,41 +315,7 @@ export const LandingPage = () => {
                         direction={matchesXS ? "column" : "row"}
                         spacing={matchesXS ? 10 : 0}
                     >
-                        <ContactBlock
-                            style={{marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"}}
-                            title={'About Us'}
-                            subtitle={"Let's get personal"}
-                        >
-                            <LearnMoreButton
-                                className={classes.learnButton}
-                                height={10}
-                                width={10}
-                                fill={"white"}
-                                style={{
-                                    color: "white",
-                                    borderColor: "white"
-                                }}
-                            />
-                        </ContactBlock>
-                        <ContactBlock
-                            style={{
-                                marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
-                                textAlign: matchesXS ? "center" : "right"
-                            }}
-                            title={'Contact Us'}
-                            subtitle={(<>Say hello! <span role={"img"} aria-label={"waving hand"}>👋🏼</span></>)}
-                        >
-                            <LearnMoreButton
-                                className={classes.learnButton}
-                                height={10}
-                                width={10}
-                                fill={"white"}
-                                style={{
-                                    color: "white",
-                                    borderColor: "white"
-                                }}
-                            />
-                        </ContactBlock>
+                        {renderContactInformation()}
                     </Grid>
                     <div className={classes.infoBackground}/>
                 </Grid>
