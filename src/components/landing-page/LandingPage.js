@@ -278,7 +278,18 @@ export const LandingPage = () => {
                         <Grid container direction={"column"}>
                             <Typography variant={"h2"} style={{color: "white"}}>About Us</Typography>
                             <Typography variant={"subtitle2"}>Let's get personal</Typography>
-                            <LearnMoreButton className={classes.learnButton} height={10} width={10} fill={"white"}/>
+                            <Grid item>
+                                <LearnMoreButton
+                                    className={classes.learnButton}
+                                    height={10}
+                                    width={10}
+                                    fill={"white"}
+                                    style={{
+                                        color:"white",
+                                        borderColor: "white"
+                                    }}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
                     <div className={classes.infoBackground}/>
