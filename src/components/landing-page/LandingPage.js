@@ -3,16 +3,16 @@ import Lottie from 'react-lottie';
 import {makeStyles, useTheme, useMediaQuery} from '@material-ui/core';
 import {Grid} from '@mui/material';
 import {Typography} from "@material-ui/core";
-import ButtonArrow from "./ui/ButtonArrow";
 import {Button, Card, CardContent} from "@material-ui/core";
 
-import animationData from '../animations/landinganimation/data';
-import customSoftwareIcon from '../assets/Custom Software Icon.svg';
-import mobileAppsIcon from '../assets/mobileIcon.svg';
-import websitesIcon from '../assets/websiteIcon.svg';
-import revolutionBackground from '../assets/repeatingBackground.svg';
-import infoBackground from '../assets/infoBackground.svg';
-import {LearnMoreButton} from "./ui/LearnMoreButton";
+import animationData from '../../animations/landinganimation/data';
+import customSoftwareIcon from '../../assets/Custom Software Icon.svg';
+import mobileAppsIcon from '../../assets/mobileIcon.svg';
+import websitesIcon from '../../assets/websiteIcon.svg';
+import revolutionBackground from '../../assets/repeatingBackground.svg';
+import infoBackground from '../../assets/infoBackground.svg';
+import {LearnMoreButton} from "./LearnMoreButton";
+import {ServiceBlock} from "./ServiceBlock";
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -101,8 +101,8 @@ const useStyles = makeStyles(theme => ({
         boxShadow: theme.shadows[10],
         borderRadius: 15,
         padding: "10em",
-        [theme.breakpoints.down("sm")]:{
-            padding:"8em 0 8em 0",
+        [theme.breakpoints.down("sm")]: {
+            padding: "8em 0 8em 0",
             borderRadius: 0,
             width: "100%"
         }
@@ -131,6 +131,51 @@ export const LandingPage = () => {
         }
     };
 
+    const getLongSubtitle = mobile => {
+        if (mobile) {
+            return (
+              <>
+                  Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}
+                  with either mobile platform.
+              </>
+            );
+        }
+        return (
+            <>
+                'Complete digital solutions, from investigation '
+                <span className={classes.specialText}>celebration.</span>
+            </>
+        );
+    }
+
+    const services = {
+        custom: {
+            title: 'Custom Software Development',
+            shortSubtitle: 'Save Energy. Save Time. Save Money.',
+            longSubtitle: getLongSubtitle(false),
+            src: customSoftwareIcon,
+            alt: 'custom software icon',
+            rightAligned: false
+        },
+        mobile: {
+            title: 'iOS/Android App Development',
+            shortSubtitle: 'Extend Functionality. Extend Access. Increase Engagement.',
+            longSubtitle: getLongSubtitle(true),
+            src: mobileAppsIcon,
+            alt: 'mobile phone icon',
+            rightAligned: true
+        },
+        website: {
+            title: 'Website Development',
+            shortSubtitle: 'Reach More. Discover More. Sell More.',
+            longSubtitle: 'Optimized for Search Engines, built for speed.',
+            src: websitesIcon,
+            alt: 'website icon',
+            rightAligned: false
+        }
+    }
+
+
     return (
         <Grid container direction={"column"} className={classes.mainContainer}>
             <Grid item>
@@ -157,76 +202,46 @@ export const LandingPage = () => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item>
-                <Grid container className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
-                    <Grid
-                        item
-                        style={{
-                            marginLeft: matchesSM ? 0 : "5em",
-                            textAlign: matchesSM ? "center" : undefined
-                        }}
-                    >
-                        <Typography variant={"h4"}>Custom Software Development</Typography>
-                        <Typography variant={"subtitle1"} className={classes.subtitle}>
-                            Save Energy. Save Time. Save Money.
-                        </Typography>
-                        <Typography variant={"subtitle1"}>
-                            Complete digital solutions, from investigation to{" "}
-                            <span className={classes.specialText}>celebration.</span>
-                        </Typography>
-                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-                    </Grid>
-                    <Grid item>
-                        <img src={customSoftwareIcon} alt={"custom software icon"} className={classes.icon}/>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item>
-                <Grid container className={classes.serviceContainer} justifyContent={matchesSM ? "center" : "flex-end"}>
-                    <Grid item style={{textAlign: matchesSM ? "center" : undefined}}>
-                        <Typography variant={"h4"}>iOS/Android App Development</Typography>
-                        <Typography variant={"subtitle1"} className={classes.subtitle}>
-                            Extend Functionality. Extend Access. Increase Engagement.
-                        </Typography>
-                        <Typography variant={"subtitle1"}>
-                            Integrate your web experience or create a standalone app{matchesSM ? null : <br/>}with
-                            either mobile platform.
-                        </Typography>
-                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-                    </Grid>
-                    <Grid item style={{marginRight: matchesSM ? 0 : "5em"}}>
-                        <img src={mobileAppsIcon} alt={"mobile phone icon"} className={classes.icon}/>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid item>
-                <Grid container className={classes.serviceContainer} justifyContent={matchesSM ? "center" : undefined}>
-                    <Grid
-                        item
-                        style={{
-                            textAlign: matchesSM ? "center" : undefined,
-                            marginLeft: matchesSM ? 0 : "5em"
-                        }}
-                    >
-                        <Typography variant={"h4"}>Website Development</Typography>
-                        <Typography variant={"subtitle1"} className={classes.subtitle}>
-                            Reach More. Discover More. Sell More.
-                        </Typography>
-                        <Typography variant={"subtitle1"}>Optimized for Search Engines, built for speed.</Typography>
-                        <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
-                    </Grid>
-                    <Grid item>
-                        <img src={websitesIcon} alt={"website icon"} className={classes.icon}/>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <ServiceBlock
+                matchesSM={matchesSM}
+                src={services.custom.src}
+                alt={services.custom.alt}
+                rightAligned={services.custom.rightAligned}
+                title={services.custom.title}
+                shortSubtitle={services.custom.shortSubtitle}
+                longSubtitle={services.custom.longSubtitle}
+            >
+                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+            </ServiceBlock>
+            <ServiceBlock
+                matchesSM={matchesSM}
+                src={services.mobile.src}
+                alt={services.mobile.alt}
+                rightAligned={services.mobile.rightAligned}
+                title={services.mobile.title}
+                shortSubtitle={services.mobile.shortSubtitle}
+                longSubtitle={services.mobile.longSubtitle}
+            >
+                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+            </ServiceBlock>
+            <ServiceBlock
+                matchesSM={matchesSM}
+                src={services.website.src}
+                alt={services.website.alt}
+                rightAligned={services.website.rightAligned}
+                title={services.website.title}
+                shortSubtitle={services.website.shortSubtitle}
+                longSubtitle={services.website.longSubtitle}
+            >
+                <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+            </ServiceBlock>
             <Grid item>
                 <Grid
                     container
                     alignItems={"center"}
                     justifyContent={"center"}
                     style={{
-                        height:"100em",
+                        height: "100em",
                         marginTop: "12em"
                     }}
                 >
@@ -238,7 +253,8 @@ export const LandingPage = () => {
                                 </Grid>
                                 <Grid item>
                                     <Typography variant={"subtitle1"}>
-                                        Visionary insights coupled with cutting-edge technology is a recipe for revolution
+                                        Visionary insights coupled with cutting-edge technology is a recipe for
+                                        revolution
                                     </Typography>
                                     <LearnMoreButton className={classes.learnButtonHero} height={15} width={15}/>
                                 </Grid>

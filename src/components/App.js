@@ -6,7 +6,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
-import {LandingPage} from "./LandingPage";
+import {LandingPage} from "./landing-page/LandingPage";
 
 
 const App = () => {
