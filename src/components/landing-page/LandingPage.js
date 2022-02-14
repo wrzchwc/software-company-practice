@@ -245,7 +245,6 @@ export const LandingPage = () => {
         })
     }
 
-
     return (
         <Grid container direction={"column"} className={classes.mainContainer}>
             <Grid item>

@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
         opacity: 0.7
     },
     drawerItemSelected: {
-        "& .MuiListItemText-root":{
+        "& .MuiListItemText-root": {
             opacity: 1
         },
     },
@@ -207,6 +207,8 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                         setSelectedIndex(route.selectedIndex);
                     }
                 }
+            } else if (window.location.pathname === '/estimate') {
+                setValue(5);
             }
         })
     }, [menuOptions, routes, selectedIndex, setSelectedIndex, setValue, value]);
@@ -219,20 +221,29 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 onChange={handleChange}
                 value={value}
             >
-                {routes.map((route, index) => (
-                    <Tab
-                        key={`${route}${index}`}
-                        className={classes.tab}
-                        component={Link}
-                        to={route.link}
-                        label={route.name}
-                        aria-owns={route.ariaOwns}
-                        aria-haspopup={route.ariaPopup}
-                        onMouseOver={route.mouseOver}
-                    />
-                ))}
+                {
+                    routes.map((route, index) => (
+                        <Tab
+                            key={`${route}${index}`}
+                            className={classes.tab}
+                            component={Link}
+                            to={route.link}
+                            label={route.name}
+                            aria-owns={route.ariaOwns}
+                            aria-haspopup={route.ariaPopup}
+                            onMouseOver={route.mouseOver}
+                        />
+                    ))
+                }
             </Tabs>
-            <Button color="secondary" className={classes.button} variant="contained">
+            <Button
+                color="secondary"
+                className={classes.button}
+                variant="contained"
+                component={Link}
+                to={'/estimate'}
+                onClick={() => setValue(5)}
+            >
                 Free Estimate
             </Button>
             <Menu
