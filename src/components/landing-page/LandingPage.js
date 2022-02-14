@@ -13,6 +13,7 @@ import mobileAppsIcon from '../../assets/mobileIcon.svg';
 import websitesIcon from '../../assets/websiteIcon.svg';
 import revolutionBackground from '../../assets/repeatingBackground.svg';
 import infoBackground from '../../assets/infoBackground.svg';
+import {ContactBlock} from "./ContactBlock";
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -279,51 +280,41 @@ export const LandingPage = () => {
                         direction={matchesXS ? "column" : "row"}
                         spacing={matchesXS ? 10 : 0}
                     >
-                        <Grid item sm style={{marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"}}>
-                            <Grid container direction={"column"}>
-                                <Typography variant={"h2"} style={{color: "white"}}>About Us</Typography>
-                                <Typography variant={"subtitle2"}>Let's get personal</Typography>
-                                <Grid item>
-                                    <LearnMoreButton
-                                        className={classes.learnButton}
-                                        height={10}
-                                        width={10}
-                                        fill={"white"}
-                                        style={{
-                                            color: "white",
-                                            borderColor: "white"
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid
-                            item
-                            sm
+                        <ContactBlock
+                            style={{marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"}}
+                            title={'About Us'}
+                            subtitle={"Let's get personal"}
+                        >
+                            <LearnMoreButton
+                                className={classes.learnButton}
+                                height={10}
+                                width={10}
+                                fill={"white"}
+                                style={{
+                                    color: "white",
+                                    borderColor: "white"
+                                }}
+                            />
+                        </ContactBlock>
+                        <ContactBlock
                             style={{
                                 marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
                                 textAlign: matchesXS ? "center" : "right"
                             }}
+                            title={'Contact Us'}
+                            subtitle={(<>Say hello! <span role={"img"} aria-label={"waving hand"}>👋🏼</span></>)}
                         >
-                            <Grid container direction={"column"}>
-                                <Typography variant={"h2"} style={{color: "white"}}>Contact Us</Typography>
-                                <Typography variant={"subtitle2"}>
-                                    Say hello! <span role={"img"} aria-label={"waving hand"}>👋🏼</span>
-                                </Typography>
-                                <Grid item>
-                                    <LearnMoreButton
-                                        className={classes.learnButton}
-                                        height={10}
-                                        width={10}
-                                        fill={"white"}
-                                        style={{
-                                            color: "white",
-                                            borderColor: "white"
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                            <LearnMoreButton
+                                className={classes.learnButton}
+                                height={10}
+                                width={10}
+                                fill={"white"}
+                                style={{
+                                    color: "white",
+                                    borderColor: "white"
+                                }}
+                            />
+                        </ContactBlock>
                     </Grid>
                     <div className={classes.infoBackground}/>
                 </Grid>
