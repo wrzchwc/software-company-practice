@@ -22,34 +22,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const getContentStyle = (rightAligned, matchesSM) => {
-    if (rightAligned) {
-        return {textAlign: matchesSM ? "center" : undefined};
+    let contentStyle = {textAlign: matchesSM ? 'center' : undefined};
+    if (!rightAligned) {
+        contentStyle['marginLeft'] = matchesSM ? 0 : '5em';
     }
-
-    return {
-        marginLeft: matchesSM ? 0 : "5em",
-        textAlign: matchesSM ? "center" : undefined
-    };
+    return contentStyle;
 }
-
-const getIconStyle = (rightAligned, matchesSM) => {
-    if (rightAligned) {
-        return {marginRight: matchesSM ? 0 : "5em"};
-    }
-
-    return undefined;
-}
-
-const getContentJustifying = (matchesSM, rightAligned) => {
-    if (matchesSM) {
-        return 'center';
-    } else if (rightAligned) {
-        return 'flex-end';
-    }
-
-    return undefined;
-}
-
 export const ServiceBlock = (props) => {
     const classes = useStyles();
 
@@ -58,7 +36,7 @@ export const ServiceBlock = (props) => {
             <Grid
                 container
                 className={classes.serviceContainer}
-                justifyContent={getContentJustifying(props.matchesSM, props.rightAligned)}
+                justifyContent={props.matchesSM ? 'center' : props.rightAligned ? 'flex-end' : undefined}
             >
                 <Grid item style={getContentStyle(props.rightAligned, props.matchesSM)}>
                     <Typography variant={"h4"}>{props.title}</Typography>
@@ -66,7 +44,7 @@ export const ServiceBlock = (props) => {
                     <Typography variant={"subtitle1"}>{props.longSubtitle}</Typography>
                     {props.children}
                 </Grid>
-                <Grid item style={getIconStyle(props.rightAligned, props.matchesSM)}>
+                <Grid item style={props.rightAligned ? {marginRight: props.matchesSM ? 0 : "5em"} : undefined}>
                     <img src={props.src} alt={props.alt} className={classes.icon}/>
                 </Grid>
             </Grid>
