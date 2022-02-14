@@ -6,6 +6,8 @@ import {Typography} from "@material-ui/core";
 import {Button, Card, CardContent} from "@material-ui/core";
 import {LearnMoreButton} from "./LearnMoreButton";
 import {ServiceBlock} from "./ServiceBlock";
+import {ContactBlock} from "./ContactBlock";
+import {CallToAction} from "../ui/CallToAction";
 
 import animationData from '../../animations/landinganimation/data';
 import customSoftwareIcon from '../../assets/Custom Software Icon.svg';
@@ -13,7 +15,7 @@ import mobileAppsIcon from '../../assets/mobileIcon.svg';
 import websitesIcon from '../../assets/websiteIcon.svg';
 import revolutionBackground from '../../assets/repeatingBackground.svg';
 import infoBackground from '../../assets/infoBackground.svg';
-import {ContactBlock} from "./ContactBlock";
+
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -211,6 +213,7 @@ export const LandingPage = () => {
                         height={10}
                         width={10}
                         fill={theme.palette.common.blue}
+                        spanStyle={{marginRight: 10}}
                     />
                 </ServiceBlock>
             );
@@ -230,6 +233,7 @@ export const LandingPage = () => {
                             color: "white",
                             borderColor: "white"
                         }}
+                        spanStyle={{marginRight: 10}}
                     />
                 </ContactBlock>
             );
@@ -259,6 +263,7 @@ export const LandingPage = () => {
                                     height={15}
                                     width={15}
                                     fill={theme.palette.common.blue}
+                                    spanStyle={{marginRight: 10}}
                                 />
                             </Grid>
                         </Grid>
@@ -295,6 +300,7 @@ export const LandingPage = () => {
                                         height={15}
                                         width={15}
                                         fill={theme.palette.common.blue}
+                                        spanStyle={{marginRight: 10}}
                                     />
                                 </Grid>
                             </Grid>
@@ -319,6 +325,9 @@ export const LandingPage = () => {
                     </Grid>
                     <div className={classes.infoBackground}/>
                 </Grid>
+            </Grid>
+            <Grid item>
+                <CallToAction/>
             </Grid>
         </Grid>
     );
