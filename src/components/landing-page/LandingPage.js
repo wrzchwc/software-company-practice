@@ -4,6 +4,8 @@ import {makeStyles, useTheme, useMediaQuery} from '@material-ui/core';
 import {Grid} from '@mui/material';
 import {Typography} from "@material-ui/core";
 import {Button, Card, CardContent} from "@material-ui/core";
+import {LearnMoreButton} from "./LearnMoreButton";
+import {ServiceBlock} from "./ServiceBlock";
 
 import animationData from '../../animations/landinganimation/data';
 import customSoftwareIcon from '../../assets/Custom Software Icon.svg';
@@ -11,8 +13,6 @@ import mobileAppsIcon from '../../assets/mobileIcon.svg';
 import websitesIcon from '../../assets/websiteIcon.svg';
 import revolutionBackground from '../../assets/repeatingBackground.svg';
 import infoBackground from '../../assets/infoBackground.svg';
-import {LearnMoreButton} from "./LearnMoreButton";
-import {ServiceBlock} from "./ServiceBlock";
 
 const useStyles = makeStyles(theme => ({
     animation: {
@@ -188,7 +188,12 @@ export const LandingPage = () => {
                     shortSubtitle={service.shortSubtitle}
                     longSubtitle={service.longSubtitle}
                 >
-                    <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+                    <LearnMoreButton
+                        className={classes.learnButton}
+                        height={10}
+                        width={10}
+                        fill={theme.palette.common.blue}
+                    />
                 </ServiceBlock>
             );
         })
@@ -212,7 +217,12 @@ export const LandingPage = () => {
                                 </Button>
                             </Grid>
                             <Grid item>
-                                <LearnMoreButton className={classes.learnButtonHero} height={15} width={15}/>
+                                <LearnMoreButton
+                                    className={classes.learnButtonHero}
+                                    height={15}
+                                    width={15}
+                                    fill={theme.palette.common.blue}
+                                />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -243,7 +253,12 @@ export const LandingPage = () => {
                                         Visionary insights coupled with cutting-edge technology is a recipe for
                                         revolution
                                     </Typography>
-                                    <LearnMoreButton className={classes.learnButtonHero} height={15} width={15}/>
+                                    <LearnMoreButton
+                                        className={classes.learnButtonHero}
+                                        height={15}
+                                        width={15}
+                                        fill={theme.palette.common.blue}
+                                    />
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -263,7 +278,7 @@ export const LandingPage = () => {
                         <Grid container direction={"column"}>
                             <Typography variant={"h2"} style={{color: "white"}}>About Us</Typography>
                             <Typography variant={"subtitle2"}>Let's get personal</Typography>
-                            <LearnMoreButton className={classes.learnButton} height={10} width={10}/>
+                            <LearnMoreButton className={classes.learnButton} height={10} width={10} fill={"white"}/>
                         </Grid>
                     </Grid>
                     <div className={classes.infoBackground}/>

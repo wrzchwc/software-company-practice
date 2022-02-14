@@ -1,15 +1,12 @@
 import React from 'react';
 import ButtonArrow from "./ButtonArrow";
 import {Button} from "@material-ui/core";
-import {useTheme} from "@material-ui/core";
 
-export const LearnMoreButton = ({className, height, width}) => {
-    const theme = useTheme();
-
+export const LearnMoreButton = props => {
     return(
-        <Button variant={"outlined"} className={className}>
+        <Button variant={"outlined"} className={props.className}>
             <span style={{marginRight: 10}}>Learn More</span>
-            <ButtonArrow width={width} height={height} fill={theme.palette.common.blue}/>
+            <ButtonArrow width={props.width} height={props.height} fill={props.fill}/>
         </Button>
     );
 }
