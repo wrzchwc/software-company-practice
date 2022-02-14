@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 import {Button, Grid, makeStyles, Typography, useTheme, useMediaQuery} from '@material-ui/core';
 import {LearnMoreButton} from "../landing-page/LearnMoreButton";
 
@@ -11,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment:'fixed',
+        backgroundAttachment: 'fixed',
         height: "60em",
         width: "100%",
         [theme.breakpoints.down('md')]: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.common.orange,
         fontSize: '1.5rem',
         margin: '0 5em 0 2em',
+        "&:hover": {
+            backgroundColor: theme.palette.secondary.light
+        },
         [theme.breakpoints.down('sm')]: {
             margin: 0
         }
@@ -42,7 +46,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-export const CallToAction = () => {
+export const CallToAction = props => {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
@@ -75,13 +79,23 @@ export const CallToAction = () => {
                                 height={10}
                                 width={10}
                                 spanStyle={{marginRight: 5}}
+                                to={'/revolution'}
+                                onClick={() => props.setValue(2)}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
             </Grid>
             <Grid item>
-                <Button variant={'contained'} className={classes.estimateButton}>Free Estimate</Button>
+                <Button
+                    variant={'contained'}
+                    className={classes.estimateButton}
+                    component={Link}
+                    to={'/estimate'}
+                    onClick={() => props.setValue(5)}
+                >
+                    Free Estimate
+                </Button>
             </Grid>
         </Grid>
     );

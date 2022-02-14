@@ -23,7 +23,7 @@ const App = () => {
                     value={value}
                 />
                 <Routes>
-                    <Route path="/" element={<LandingPage/>}/>
+                    <Route path="/" element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
                     <Route path="/services" element={<PlaceHolder label="Services"/>}/>
                     <Route path="/custom-software" element={<PlaceHolder label="Custom software"/>}/>
                     <Route path="/mobile-apps" element={<PlaceHolder label="Mobile apps"/>}/>
@@ -34,10 +34,8 @@ const App = () => {
                     <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
                 </Routes>
                 <Footer
-                    selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}
                     setValue={setValue}
-                    value={value}
                 />
             </BrowserRouter>
         </ThemeProvider>

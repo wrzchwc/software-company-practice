@@ -1,5 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
+import {Link} from "react-router-dom";
 import {makeStyles, useTheme, useMediaQuery} from '@material-ui/core';
 import {Grid} from '@mui/material';
 import {Typography} from "@material-ui/core";
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         width: "145px",
         marginRight: "40px",
         "&:hover": {
-            backgroundColor: theme.palette.secondary.main
+            backgroundColor: theme.palette.secondary.light
         }
     },
     buttonContainer: {
@@ -120,7 +121,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const LandingPage = () => {
+export const LandingPage = props => {
     const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
@@ -159,7 +160,12 @@ export const LandingPage = () => {
             longSubtitle: getLongSubtitle(false),
             src: customSoftwareIcon,
             alt: 'custom software icon',
-            rightAligned: false
+            rightAligned: false,
+            to: '/custom-software',
+            onClick: () => {
+                props.setValue(1);
+                props.setSelectedIndex(1);
+            }
         },
         {
             title: 'iOS/Android App Development',
@@ -167,7 +173,12 @@ export const LandingPage = () => {
             longSubtitle: getLongSubtitle(true),
             src: mobileAppsIcon,
             alt: 'mobile phone icon',
-            rightAligned: true
+            rightAligned: true,
+            to: '/mobile-apps',
+            onClick: () => {
+                props.setValue(1);
+                props.setSelectedIndex(2);
+            }
         },
         {
             title: 'Website Development',
@@ -175,7 +186,12 @@ export const LandingPage = () => {
             longSubtitle: 'Optimized for Search Engines, built for speed.',
             src: websitesIcon,
             alt: 'website icon',
-            rightAligned: false
+            rightAligned: false,
+            to: '/websites',
+            onClick: () => {
+                props.setValue(1);
+                props.setSelectedIndex(3);
+            }
         }
     ]
 
@@ -183,7 +199,9 @@ export const LandingPage = () => {
         {
             title: 'About Us',
             subtitle: "Let's get personal",
-            style: {marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"}
+            style: {marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em"},
+            to: '/about',
+            onClick: () => props.setValue(3)
         },
         {
             title: 'Contact Us',
@@ -191,7 +209,9 @@ export const LandingPage = () => {
             style: {
                 marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
                 textAlign: matchesXS ? "center" : "right"
-            }
+            },
+            to: '/contact',
+            onClick: () => props.setValue(4)
         }
     ]
 
@@ -207,7 +227,13 @@ export const LandingPage = () => {
                         </Typography>
                         <Grid container justifyContent={"center"} className={classes.buttonContainer}>
                             <Grid item>
-                                <Button variant={"contained"} className={classes.estimateButton}>
+                                <Button
+                                    variant={"contained"}
+                                    className={classes.estimateButton}
+                                    component={Link}
+                                    to={'/estimate'}
+                                    onClick={() => props.setValue(5)}
+                                >
                                     Free Estimate
                                 </Button>
                             </Grid>
@@ -218,6 +244,8 @@ export const LandingPage = () => {
                                     width={15}
                                     fill={theme.palette.common.blue}
                                     spanStyle={{marginRight: 10}}
+                                    to={'/revolution'}
+                                    onClick={() => props.setValue(2)}
                                 />
                             </Grid>
                         </Grid>
@@ -246,6 +274,8 @@ export const LandingPage = () => {
                                 width={10}
                                 fill={theme.palette.common.blue}
                                 spanStyle={{marginRight: 10}}
+                                to={service.to}
+                                onClick={service.onClick}
                             />
                         </ServiceBlock>
                     );
@@ -278,6 +308,8 @@ export const LandingPage = () => {
                                         width={15}
                                         fill={theme.palette.common.blue}
                                         spanStyle={{marginRight: 10}}
+                                        to={'/revolution'}
+                                        onClick={() => props.setValue(2)}
                                     />
                                 </Grid>
                             </Grid>
@@ -296,7 +328,6 @@ export const LandingPage = () => {
                             textAlign: matchesXS ? "center" : "inherit"
                         }}
                         direction={matchesXS ? "column" : "row"}
-                        spacing={matchesXS ? 10 : 0}
                     >
                         {
                             contactInformation.map(information => {
@@ -306,6 +337,7 @@ export const LandingPage = () => {
                                         style={information.style}
                                         title={information.title}
                                         subtitle={information.subtitle}
+                                        matchesXS={matchesXS}
                                     >
                                         <LearnMoreButton
                                             className={classes.learnButton}
@@ -317,6 +349,8 @@ export const LandingPage = () => {
                                                 borderColor: "white"
                                             }}
                                             spanStyle={{marginRight: 10}}
+                                            to={information.to}
+                                            onClick={information.onClick}
                                         />
                                     </ContactBlock>
                                 );
@@ -327,7 +361,7 @@ export const LandingPage = () => {
                 </Grid>
             </Grid>
             <Grid item>
-                <CallToAction/>
+                <CallToAction setValue={props.setValue}/>
             </Grid>
         </Grid>
     );
