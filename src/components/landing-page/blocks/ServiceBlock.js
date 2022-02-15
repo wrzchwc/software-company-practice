@@ -36,6 +36,7 @@ export const ServiceBlock = (props) => {
             <Grid
                 container
                 className={classes.serviceContainer}
+                style={props.containerStyle}
                 justifyContent={props.matchesSM ? 'center' : props.rightAligned ? 'flex-end' : undefined}
             >
                 <Grid item style={getContentStyle(props.rightAligned, props.matchesSM)}>

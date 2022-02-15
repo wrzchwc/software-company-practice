@@ -7,6 +7,7 @@ import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
 import {LandingPage} from "./landing-page/LandingPage";
+import {Services} from "./Services";
 
 
 const App = () => {
@@ -24,7 +25,10 @@ const App = () => {
                 />
                 <Routes>
                     <Route path="/" element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
-                    <Route path="/services" element={<PlaceHolder label="Services"/>}/>
+                    <Route
+                        path="/services"
+                        element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
+                    />
                     <Route path="/custom-software" element={<PlaceHolder label="Custom software"/>}/>
                     <Route path="/mobile-apps" element={<PlaceHolder label="Mobile apps"/>}/>
                     <Route path="/websites" element={<PlaceHolder label="Websites"/>}/>

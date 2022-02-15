@@ -5,9 +5,9 @@ import {makeStyles, useTheme, useMediaQuery} from '@material-ui/core';
 import {Grid} from '@mui/material';
 import {Typography} from "@material-ui/core";
 import {Button, Card, CardContent} from "@material-ui/core";
-import {LearnMoreButton} from "./LearnMoreButton";
-import {ServiceBlock} from "./ServiceBlock";
-import {ContactBlock} from "./ContactBlock";
+import {LearnMoreButton} from "./buttons/LearnMoreButton";
+import {ServiceBlock} from "./blocks/ServiceBlock";
+import {ContactBlock} from "./blocks/ContactBlock";
 import {CallToAction} from "../ui/CallToAction";
 
 import animationData from '../../animations/landinganimation/data';

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import {Button, Grid, makeStyles, Typography, useTheme, useMediaQuery} from '@material-ui/core';
-import {LearnMoreButton} from "../landing-page/LearnMoreButton";
+import {LearnMoreButton} from "../landing-page/buttons/LearnMoreButton";
 
 import background from '../../assets/background.jpg';
 import mobileBackground from '../../assets/mobileBackground.jpg';
