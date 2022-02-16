@@ -266,7 +266,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                                 onClick={event => {
                                     handleMenuItemClick(event, i);
                                     setValue(1);
-                                    handleClose()
+                                    handleClose();
                                 }}
                                 key={`${option}${i}`}
                                 selected={i === selectedIndex && value === 1}

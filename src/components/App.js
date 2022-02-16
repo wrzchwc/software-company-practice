@@ -8,6 +8,7 @@ import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
 import {LandingPage} from "./landing-page/LandingPage";
 import {Services} from "./Services";
+import {CustomSoftware} from "./CustomSoftware";
 
 
 const App = () => {
@@ -29,7 +30,10 @@ const App = () => {
                         path="/services"
                         element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
                     />
-                    <Route path="/custom-software" element={<PlaceHolder label="Custom software"/>}/>
+                    <Route
+                        path="/custom-software"
+                        element={<CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
+                    />
                     <Route path="/mobile-apps" element={<PlaceHolder label="Mobile apps"/>}/>
                     <Route path="/websites" element={<PlaceHolder label="Websites"/>}/>
                     <Route path="/revolution" element={<PlaceHolder label="Revolution"/>}/>
