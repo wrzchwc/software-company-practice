@@ -7,8 +7,8 @@ import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
 import {LandingPage} from "./landing-page/LandingPage";
-import {Services} from "./Services";
-import {CustomSoftware} from "./CustomSoftware";
+import {Services} from "./services/Services";
+import {CustomSoftware} from "./services/CustomSoftware";
 
 
 const App = () => {

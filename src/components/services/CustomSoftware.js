@@ -2,18 +2,19 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import {Link} from 'react-router-dom';
 import {Grid, IconButton, Typography, makeStyles, useMediaQuery, useTheme, Hidden} from "@material-ui/core";
-import backArrow from '../assets/backArrow.svg';
-import forwardArrow from '../assets/forwardArrow.svg';
-import lightbulb from '../assets/bulb.svg';
-import cash from '../assets/cash.svg';
-import stopwatch from '../assets/stopwatch.svg';
-import roots from '../assets/root.svg'
+import backArrow from '../../assets/backArrow.svg';
+import forwardArrow from '../../assets/forwardArrow.svg';
+import lightbulb from '../../assets/bulb.svg';
+import cash from '../../assets/cash.svg';
+import stopwatch from '../../assets/stopwatch.svg';
+import roots from '../../assets/root.svg'
 
-import documentsAnimation from '../animations/documentsAnimation/data';
-import scaleAnimation from '../animations/scaleAnimation/data.json';
-import automationAnimation from '../animations/automationAnimation/data.json';
-import uxAnimation from '../animations/uxAnimation/data';
-import {CallToAction} from "./ui/CallToAction";
+import documentsAnimation from '../../animations/documentsAnimation/data';
+import scaleAnimation from '../../animations/scaleAnimation/data.json';
+import automationAnimation from '../../animations/automationAnimation/data.json';
+import uxAnimation from '../../animations/uxAnimation/data';
+import {CallToAction} from "../ui/CallToAction";
+import {IconImage} from "./IconImage";
 
 
 const useStyles = makeStyles(theme => ({
@@ -77,6 +78,8 @@ export const CustomSoftware = props => {
         }
     };
 
+
+
     return (
         <Grid container direction={'column'}>
             <Grid
@@ -139,40 +142,17 @@ export const CustomSoftware = props => {
                 </Hidden>
             </Grid>
             <Grid item container justify={'center'} style={{margin: '15em 0 20em 0'}} className={classes.rowContainer}>
-                <Grid item container direction={'column'} md style={{maxWidth: '40em'}} alignItems={'center'}>
-                    <Grid item>
-                        <Typography variant={'h4'}>Save Energy</Typography>
-                    </Grid>
-                    <Grid item>
-                        <img src={lightbulb} alt="lightbulb"/>
-                    </Grid>
-                </Grid>
-                <Grid
-                    item
-                    container
-                    direction={'column'}
-                    md
+                <IconImage label={'Save Energy'} src={lightbulb} alt={'lightbulb'} style={{maxWidth: '40em'}}/>
+                <IconImage
+                    label={'Save Time'}
+                    src={stopwatch}
+                    alt={'stopwatch'}
                     style={{
                         maxWidth: '40em',
                         margin: matchesSM ? '10em 0 10em 0' : 0
                     }}
-                    alignItems={'center'}
-                >
-                    <Grid item>
-                        <Typography variant={'h4'}>Save Time</Typography>
-                    </Grid>
-                    <Grid item>
-                        <img src={stopwatch} alt="stopwatch"/>
-                    </Grid>
-                </Grid>
-                <Grid item container direction={'column'} md style={{maxWidth: '40em'}} alignItems={'center'}>
-                    <Grid item>
-                        <Typography variant={'h4'}>Save Money</Typography>
-                    </Grid>
-                    <Grid item>
-                        <img src={cash} alt="cash"/>
-                    </Grid>
-                </Grid>
+                />
+                <IconImage label={'Save Money'} src={cash} alt={'cash'} style={{maxWidth: '40em'}}/>
             </Grid>
             <Grid
                 item
