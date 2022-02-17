@@ -8,7 +8,7 @@ export const IconImage = props => {
                 <Typography variant={'h4'}>{props.label}</Typography>
             </Grid>
             <Grid item>
-                <img src={props.src} alt={props.alt}/>
+                <img src={props.src} alt={props.alt} style={props.imageStyle}/>
             </Grid>
         </Grid>
     );
