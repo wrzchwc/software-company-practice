@@ -2,14 +2,14 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import {makeStyles, useMediaQuery, useTheme} from '@material-ui/core';
 import {Grid, Hidden, Typography} from '@material-ui/core';
-import {NavigationArrowButton} from "./NavigationArrowButton";
-import integrationAnimation from "../../animations/integrationAnimation/data.json";
-import {animationOptions} from "./animationOptions";
-import {IconImage} from "./IconImage";
-import swiss from '../../assets/swissKnife.svg';
-import access from '../../assets/extendAccess.svg';
-import engagement from '../../assets/increaseEngagement.svg';
-import {CallToAction} from "../ui/CallToAction";
+import {NavigationArrowButton} from "../shared-components/NavigationArrowButton";
+import integrationAnimation from "../../../animations/integrationAnimation/data.json";
+import {animationOptions} from "../animationOptions";
+import {IconImage} from "../shared-components/IconImage";
+import swiss from '../../../assets/swissKnife.svg';
+import access from '../../../assets/extendAccess.svg';
+import engagement from '../../../assets/increaseEngagement.svg';
+import {CallToAction} from "../../ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     heading: {

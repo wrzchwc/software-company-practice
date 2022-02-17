@@ -1,29 +1,22 @@
 import React from 'react';
 import Lottie from 'react-lottie';
 import {Grid, Typography, makeStyles, useMediaQuery, useTheme, Hidden} from "@material-ui/core";
-import {CallToAction} from "../ui/CallToAction";
-import {IconImage} from "./IconImage";
-import {NavigationArrowButton} from "./NavigationArrowButton";
+import {CallToAction} from "../../ui/CallToAction";
+import {IconImage} from "../shared-components/IconImage";
+import {ServiceDescription} from "../shared-components/ServiceDescription";
+import {animationOptions} from "../animationOptions";
 
-import lightbulb from '../../assets/bulb.svg';
-import cash from '../../assets/cash.svg';
-import stopwatch from '../../assets/stopwatch.svg';
-import roots from '../../assets/root.svg'
+import lightbulb from '../../../assets/bulb.svg';
+import cash from '../../../assets/cash.svg';
+import stopwatch from '../../../assets/stopwatch.svg';
+import roots from '../../../assets/root.svg'
 
-import documentsAnimation from '../../animations/documentsAnimation/data';
-import scaleAnimation from '../../animations/scaleAnimation/data.json';
-import automationAnimation from '../../animations/automationAnimation/data.json';
-import uxAnimation from '../../animations/uxAnimation/data';
-import {animationOptions} from "./animationOptions";
-
+import documentsAnimation from '../../../animations/documentsAnimation/data';
+import scaleAnimation from '../../../animations/scaleAnimation/data.json';
+import automationAnimation from '../../../animations/automationAnimation/data.json';
+import uxAnimation from '../../../animations/uxAnimation/data';
 
 const useStyles = makeStyles(theme => ({
-    heading: {
-        maxWidth: '40em'
-    },
-    arrowContainer: {
-        marginTop: '0.5rem'
-    },
     rowContainer: {
         padding: '0 5em 0 5em',
         [theme.breakpoints.down('sm')]: {
@@ -40,65 +33,41 @@ export const CustomSoftware = props => {
     const theme = useTheme();
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-    const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
+
+    const navigation = {
+        back:{
+            to:'/services',
+            onClick:() => props.setSelectedIndex(0),
+            alt: 'back to services page'
+        },
+        forward:{
+            to:'/mobile-apps',
+            onClick:() => props.setSelectedIndex(2),
+            alt: 'forward to iOS/Android App Development'
+        }
+    }
 
     return (
         <Grid container direction={'column'}>
-            <Grid
-                item
-                container
-                justify={matchesMD ? 'center' : undefined}
-                className={classes.rowContainer}
-                style={{marginTop: matchesXS ? '1em' : '2em'}}
-            >
-                <Hidden mdDown>
-                    <Grid item className={classes.arrowContainer} style={{margin: '0 1em 0 -3.5em'}}>
-                        <NavigationArrowButton
-                            to={'/services'}
-                            onClick={()=>props.setSelectedIndex(0)}
-                            alt={'back to services page'}
-                            forward={false}
-                        />
-                    </Grid>
-                </Hidden>
-                <Grid item container direction={'column'} className={classes.heading}>
-                    <Grid item>
-                        <Typography variant={'h2'} align={matchesMD ? 'center' : undefined}>
-                            Custom Software Development
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant={'body1'} paragraph align={matchesMD ? 'center' : undefined}>
-                            Whether we're replacing old software or inventing new solutions, Arc Development is here to
-                            help your business tackle technology.
-                        </Typography>
-                        <Typography variant={'body1'} paragraph align={matchesMD ? 'center' : undefined}>
-                            Using regular commercial software leaves you with a lof of stuff you don't need, without
-                            some of the stuff you do need, and ultimately controls the way you work.
-                            Without using any software at all you risk falling behind competitors and missing out on
-                            huge savings from increased efficiency.
-                        </Typography>
-                        <Typography variant={'body1'} paragraph align={matchesMD ? 'center' : undefined}>
-                            Our custom solutions are designed from the ground up with your needs, wants and goals at the
-                            core. This collaborative process produces finely tuned software that is much more efficient
-                            at improving your workflow and reducing cots than generalized options.
-                        </Typography>
-                        <Typography variant={'body1'} paragraph align={matchesMD ? 'center' : undefined}>
-                            We create exactly what you want, exactly how you want it.
-                        </Typography>
-                    </Grid>
-                </Grid>
-                <Hidden mdDown>
-                    <Grid item className={classes.arrowContainer}>
-                        <NavigationArrowButton
-                            to={'/mobile-apps'}
-                            onClick={()=>props.setSelectedIndex(2)}
-                            alt={'forward to iOS/Android App Development'}
-                            forward={true}
-                        />
-                    </Grid>
-                </Hidden>
-            </Grid>
+            <ServiceDescription navigation={navigation} title={'Custom Software Development'}>
+                <>
+                    Whether we're replacing old software or inventing new solutions, Arc Development is here to help
+                    your business tackle technology.
+                </>
+                <>
+                    Using regular commercial software leaves you with a lof of stuff you don't need, without some of
+                    the stuff you do need, and ultimately controls the way you work. Without using any software at all
+                    you risk falling behind competitors and missing out on huge savings from increased efficiency.
+                </>
+                <>
+                    Our custom solutions are designed from the ground up with your needs, wants and goals at the core.
+                    This collaborative process produces finely tuned software that is much more efficient at improving
+                    your workflow and reducing cots than generalized options.
+                </>
+                <>
+                    We create exactly what you want, exactly how you want it.
+                </>
+            </ServiceDescription>
             <Grid item container justify={'center'} style={{margin: '15em 0 20em 0'}} className={classes.rowContainer}>
                 <IconImage label={'Save Energy'} src={lightbulb} alt={'lightbulb'} style={{maxWidth: '40em'}}/>
                 <IconImage

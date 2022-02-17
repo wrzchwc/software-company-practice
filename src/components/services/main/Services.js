@@ -1,10 +1,10 @@
 import React from 'react';
 import {Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
-import customSoftwareIcon from "../../assets/Custom Software Icon.svg";
-import mobileAppsIcon from "../../assets/mobileIcon.svg";
-import websitesIcon from "../../assets/websiteIcon.svg";
-import {ServiceBlock} from "../landing-page/blocks/ServiceBlock";
-import {LearnMoreButton} from "../landing-page/buttons/LearnMoreButton";
+import customSoftwareIcon from "../../../assets/Custom Software Icon.svg";
+import mobileAppsIcon from "../../../assets/mobileIcon.svg";
+import websitesIcon from "../../../assets/websiteIcon.svg";
+import {ServiceBlock} from "../../landing-page/blocks/ServiceBlock";
+import {LearnMoreButton} from "../../landing-page/buttons/LearnMoreButton";
 
 const useStyles = makeStyles(theme => ({
     specialText: {
