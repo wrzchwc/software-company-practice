@@ -1,9 +1,10 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import {Link} from 'react-router-dom';
-import {Grid, IconButton, Typography, makeStyles, useMediaQuery, useTheme, Hidden} from "@material-ui/core";
-import backArrow from '../../assets/backArrow.svg';
-import forwardArrow from '../../assets/forwardArrow.svg';
+import {Grid, Typography, makeStyles, useMediaQuery, useTheme, Hidden} from "@material-ui/core";
+import {CallToAction} from "../ui/CallToAction";
+import {IconImage} from "./IconImage";
+import {NavigationArrowButton} from "./NavigationArrowButton";
+
 import lightbulb from '../../assets/bulb.svg';
 import cash from '../../assets/cash.svg';
 import stopwatch from '../../assets/stopwatch.svg';
@@ -13,8 +14,6 @@ import documentsAnimation from '../../animations/documentsAnimation/data';
 import scaleAnimation from '../../animations/scaleAnimation/data.json';
 import automationAnimation from '../../animations/automationAnimation/data.json';
 import uxAnimation from '../../animations/uxAnimation/data';
-import {CallToAction} from "../ui/CallToAction";
-import {IconImage} from "./IconImage";
 
 
 const useStyles = makeStyles(theme => ({
@@ -91,14 +90,12 @@ export const CustomSoftware = props => {
             >
                 <Hidden mdDown>
                     <Grid item className={classes.arrowContainer} style={{margin: '0 1em 0 -3.5em'}}>
-                        <IconButton
-                            style={{backgroundColor: 'transparent'}}
-                            component={Link}
+                        <NavigationArrowButton
                             to={'/services'}
-                            onClick={() => props.setSelectedIndex(0)}
-                        >
-                            <img src={backArrow} alt="back to services page"/>
-                        </IconButton>
+                            onClick={()=>props.setSelectedIndex(0)}
+                            alt={'back to services page'}
+                            forward={false}
+                        />
                     </Grid>
                 </Hidden>
                 <Grid item container direction={'column'} className={classes.heading}>
@@ -130,14 +127,12 @@ export const CustomSoftware = props => {
                 </Grid>
                 <Hidden mdDown>
                     <Grid item className={classes.arrowContainer}>
-                        <IconButton
-                            style={{backgroundColor: 'transparent'}}
-                            onClick={() => props.setSelectedIndex(2)}
-                            component={Link}
+                        <NavigationArrowButton
                             to={'/mobile-apps'}
-                        >
-                            <img src={forwardArrow} alt="forward to iOS/Android App Development"/>
-                        </IconButton>
+                            onClick={()=>props.setSelectedIndex(2)}
+                            alt={'forward to iOS/Android App Development'}
+                            forward={true}
+                        />
                     </Grid>
                 </Hidden>
             </Grid>
