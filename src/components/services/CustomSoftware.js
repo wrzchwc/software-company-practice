@@ -14,6 +14,7 @@ import documentsAnimation from '../../animations/documentsAnimation/data';
 import scaleAnimation from '../../animations/scaleAnimation/data.json';
 import automationAnimation from '../../animations/automationAnimation/data.json';
 import uxAnimation from '../../animations/uxAnimation/data';
+import {animationOptions} from "./animationOptions";
 
 
 const useStyles = makeStyles(theme => ({
@@ -40,44 +41,6 @@ export const CustomSoftware = props => {
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-
-    const documentsOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: documentsAnimation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-    const scaleOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: scaleAnimation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-    const automationOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: automationAnimation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-    const uxOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: uxAnimation,
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid slice'
-        }
-    };
-
-
 
     return (
         <Grid container direction={'column'}>
@@ -188,7 +151,7 @@ export const CustomSoftware = props => {
                     </Grid>
                     <Grid item md>
                         <Lottie
-                            options={documentsOptions}
+                            options={animationOptions(documentsAnimation)}
                             style={{
                                 maxHeight: 275,
                                 maxWidth: 275,
@@ -200,7 +163,7 @@ export const CustomSoftware = props => {
                 <Grid item container md className={classes.itemContainer} direction={matchesSM ? 'column' : 'row'}>
                     <Grid item md>
                         <Lottie
-                            options={scaleOptions}
+                            options={animationOptions(scaleAnimation)}
                             style={{
                                 maxHeight: 260,
                                 maxWidth: 280
@@ -279,7 +242,7 @@ export const CustomSoftware = props => {
                     </Grid>
                     <Grid item md>
                         <Lottie
-                            options={automationOptions}
+                            options={animationOptions(automationAnimation)}
                             style={{
                                 maxHeight: 290,
                                 maxWidth: 280,
@@ -290,7 +253,7 @@ export const CustomSoftware = props => {
                 <Grid item container md className={classes.itemContainer} direction={matchesSM ? 'column' : 'row'}>
                     <Grid item md>
                         <Lottie
-                            options={uxOptions}
+                            options={animationOptions(uxAnimation)}
                             style={{
                                 maxHeight: 310,
                                 maxWidth: 155
