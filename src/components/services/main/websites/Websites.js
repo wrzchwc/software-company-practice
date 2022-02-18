@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
+import {Grid, useMediaQuery, useTheme} from "@material-ui/core";
 import {ServiceDescription} from "../../shared-components/ServiceDescription";
 
 import analytics from '../../../../assets/analytics.svg';
@@ -9,20 +9,7 @@ import ecommerce from '../../../../assets/ecommerce.svg';
 import {WebUseCase} from "./WebUseCase";
 import {CallToAction} from "../../../ui/CallToAction";
 
-const useStyles = makeStyles(theme => ({
-    rowContainer: {
-        padding: '0 5em 0 5em',
-        [theme.breakpoints.down('sm')]: {
-            padding: '0 1.5em 10em 1.5em',
-        }
-    },
-    paragraphContainer: {
-        maxWidth: '30em'
-    }
-}))
-
 export const Websites = props => {
-    const classes = useStyles();
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
