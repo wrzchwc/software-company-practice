@@ -61,8 +61,7 @@ export const MobileApps = props => {
             >
                 <Grid item container direction={'column'} md>
                     <Grid item>
-                        <Typography variant={'h4'} gutterBottom
-                                    align={matchesSM ? 'center' : undefined}>Integration</Typography>
+                        <Typography variant={'h4'} gutterBottom align={matchesSM ? 'center' : undefined}>Integration</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>

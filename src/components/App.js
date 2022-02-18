@@ -10,6 +10,7 @@ import {LandingPage} from "./landing-page/LandingPage";
 import {Services} from "./services/main/Services";
 import {CustomSoftware} from "./services/main/CustomSoftware";
 import {MobileApps} from "./services/main/MobileApps";
+import {Websites} from "./services/main/websites/Websites";
 
 
 const App = () => {
@@ -39,7 +40,10 @@ const App = () => {
                         path="/mobile-apps"
                         element={<MobileApps setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
                     />
-                    <Route path="/websites" element={<PlaceHolder label="Websites"/>}/>
+                    <Route
+                        path="/websites"
+                        element={<Websites setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
+                    />
                     <Route path="/revolution" element={<PlaceHolder label="Revolution"/>}/>
                     <Route path="/about" element={<PlaceHolder label="About Us"/>}/>
                     <Route path="/contact" element={<Contact/>}/>

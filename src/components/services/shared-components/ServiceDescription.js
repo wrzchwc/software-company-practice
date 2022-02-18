@@ -2,7 +2,7 @@ import React from 'react';
 import {Grid, Hidden, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {NavigationArrowButton} from "./NavigationArrowButton";
 
-const useStyles = makeStyles(theme=>({
+const useStyles = makeStyles(theme => ({
     arrowContainer: {
         marginTop: '0.5rem'
     },
@@ -24,7 +24,7 @@ export const ServiceDescription = props => {
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
-    return(
+    return (
         <Grid
             item
             container
@@ -49,8 +49,13 @@ export const ServiceDescription = props => {
                 <Grid item>
                     {
                         props.children.map(child => {
-                            return(
-                                <Typography variant={'body1'} paragraph align={matchesMD ? 'center' : undefined}>
+                            return (
+                                <Typography
+                                    key={props.children.indexOf(child)}
+                                    variant={'body1'}
+                                    paragraph
+                                    align={matchesMD ? 'center' : undefined}
+                                >
                                     {child}
                                 </Typography>
                             );

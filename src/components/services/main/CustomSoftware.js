@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import {Grid, Typography, makeStyles, useMediaQuery, useTheme, Hidden} from "@material-ui/core";
+import {Grid, Typography, makeStyles, useMediaQuery, useTheme} from "@material-ui/core";
 import {CallToAction} from "../../ui/CallToAction";
 import {IconImage} from "../shared-components/IconImage";
 import {ServiceDescription} from "../shared-components/ServiceDescription";
