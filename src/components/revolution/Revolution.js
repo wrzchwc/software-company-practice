@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import {Grid, makeStyles, Typography, useTheme} from "@material-ui/core";
+import {Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {TitledParagraphs} from "./TitledParagraphs";
 
 import vision from '../../assets/vision.svg';
@@ -30,11 +30,13 @@ const useStyles = makeStyles(theme => ({
 export const Revolution = props => {
     const classes = useStyles();
     const theme = useTheme();
+    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
     const titles = {
         vision: {
             content: 'Vision',
-            align: 'right'
+            align: matchesMD ? 'center' : 'right'
         },
         technology: {
             content: 'Technology'
@@ -46,68 +48,78 @@ export const Revolution = props => {
             content: 'Consultation',
             style: {
                 color: '#000',
-                marginTop: '5em'
-            }
+                marginTop: '5em',
+                maxWidth: 700
+            },
+            align: matchesMD ? 'center' : undefined
         },
         mockup: {
             content: 'Mockup',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         review: {
             content: 'Review',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         design: {
             content: 'Design',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         build: {
             content: 'Build',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         launch: {
             content: 'Launch',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         maintain: {
             content: 'Maintain',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         },
         iterate: {
             content: 'Iterate',
             style: {
                 color: '#000',
                 marginTop: '5em'
-            }
+            },
+            align: matchesMD ? 'center' : undefined
         }
     }
 
     const images = {
         consultation: {
             src: consultation,
-            alt: 'handshake',
+            alt: 'handshake'
         },
         mockup: {
             src: mockup,
             alt: 'basic website design outline',
+            style: {maxWidth: 1000}
         },
         review: {
             src: review,
@@ -115,19 +127,25 @@ export const Revolution = props => {
         },
         design: {
             src: design,
-            alt: 'paintbrush leaving stroke of paint'
+            alt: 'paintbrush leaving stroke of paint',
+            style: {maxWidth: 1000}
         },
         build: {
             src: build,
-            alt: 'building construction site'
+            alt: 'building construction site',
+            style: {maxWidth: matchesMD ? 700 : 1000}
         },
         launch: {
             src: launch,
-            alt: 'rocket'
+            alt: 'rocket',
+            style: {maxWidth: 200}
         },
         maintain: {
             src: maintain,
-            alt: 'wrench tightening bolts'
+            alt: 'wrench tightening bolts',
+            style: {
+                maxWidth: 500
+            }
         },
         iterate: {
             src: iterate,
@@ -138,20 +156,33 @@ export const Revolution = props => {
     return (
         <Grid container direction={'column'}>
             <Grid item className={classes.rowContainer} style={{marginTop: '2em'}}>
-                <Typography variant={'h2'} style={{fontFamily: 'Pacifico'}}>The Revolution</Typography>
+                <Typography variant={'h2'} style={{fontFamily: 'Pacifico'}} align={matchesMD ? 'center' : undefined}>
+                    The Revolution
+                </Typography>
             </Grid>
-            <Grid item container className={classes.rowContainer} alignItems={'center'}>
+            <Grid
+                item
+                container
+                direction={matchesMD ? 'column' : 'row'}
+                className={classes.rowContainer}
+                alignItems={'center'}
+                style={{marginTop: '5em'}}
+            >
                 <Grid item lg>
                     <img
                         src={vision}
                         alt={'mountain through binoculars'}
                         style={{
                             maxWidth: '40em',
-                            marginRight: '5em'
+                            margin: matchesMD ? '0 0 5em 0' : '0 5em 0 0'
                         }}
                     />
                 </Grid>
-                <TitledParagraphs title={titles.vision} paragraphAlignment={'right'} style={{maxWidth: '40em'}}>
+                <TitledParagraphs
+                    title={titles.vision}
+                    paragraphAlignment={matchesMD ? 'center' : 'right'}
+                    style={{maxWidth: matchesSM ? 300 : '40em'}}
+                >
                     <>
                         The rise of computers and subsequently the internet, has completely altered every
                         aspect of human life. This has increased our comfort, broadened our connections and
@@ -178,8 +209,19 @@ export const Revolution = props => {
                     </>
                 </TitledParagraphs>
             </Grid>
-            <Grid item container className={classes.rowContainer} alignItems={'center'}>
-                <TitledParagraphs title={titles.technology} style={{maxWidth: '40em'}}>
+            <Grid
+                item
+                container
+                direction={matchesMD ? 'column' : 'row'}
+                className={classes.rowContainer}
+                alignItems={'center'}
+                style={{margin: '10em 0 10em 0'}}
+            >
+                <TitledParagraphs
+                    title={titles.technology}
+                    paragraphAlignment={matchesMD ? 'center' : undefined}
+                    style={{maxWidth: '40em'}}
+                >
                     <>
                         In 2013, Facebook invented a new way of building websites. This new system, React.js,
                         completely revolutionizes the process and practice of website development.
@@ -213,7 +255,7 @@ export const Revolution = props => {
                         This puts personalization in your pocket - faster, better and more affordable than ever before.
                     </>
                 </TitledParagraphs>
-                <Grid item container justify={'flex-end'} lg>
+                <Grid item container justify={matchesMD ? 'center' : 'flex-end'} lg>
                     <Lottie
                         options={animationOptions(technologyAnimation)}
                         style={{
@@ -230,6 +272,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.consultation}
                 img={images.consultation}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
                 style={{
                     backgroundColor: '#B3B3B3',
                     height: '90em'
@@ -259,6 +302,7 @@ export const Revolution = props => {
                     backgroundColor: '#FF7373',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>
                     After we settle on the best path forward and decide on a solution to pursue, details like the cost
@@ -282,6 +326,7 @@ export const Revolution = props => {
                     backgroundColor: '#39B54A',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>
                     Before moving any farther we come back to you with our progress. This gives you the freedom to
@@ -305,6 +350,7 @@ export const Revolution = props => {
                     backgroundColor: '#A67C52',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>
                     Using the mockups and notes taken during the consultation as guides, we will start ironing out what
@@ -324,6 +370,7 @@ export const Revolution = props => {
                     backgroundColor: '#39B54A',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>
                     A second round of review is essential to our goal of creating exactly what you want, exactly how
@@ -343,6 +390,7 @@ export const Revolution = props => {
                     backgroundColor: '#FBB03B',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>Here’s where we get down to business.</>
                 <>
@@ -374,6 +422,7 @@ export const Revolution = props => {
                     backgroundColor: '#C1272D',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>The moment we’ve all been waiting for.</>
                 <>
@@ -394,6 +443,7 @@ export const Revolution = props => {
                     backgroundColor: '#8E45CE',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>Our work doesn't end there.</>
                 <>
@@ -415,6 +465,7 @@ export const Revolution = props => {
                     backgroundColor: '#29ABE2',
                     height: '90em'
                 }}
+                paragraphAlignment={matchesMD ? 'center' : undefined}
             >
                 <>
                     The cycle repeats whenever you come up with a new idea for extending your current project, or
