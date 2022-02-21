@@ -17,6 +17,7 @@ import technologyAnimation from '../../animations/technologyAnimation/data.json'
 import {animationOptions} from "../services/animationOptions";
 import {SectionTitle} from "./SectionTitle";
 import {ProcessPhase} from "./ProcessPhase";
+import {CallToAction} from "../ui/CallToAction";
 
 const useStyles = makeStyles(theme => ({
     rowContainer: {
@@ -454,6 +455,9 @@ export const Revolution = props => {
                     changes instead of waiting months for a single update.
                 </>
             </ProcessPhase>
+            <Grid item>
+                <CallToAction setValue={props.setValue}/>
+            </Grid>
         </Grid>
     );
 }
