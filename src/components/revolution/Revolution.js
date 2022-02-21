@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     rowContainer: {
         padding: '0 5em 0 5em',
         [theme.breakpoints.down('sm')]: {
-            padding: '0 1.5em 10em 1.5em',
+            padding: '0 1.5em 0 1.5em',
         }
     }
 }))
@@ -32,6 +32,14 @@ export const Revolution = props => {
     const theme = useTheme();
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+
+    const title = {
+        style: {
+            color: '#000',
+            marginTop: matchesMD ? 0 : "5em"
+        },
+        align: matchesMD ? 'center' : undefined
+    }
 
     const titles = {
         vision: {
@@ -45,69 +53,36 @@ export const Revolution = props => {
             content: 'Process'
         },
         consultation: {
-            content: 'Consultation',
-            style: {
-                color: '#000',
-                marginTop: '5em',
-                maxWidth: 700
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Consultation'
         },
         mockup: {
-            content: 'Mockup',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Mockup'
         },
         review: {
-            content: 'Review',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Review'
         },
         design: {
-            content: 'Design',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Design'
         },
         build: {
-            content: 'Build',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Build'
         },
         launch: {
-            content: 'Launch',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Launch'
         },
         maintain: {
-            content: 'Maintain',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Maintain'
         },
         iterate: {
-            content: 'Iterate',
-            style: {
-                color: '#000',
-                marginTop: '5em'
-            },
-            align: matchesMD ? 'center' : undefined
+            ...title,
+            content: 'Iterate'
         }
     }
 
