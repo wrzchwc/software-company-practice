@@ -1,6 +1,8 @@
 import React from 'react';
-import {Avatar, Grid, makeStyles, Typography, useTheme} from "@material-ui/core";
+import {Avatar, Grid, makeStyles, Typography, useMediaQuery, useTheme} from "@material-ui/core";
 import {BrandStory} from "./BrandStory";
+import {Bio} from "./Bio";
+import {CallToAction} from "../ui/CallToAction";
 
 import history from '../../assets/history.svg';
 import profile from '../../assets/founder.jpg';
@@ -23,20 +25,26 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         height: '25em',
-        width: '25em'
+        width: '25em',
+        [theme.breakpoints.down('sm')]: {
+            height: '20em',
+            width: '20em',
+            maxHeight: 300,
+            maxWidth: 300
+        }
     }
 }))
 
-export const About = () => {
+export const About = props => {
     const classes = useStyles();
     const theme = useTheme();
-
+    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
     return (
         <Grid container direction={'column'}>
-            <Grid item className={classes.rowContainer} style={{marginTop: '2em'}}>
-                <Typography variant={'h2'}>About Us</Typography>
+            <Grid item className={classes.rowContainer} style={{marginTop: matchesMD ? '1em' : '2em'}}>
+                <Typography variant={'h2'} align={matchesMD ? 'center' : undefined}>About Us</Typography>
             </Grid>
-            <Grid item container justify={'center'} className={classes.rowContainer}>
+            <Grid item container justify={'center'} className={classes.rowContainer} style={{marginTop: '3em'}}>
                 <Typography variant={'h4'} className={classes.missionStatement} align={'center'}>
                     Whether it be person to person, business to consumer, or an individual to their interests,
                     technology is meant to bring us closer to what we care about in the best way possible. Arc
@@ -44,11 +52,21 @@ export const About = () => {
                     the Midwest and beyond.
                 </Typography>
             </Grid>
-            <Grid item container className={classes.rowContainer} justify={'space-around'}>
+            <Grid
+                item
+                container
+                className={classes.rowContainer}
+                justify={'space-around'}
+                direction={matchesMD ? 'column' : 'row'}
+                alignItems={matchesMD ? 'center' : undefined}
+                style={{margin: '10em 0 10em 0'}}
+            >
                 <Grid item>
                     <Grid item container direction={'column'} lg style={{maxWidth: '35em'}}>
                         <Grid item>
-                            <Typography variant={'h4'} gutterBottom>History</Typography>
+                            <Typography variant={'h4'} gutterBottom align={matchesMD ? 'center' : undefined}>
+                                History
+                            </Typography>
                         </Grid>
                         <BrandStory>
                             <>Founded in 2019, we’re ready to get our hands on the world’s business problems.</>
@@ -59,8 +77,10 @@ export const About = () => {
                             </>
                             <>
                                 We aim to be a powerful force in overcoming these obstacles. Recent developments in
-                                software engineering and computing power, compounded by the proliferation of smart phones,
-                                has opened up infinite worlds of possibility. Things that have always been done by hand can
+                                software engineering and computing power, compounded by the proliferation of smart
+                                phones,
+                                has opened up infinite worlds of possibility. Things that have always been done by hand
+                                can
                                 now be done digitally and automatically, and completely new methods of interaction are
                                 created daily. Taking full advantage of these advancements is the name of the game
                             </>
@@ -68,12 +88,17 @@ export const About = () => {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <Grid item container justify={'center'} lg >
-                        <img src={history} alt={'quill pen sitting on top of book'} style={{maxHeight: '22em'}}/>
+                    <Grid item container justify={'center'} lg>
+                        <img
+                            src={history}
+                            alt={'quill pen sitting on top of book'}
+                            style={{maxHeight: matchesMD ? 200 : '22em'}}
+                        />
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item container direction={'column'} className={classes.rowContainer} alignItems={'center'}>
+            <Grid item container direction={'column'} className={classes.rowContainer} alignItems={'center'}
+                  style={{marginBottom: '15em'}}>
                 <Grid item>
                     <Typography variant={'h4'} gutterBottom align={'center'}>Team</Typography>
                 </Grid>
@@ -86,43 +111,44 @@ export const About = () => {
                 <Grid item>
                     <Avatar src={profile} alt={'founder'} className={classes.avatar}/>
                 </Grid>
-                <Grid item container>
-                    <Grid item container direction={'column'} lg alignItems={'flex-end'}>
+                <Grid item container justify={matchesMD ? 'center' : undefined}>
+                    <Bio lgUp={true}/>
+                    <Grid
+                        item
+                        container
+                        direction={'column'}
+                        lg
+                        alignItems={matchesMD ? 'center' : undefined}
+                        style={{marginBottom: matchesMD ? '2.5em' : 0}}
+                    >
                         <Grid item>
-                            <img src={yearbook} alt={'yearbook page about founder'}/>
+                            <img
+                                src={yearbook}
+                                alt={'yearbook page about founder'}
+                                style={{maxWidth: matchesMD ? 300 : undefined}}
+                            />
                         </Grid>
                         <Grid item>
                             <Typography variant={'caption'}>a page from my Sophomore yearbook</Typography>
                         </Grid>
                     </Grid>
-                    <Grid
-                        item
-                        lg
-                        style={{
-                            maxWidth: '45em',
-                            padding: '1.25em'
-                        }}
-                    >
-                        <Typography variant={'body1'} align={'center'}>
-                            I taught myself basic coding from a library book in third grade, and ever
-                            since then my passion has solely been set on learning — learning about
-                            computers, learning mathematics and philosophy, studying design, always
-                            just learning.
-                        </Typography>
-                        <Typography variant={'body1'} align={'center'}>
-                            Now I’m ready to apply everything I’ve learned, and to help others with the intuition I
-                            have developed.
-                        </Typography>
-                    </Grid>
-                    <Grid item container direction={'column'} lg>
+                    <Bio mdDown={true}/>
+                    <Grid item container direction={'column'} lg alignItems={matchesMD ? 'center' : 'flex-end'}>
                         <Grid item>
-                            <img src={puppy} alt={'grey spotted puppy'}/>
+                            <img
+                                src={puppy}
+                                alt={'grey spotted puppy'}
+                                style={{maxWidth: matchesMD ? 300 : undefined}}
+                            />
                         </Grid>
                         <Grid item>
                             <Typography variant={'caption'}>my miniature dapple dachshund, Sterling</Typography>
                         </Grid>
                     </Grid>
                 </Grid>
+            </Grid>
+            <Grid item>
+                <CallToAction setValue={props.setValue}/>
             </Grid>
         </Grid>
     );
