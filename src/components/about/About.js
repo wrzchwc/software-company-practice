@@ -8,6 +8,7 @@ import history from '../../assets/history.svg';
 import profile from '../../assets/founder.jpg';
 import yearbook from '../../assets/yearbook.svg';
 import puppy from '../../assets/puppy.svg';
+import {ImageWithCaption} from "./ImageWithCaption";
 
 const useStyles = makeStyles(theme => ({
     missionStatement: {
@@ -39,6 +40,18 @@ export const About = props => {
     const classes = useStyles();
     const theme = useTheme();
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+
+    const images = {
+        yearbook: {
+            src: yearbook,
+            alt: 'yearbook page about founder'
+        },
+        puppy: {
+            src: puppy,
+            alt: 'grey spotted puppy'
+        }
+    }
+
     return (
         <Grid container direction={'column'}>
             <Grid item className={classes.rowContainer} style={{marginTop: matchesMD ? '1em' : '2em'}}>
@@ -113,38 +126,18 @@ export const About = props => {
                 </Grid>
                 <Grid item container justify={matchesMD ? 'center' : undefined}>
                     <Bio lgUp={true}/>
-                    <Grid
-                        item
-                        container
-                        direction={'column'}
-                        lg
+                    <ImageWithCaption
+                        img={images.yearbook}
                         alignItems={matchesMD ? 'center' : undefined}
                         style={{marginBottom: matchesMD ? '2.5em' : 0}}
-                    >
-                        <Grid item>
-                            <img
-                                src={yearbook}
-                                alt={'yearbook page about founder'}
-                                style={{maxWidth: matchesMD ? 300 : undefined}}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'caption'}>a page from my Sophomore yearbook</Typography>
-                        </Grid>
-                    </Grid>
+                        caption={'a page from my Sophomore yearbook'}
+                    />
                     <Bio mdDown={true}/>
-                    <Grid item container direction={'column'} lg alignItems={matchesMD ? 'center' : 'flex-end'}>
-                        <Grid item>
-                            <img
-                                src={puppy}
-                                alt={'grey spotted puppy'}
-                                style={{maxWidth: matchesMD ? 300 : undefined}}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Typography variant={'caption'}>my miniature dapple dachshund, Sterling</Typography>
-                        </Grid>
-                    </Grid>
+                    <ImageWithCaption
+                        img={images.puppy}
+                        alignItems={matchesMD ? 'center' : 'flex-end'}
+                        caption={'my miniature dapple dachshund, Sterling'}
+                    />
                 </Grid>
             </Grid>
             <Grid item>
