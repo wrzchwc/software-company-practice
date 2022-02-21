@@ -42,6 +42,11 @@ export const About = props => {
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
 
     const images = {
+        history: {
+            src: history,
+            alt: 'quill pen sitting on top of book',
+            style: {maxHeight: matchesMD ? 200 : '22em'}
+        },
         yearbook: {
             src: yearbook,
             alt: 'yearbook page about founder'
@@ -102,11 +107,7 @@ export const About = props => {
                 </Grid>
                 <Grid item>
                     <Grid item container justify={'center'} lg>
-                        <img
-                            src={history}
-                            alt={'quill pen sitting on top of book'}
-                            style={{maxHeight: matchesMD ? 200 : '22em'}}
-                        />
+                        <img src={images.history.src} alt={images.history.alt} style={images.history.style}/>
                     </Grid>
                 </Grid>
             </Grid>
