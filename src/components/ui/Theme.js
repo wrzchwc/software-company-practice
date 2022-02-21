@@ -35,6 +35,11 @@ export default createMuiTheme({
             fontWeight: 300,
             color: arcGrey
         },
+        caption: {
+            fontSize: '1rem',
+            fontWeight: 300,
+            color: arcGrey
+        },
         h2: {
             fontFamily: "Raleway",
             fontWeight: 700,

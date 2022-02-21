@@ -12,6 +12,7 @@ import {CustomSoftware} from "./services/main/CustomSoftware";
 import {MobileApps} from "./services/main/MobileApps";
 import {Websites} from "./services/main/websites/Websites";
 import {Revolution} from "./revolution/Revolution";
+import {About} from "./about/About";
 
 
 const App = () => {
@@ -49,7 +50,7 @@ const App = () => {
                         path="/revolution"
                         element={<Revolution setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
                     />
-                    <Route path="/about" element={<PlaceHolder label="About Us"/>}/>
+                    <Route path="/about" element={<About setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
                     <Route path="/contact" element={<Contact/>}/>
                     <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
                 </Routes>
