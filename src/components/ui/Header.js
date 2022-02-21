@@ -271,6 +271,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                                 key={`${option}${i}`}
                                 selected={i === selectedIndex && value === 1}
                                 to={option.link}
+                                style={{color:'#fff'}}
                             >
                                 {option.name}
                             </MenuItem>

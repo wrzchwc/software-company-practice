@@ -118,9 +118,7 @@ export const Revolution = props => {
         maintain: {
             src: maintain,
             alt: 'wrench tightening bolts',
-            style: {
-                maxWidth: 500
-            }
+            style: {maxWidth: 500}
         },
         iterate: {
             src: iterate,
