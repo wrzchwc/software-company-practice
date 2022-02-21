@@ -86,7 +86,7 @@ export default createMuiTheme({
         },
         MuiInput: {
             root: {
-                color: "grey",
+                color: arcGrey,
                 fontWeight: 300
             },
             underline: {

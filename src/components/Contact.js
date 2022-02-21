@@ -1,7 +1,17 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
-import {Button, Dialog, DialogContent, Grid, makeStyles, useTheme, TextField, Typography} from '@material-ui/core';
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    Grid,
+    makeStyles,
+    useTheme,
+    TextField,
+    Typography,
+    useMediaQuery
+} from '@material-ui/core';
 import background from "../assets/background.jpg";
+import mobileBackground from '../assets/mobileBackground.jpg';
 import phoneIcon from "../assets/phone.svg";
 import emailIcon from "../assets/email.svg";
 import airplane from "../assets/send.svg";
@@ -13,7 +23,10 @@ const useStyles = makeStyles(theme => ({
         backgroundSize: "cover",
         backgroundRepeat: "no - repeat",
         height: "60em",
-        paddingDown: "10em"
+        paddingDown: "10em",
+        [theme.breakpoints.down('md')]: {
+            backgroundImage: `url${mobileBackground}`
+        }
     },
     contactInfo: {
         color: theme.palette.common.blue,
@@ -36,7 +49,11 @@ const useStyles = makeStyles(theme => ({
         height: 45,
         width: 245,
         "&:hover": {
-            backgroundColor: theme.palette.secondary.light
+            backgroundColor: theme.palette.secondary.light,
+            [theme.breakpoints.down('sm')]: {
+                height: 40,
+                width: 225
+            }
         }
     }
 }));
@@ -51,6 +68,9 @@ export const Contact = () => {
     const [phoneHelper, setPhoneHelper] = useState('');
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false);
+    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
+    const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
 
     const onChange = event => {
         let valid;
@@ -82,12 +102,30 @@ export const Contact = () => {
 
     return (
         <Grid container direction={"row"}>
-            <Grid item container direction={"column"} lg={4} xl={3} justify={"center"} alignItems={"center"}>
+            <Grid
+                item
+                container
+                direction={"column"}
+                lg={4}
+                xl={3}
+                justify={"center"}
+                alignItems={"center"}
+                style={{
+                    marginBottom: matchesMD ? '5em' : 0,
+                    marginTop: matchesSM ? '1em' : matchesMD ? '5em' : 0
+                }}
+            >
                 <Grid item>
                     <Grid container direction={"column"}>
                         <Grid item>
-                            <Typography variant={"h2"} style={{lineHeight: 1}}>Contact Us</Typography>
-                            <Typography variant={"body1"} style={{color: theme.palette.common.blue}}>
+                            <Typography variant={"h2"} align={matchesMD ? 'center' : undefined} style={{lineHeight: 1}}>
+                                Contact Us
+                            </Typography>
+                            <Typography
+                                variant={"body1"}
+                                style={{color: theme.palette.common.blue}}
+                                align={matchesMD ? 'center' : undefined}
+                            >
                                 We're waiting
                             </Typography>
                         </Grid>
@@ -186,8 +224,16 @@ export const Contact = () => {
             <Dialog
                 open={open}
                 onClose={() => setOpen(false)}
-                PaperProps={{style: {padding: "5em"}}}
+                PaperProps={{
+                    style: {
+                        paddingTop: matchesXS ? '1em' : '5em',
+                        paddingBottom: matchesXS ? '1em' : '5em',
+                        paddingLeft: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '10em' : '20em',
+                        paddingRight: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '10em' : '20em'
+                    }
+                }}
                 style={{zIndex: 1302}}
+                fullScreen={matchesXS}
             >
                 <DialogContent>
                     <Grid container direction={"column"}>
@@ -227,9 +273,9 @@ export const Contact = () => {
                                 onChange={onChange}
                             />
                         </Grid>
-                        <Grid item style={{maxWidth: "20em"}}>
+                        <Grid item style={{maxWidth: matchesXS ? '100%' : '20em'}}>
                             <TextField
-                                inputProps={{disableUnderline: true}}
+                                InputProps={{disableUnderline: true}}
                                 value={message}
                                 className={classes.message}
                                 fullWidth
@@ -242,9 +288,21 @@ export const Contact = () => {
                             />
                         </Grid>
                     </Grid>
-                    <Grid item container style={{marginTop: "2em"}} alignItems={"center"}>
+                    <Grid
+                        item
+                        container
+                        direction={matchesSM ? 'column' : 'row'}
+                        style={{marginTop: "2em"}}
+                        alignItems={"center"}
+                    >
                         <Grid item>
-                            <Button color={"primary"} onClick={()=>{setOpen(false)}} style={{fontWeight: 300}}>
+                            <Button
+                                color={"primary"}
+                                onClick={() => {
+                                    setOpen(false);
+                                }}
+                                style={{fontWeight: 300}}
+                            >
                                 Cancel
                             </Button>
                         </Grid>
@@ -264,7 +322,7 @@ export const Contact = () => {
                     </Grid>
                 </DialogContent>
             </Dialog>
-            <Grid item container className={classes.background} lg={8} xl={9}/>
+            <Grid item container direction={matchesMD ? 'column' : 'row'} className={classes.background} lg={8} xl={9}/>
         </Grid>
     );
 }
