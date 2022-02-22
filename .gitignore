@@ -23,3 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 src/components/PlaceHolder.js
+
+# firebase
+functions
+firebase.json
+.firebaserc
