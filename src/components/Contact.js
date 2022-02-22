@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import {
     Button,
+    CircularProgress,
     Dialog,
     DialogContent,
     Grid,
     makeStyles,
+    Snackbar,
     useTheme,
     TextField,
     Typography,
@@ -15,7 +17,6 @@ import mobileBackground from '../assets/mobileBackground.jpg';
 import phoneIcon from "../assets/phone.svg";
 import emailIcon from "../assets/email.svg";
 import airplane from "../assets/send.svg";
-import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -69,6 +70,12 @@ export const Contact = () => {
     const [phoneHelper, setPhoneHelper] = useState('');
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({
+        open: false,
+        message: '',
+        backgroundColor: ''
+    })
     const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
@@ -102,8 +109,31 @@ export const Contact = () => {
     }
 
     const onConfirm = () => {
-
+        setLoading(true);
+        // successful API request simulation
+        setTimeout(
+            () => {
+                setLoading(false);
+                setOpen(false);
+                setName('');
+                setEmail('');
+                setPhone('');
+                setMessage('');
+                setAlert({
+                    open: true,
+                    message: 'Message sent successfully!',
+                    backgroundColor: '#4BB543'
+                })
+            },
+            1000)
     }
+
+    const buttonContents = (
+        <>
+            Send message
+            <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
+        </>
+    )
 
     return (
         <Grid container direction={"row"}>
@@ -219,8 +249,7 @@ export const Contact = () => {
                                     setOpen(true)
                                 }}
                             >
-                                Send message
-                                <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
+                                {buttonContents}
                             </Button>
                         </Grid>
                     </Grid>
@@ -318,13 +347,28 @@ export const Contact = () => {
                                 className={classes.sendButton}
                                 onClick={onConfirm}
                             >
-                                Send message
-                                <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
+                                {loading ? <CircularProgress size={30}/> : buttonContents}
                             </Button>
                         </Grid>
                     </Grid>
                 </DialogContent>
             </Dialog>
+            <Snackbar
+                open={alert.open}
+                message={alert.message}
+                ContentProps={{style: {backgroundColor: alert.backgroundColor}}}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                onClose={() => {
+                    setAlert({
+                        ...alert,
+                        open: false
+                    })
+                }}
+                autoHideDuration={4000}
+            />
             <Grid item container direction={matchesMD ? 'column' : 'row'} className={classes.background} lg={8} xl={9}/>
         </Grid>
     );
