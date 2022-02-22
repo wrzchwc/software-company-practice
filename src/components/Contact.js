@@ -15,6 +15,7 @@ import mobileBackground from '../assets/mobileBackground.jpg';
 import phoneIcon from "../assets/phone.svg";
 import emailIcon from "../assets/email.svg";
 import airplane from "../assets/send.svg";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -98,6 +99,10 @@ export const Contact = () => {
             emailHelper.length !== 0 ||
             email.length === 0 ||
             phone.length === 0;
+    }
+
+    const onConfirm = () => {
+
     }
 
     return (
@@ -311,9 +316,7 @@ export const Contact = () => {
                                 variant={"contained"}
                                 disabled={canBeSent()}
                                 className={classes.sendButton}
-                                onClick={() => {
-                                    setOpen(true)
-                                }}
+                                onClick={onConfirm}
                             >
                                 Send message
                                 <img src={airplane} alt="paper airplane" style={{marginLeft: "1em"}}/>
