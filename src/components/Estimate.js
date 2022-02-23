@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {cloneDeep} from "lodash";
 import Lottie from 'react-lottie';
 import {Button, Grid, IconButton, makeStyles, Typography, useTheme} from "@material-ui/core";
@@ -310,6 +310,81 @@ const websiteQuestions = [
 export const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
+    const [questions, setQuestions] = useState(defaultQuestions);
+
+    const nextQuestion = () => {
+        const newQuestions = cloneDeep(questions);
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+        const nextIndex = activeIndex + 1;
+
+        newQuestions[activeIndex] = {...currentlyActive[0], active: false};
+        newQuestions[nextIndex] = {...newQuestions[nextIndex], active: true};
+        setQuestions(newQuestions);
+    }
+
+    const previousQuestion = () => {
+        const newQuestions = cloneDeep(questions);
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+        const nextIndex = activeIndex - 1;
+
+        newQuestions[activeIndex] = {...currentlyActive[0], active: false};
+        newQuestions[nextIndex] = {...newQuestions[nextIndex], active: true};
+        setQuestions(newQuestions);
+    }
+
+    const navigationPreviousDisabled = () => {
+        const currentlyActive = questions.filter(question => question.active);
+        return currentlyActive[0].id === 1;
+    }
+
+    const navigationNextDisabled = () => {
+        const currentlyActive = questions.filter(question => question.active);
+        return currentlyActive[0].id === questions[questions.length - 1].id;
+    }
+
+    const handleSelect = id => {
+        const newQuestions = cloneDeep(questions);
+
+        const currentlyActive = newQuestions.filter(question => question.active);
+        const activeIndex = currentlyActive[0].id - 1;
+
+        const newSelected = newQuestions[activeIndex].options[id - 1];
+
+        const previousSelected = currentlyActive[0].options.filter(
+            option => option.selected
+        );
+
+        switch (currentlyActive[0].subtitle) {
+            case "Select one.":
+                if (previousSelected[0]) {
+                    previousSelected[0].selected = !previousSelected[0].selected;
+                }
+                newSelected.selected = !newSelected.selected;
+                break;
+            default:
+                newSelected.selected = !newSelected.selected;
+                break;
+        }
+
+        switch (newSelected.title) {
+            case "Custom Software Development":
+                setQuestions(softwareQuestions);
+                break;
+            case "iOS/Android App Development":
+                setQuestions(softwareQuestions);
+                break;
+            case "Website Development":
+                setQuestions(websiteQuestions);
+                break;
+            default:
+                setQuestions(newQuestions);
+                break;
+        }
+    }
+
+    console.log(questions);
 
     return (
         <Grid container>
@@ -329,7 +404,7 @@ export const Estimate = () => {
             </Grid>
             <Grid item container lg direction={'column'} alignItems={'center'} style={{margin: '0 2em 25em 0'}}>
                 {
-                    defaultQuestions.filter(question => question.active).map((question, index) => {
+                    questions.filter(question => question.active).map((question, index) => {
                         return (
                             <React.Fragment key={index}>
                                 <Grid item>
@@ -339,7 +414,8 @@ export const Estimate = () => {
                                         style={{
                                             fontWeight: 500,
                                             marginTop: '5em',
-                                            fontSize: '2.25rem'
+                                            fontSize: '2.25rem',
+                                            lineHeight: 1.25
                                         }}
                                     >
                                         {question.title}
@@ -362,8 +438,17 @@ export const Estimate = () => {
                                                 container
                                                 md
                                                 direction={'column'}
+                                                component={Button}
+                                                onClick={() => handleSelect(option.id)}
+                                                style={{
+                                                    display: 'grid',
+                                                    textTransform: 'none',
+                                                    backgroundColor:
+                                                        option.selected ? theme.palette.common.orange : null,
+                                                    borderRadius: 0
+                                                }}
                                             >
-                                                <Grid item style={{maxWidth: '12em'}}>
+                                                <Grid item style={{maxWidth: '14em'}}>
                                                     <Typography
                                                         variant={'h6'}
                                                         align={'center'}
@@ -395,15 +480,25 @@ export const Estimate = () => {
                     container
                     justify={'space-between'}
                     style={{
-                        width: '15em',
+                        width: '18em',
                         marginTop: '3em'
                     }}
                 >
                     <Grid item>
-                        <img src={backArrow} alt={'previous question'}/>
+                        <IconButton disabled={navigationPreviousDisabled()} onClick={previousQuestion}>
+                            <img
+                                src={navigationPreviousDisabled() ? backArrowDisabled : backArrow}
+                                alt={'previous question'}
+                            />
+                        </IconButton>
                     </Grid>
                     <Grid item>
-                        <img src={forwardArrow} alt={'next question'}/>
+                        <IconButton disabled={navigationNextDisabled()} onClick={nextQuestion}>
+                            <img
+                                src={navigationNextDisabled() ? forwardArrowDisabled : forwardArrow}
+                                alt={'next question'}
+                            />
+                        </IconButton>
                     </Grid>
                 </Grid>
                 <Grid item>
