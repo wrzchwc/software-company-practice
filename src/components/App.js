@@ -3,7 +3,6 @@ import Header from "./ui/Header";
 import {ThemeProvider} from "@material-ui/core/styles";
 import theme from "./ui/Theme"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import PlaceHolder from "./PlaceHolder";
 import {Footer} from "./ui/Footer";
 import {Contact} from "./Contact";
 import {LandingPage} from "./landing-page/LandingPage";
@@ -13,6 +12,7 @@ import {MobileApps} from "./services/main/MobileApps";
 import {Websites} from "./services/main/websites/Websites";
 import {Revolution} from "./revolution/Revolution";
 import {About} from "./about/About";
+import {Estimate} from "./Estimate";
 
 
 const App = () => {
@@ -52,7 +52,10 @@ const App = () => {
                     />
                     <Route path="/about" element={<About setValue={setValue} setSelectedIndex={setSelectedIndex}/>}/>
                     <Route path="/contact" element={<Contact/>}/>
-                    <Route path="/estimate" element={<PlaceHolder label="Estimate"/>}/>
+                    <Route
+                        path="/estimate"
+                        element={<Estimate setValue={setValue} setSelectedIndex={setSelectedIndex}/>}
+                    />
                 </Routes>
                 <Footer
                     setSelectedIndex={setSelectedIndex}
