@@ -385,25 +385,15 @@ export const Estimate = () => {
         const currentlyActive = newQuestions.find(question => question.active);
         const activeIndex = currentlyActive.id - 1;
         const newSelected = newQuestions[activeIndex].options[id - 1];
-        const previousSelected = currentlyActive.options.filter(option => option.selected);
+        const previouslySelected = currentlyActive.options.filter(option => option.selected);
 
-        switch (currentlyActive.subtitle) {
-            case "Select one.":
-                if (previousSelected[0]) {
-                    previousSelected[0].selected = !previousSelected[0].selected;
-                }
-                newSelected.selected = !newSelected.selected;
-                break;
-            default:
-                newSelected.selected = !newSelected.selected;
-                break;
+        if (currentlyActive.subtitle === 'Select one.' && previouslySelected[0]) {
+            previouslySelected[0].selected = !previouslySelected[0].selected;
         }
+        newSelected.selected = !newSelected.selected;
 
         switch (newSelected.title) {
             case "Custom Software Development":
-                setQuestions(softwareQuestions);
-                setService(newSelected.title);
-                break;
             case "iOS/Android App Development":
                 setQuestions(softwareQuestions);
                 setService(newSelected.title);
@@ -415,6 +405,14 @@ export const Estimate = () => {
             default:
                 setQuestions(newQuestions);
                 break;
+        }
+
+        if (activeIndex > 0) {
+            setPlatforms([]);
+            setFeatures([]);
+            setCustomFeatures('');
+            setCategory('');
+            setUsers('');
         }
     }
 
@@ -448,7 +446,7 @@ export const Estimate = () => {
         if (questions.length > 2) {
             const userCost = questions
                 .find(question => question.title === 'How many users do you expect?').options
-                .find(option=>option.selected);
+                .find(option => option.selected);
             setUsers(userCost.title);
             cost -= userCost.cost;
             cost *= userCost.cost;
@@ -511,7 +509,7 @@ export const Estimate = () => {
     }
 
     const getCustomFeatures = () => {
-        if (questions.length>2){
+        if (questions.length > 2) {
             const newCustomFeatures = questions
                 .find(question => question.title === 'What type of custom features do you expect to need?').options
                 .find(option => option.selected).title.toLowerCase();
