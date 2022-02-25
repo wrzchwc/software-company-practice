@@ -19,10 +19,10 @@ export const BrandStory = props => {
                 We're the new kid on the block
             </Typography>
             {
-                props.children.map(child => {
+                props.children.map((child, index) => {
                     return (
                         <Typography
-                            key={props.children.indexOf(child)}
+                            key={index}
                             variant={'body1'}
                             paragraph
                             align={matchesMD ? 'center' : undefined}

@@ -12,10 +12,10 @@ export const TitledParagraphs = props => {
             <SectionTitle title={title}/>
             <Grid item>
                 {
-                    props.children.map(child => {
+                    props.children.map((child, index) => {
                         return (
                             <Typography
-                                key={props.children.indexOf(child)}
+                                key={index}
                                 variant={'body1'}
                                 paragraph
                                 align={props.paragraphAlignment}

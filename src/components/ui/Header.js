@@ -224,7 +224,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 {
                     routes.map((route, index) => (
                         <Tab
-                            key={`${route}${index}`}
+                            key={index}
                             className={classes.tab}
                             component={Link}
                             to={route.link}
@@ -258,18 +258,18 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 style={{zIndex: 1302}}
             >
                 {
-                    menuOptions.map((option, i) => {
+                    menuOptions.map((option, index) => {
                         return (
                             <MenuItem
                                 classes={{root: classes.menuItem}}
                                 component={Link}
                                 onClick={event => {
-                                    handleMenuItemClick(event, i);
+                                    handleMenuItemClick(event, index);
                                     setValue(1);
                                     handleClose();
                                 }}
-                                key={`${option}${i}`}
-                                selected={i === selectedIndex && value === 1}
+                                key={index}
+                                selected={index === selectedIndex && value === 1}
                                 to={option.link}
                                 style={{color:'#fff'}}
                             >
@@ -300,7 +300,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
                 <List disablePadding>
                     {routes.map((route, index) => (
                         <ListItem
-                            key={`${route}${route.activeIndex}`}
+                            key={index}
                             button
                             divider
                             component={Link}

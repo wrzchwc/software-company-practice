@@ -106,10 +106,10 @@ export const Services = props => {
                 <Typography align={matchesSM ? 'center' : undefined} variant={'h2'} gutterBottom>Services</Typography>
             </Grid>
             {
-                services.map(service => {
+                services.map((service, index) => {
                     return (
                         <ServiceBlock
-                            key={services.indexOf(service)}
+                            key={index}
                             matchesSM={matchesSM}
                             src={service.src}
                             alt={service.alt}

@@ -256,10 +256,10 @@ export const LandingPage = props => {
                 </Grid>
             </Grid>
             {
-                services.map(service => {
+                services.map((service, index) => {
                     return (
                         <ServiceBlock
-                            key={services.indexOf(service)}
+                            key={index}
                             matchesSM={matchesSM}
                             src={service.src}
                             alt={service.alt}
@@ -330,10 +330,10 @@ export const LandingPage = props => {
                         direction={matchesXS ? "column" : "row"}
                     >
                         {
-                            contactInformation.map(information => {
+                            contactInformation.map((information, index) => {
                                 return (
                                     <ContactBlock
-                                        key={contactInformation.indexOf(information)}
+                                        key={index}
                                         style={information.style}
                                         title={information.title}
                                         subtitle={information.subtitle}

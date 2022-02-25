@@ -553,10 +553,10 @@ export const Estimate = () => {
                                     </Typography>
                                 </Grid>
                                 <Grid item container>
-                                    {question.options.map(option => {
+                                    {question.options.map((option, index) => {
                                         return (
                                             <Grid
-                                                key={question.options.indexOf(option)}
+                                                key={index}
                                                 item
                                                 container
                                                 md
