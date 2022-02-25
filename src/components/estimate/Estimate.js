@@ -12,34 +12,35 @@ import {
     Typography, useMediaQuery,
     useTheme
 } from "@material-ui/core";
-import {animationOptions} from "./services/animationOptions";
+import {animationOptions} from "../services/animationOptions";
 
-import check from '../assets/check.svg';
-import send from '../assets/send.svg';
-import software from '../assets/software.svg';
-import mobile from '../assets/mobile.svg';
-import website from '../assets/website.svg';
-import backArrow from '../assets/backArrow.svg';
-import forwardArrow from '../assets/forwardArrow.svg';
-import backArrowDisabled from '../assets/backArrowDisabled.svg';
-import forwardArrowDisabled from '../assets/forwardArrowDisabled.svg';
-import camera from '../assets/camera.svg';
-import upload from '../assets/upload.svg';
-import person from '../assets/person.svg';
-import persons from '../assets/persons.svg';
-import people from '../assets/people.svg';
-import info from '../assets/info.svg';
-import bell from '../assets/bell.svg';
-import users from '../assets/users.svg';
-import iphone from '../assets/iphone.svg';
-import gps from '../assets/gps.svg';
-import customized from '../assets/customized.svg';
-import data from '../assets/data.svg';
-import android from '../assets/android.svg';
-import globe from '../assets/globe.svg';
-import biometrics from '../assets/biometrics.svg';
+import check from '../../assets/check.svg';
+import send from '../../assets/send.svg';
+import software from '../../assets/software.svg';
+import mobile from '../../assets/mobile.svg';
+import website from '../../assets/website.svg';
+import backArrow from '../../assets/backArrow.svg';
+import forwardArrow from '../../assets/forwardArrow.svg';
+import backArrowDisabled from '../../assets/backArrowDisabled.svg';
+import forwardArrowDisabled from '../../assets/forwardArrowDisabled.svg';
+import camera from '../../assets/camera.svg';
+import upload from '../../assets/upload.svg';
+import person from '../../assets/person.svg';
+import persons from '../../assets/persons.svg';
+import people from '../../assets/people.svg';
+import info from '../../assets/info.svg';
+import bell from '../../assets/bell.svg';
+import users from '../../assets/users.svg';
+import iphone from '../../assets/iphone.svg';
+import gps from '../../assets/gps.svg';
+import customized from '../../assets/customized.svg';
+import data from '../../assets/data.svg';
+import android from '../../assets/android.svg';
+import globe from '../../assets/globe.svg';
+import biometrics from '../../assets/biometrics.svg';
 
-import estimateAnimation from '../animations/estimateAnimation/data.json';
+import estimateAnimation from '../../animations/estimateAnimation/data.json';
+import {Expectation} from "./Expectation";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -342,6 +343,11 @@ export const Estimate = () => {
     const [phoneHelper, setPhoneHelper] = useState('');
     const [message, setMessage] = useState('');
     const [total, setTotal] = useState(0);
+    const [service, setService] = useState([]);
+    const [platforms, setPlatforms] = useState([]);
+    const [customFeatures, setCustomFeatures] = useState('');
+    const [category, setCategory] = useState('');
+    const [users, setUsers] = useState('');
 
     const nextQuestion = () => {
         const newQuestions = cloneDeep(questions);
@@ -402,12 +408,15 @@ export const Estimate = () => {
         switch (newSelected.title) {
             case "Custom Software Development":
                 setQuestions(softwareQuestions);
+                setService(newSelected.title);
                 break;
             case "iOS/Android App Development":
                 setQuestions(softwareQuestions);
+                setService(newSelected.title);
                 break;
             case "Website Development":
                 setQuestions(websiteQuestions);
+                setService(newSelected.title);
                 break;
             default:
                 setQuestions(newQuestions);
@@ -449,6 +458,31 @@ export const Estimate = () => {
             cost *= userCost;
         }
         setTotal(cost);
+    }
+
+    const getPlatforms = () => {
+        if (questions.length > 2) {
+            let newPlatforms = [];
+            questions
+                .filter(question => question.title === 'Which platforms do you need supported?')
+                .map(question => question.options.filter(option => option.selected))[0]
+                .map(option => newPlatforms.push(option.title));
+            setPlatforms(newPlatforms);
+        }
+    };
+
+    const getPlatformsString = () => {
+        switch (platforms.length) {
+            case 1:
+                return `for ${platforms.includes('Web Application') ? 'a' : 'an'} ${platforms[0]}`;
+            case 2:
+                const article = platforms.includes('Web Application') ? 'a' : 'an';
+                return `for ${article} ${platforms[0]} and an ${platforms[1]}.`;
+            case 3:
+                return 'for a Web Application, an iOS Application, and an Android Application.';
+            default:
+                return null;
+        }
     }
 
     return (
@@ -573,6 +607,7 @@ export const Estimate = () => {
                         onClick={() => {
                             setDialogOpen(true);
                             getTotal();
+                            getPlatforms();
                         }}
                     >
                         Get Estimate
@@ -587,7 +622,7 @@ export const Estimate = () => {
                 </Grid>
                 <DialogContent>
                     <Grid container>
-                        <Grid item container direction={'column'}>
+                        <Grid item container md={7} direction={'column'}>
                             <Grid item style={{marginBottom: "0.5em"}}>
                                 <TextField
                                     label={"name"}
@@ -644,6 +679,37 @@ export const Estimate = () => {
                                     Fill out your name, phone number and email, place your request and we'll get back
                                     to you with details moving forward and a final price.
                                 </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid item container md={5} direction={'column'}>
+                            <Grid item>
+                                <Grid container direction={'column'}>
+                                    <Expectation>
+                                        <>You want {service} {getPlatformsString()}</>
+                                    </Expectation>
+                                    <Grid item container alignItems={'center'}>
+                                        <Grid item>
+                                            <img src={check} alt={'checkmark'}/>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant={'body1'}>second options check</Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid item container alignItems={'center'}>
+                                        <Grid item>
+                                            <img src={check} alt={'checkmark'}/>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant={'body1'}>third options check</Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Button variant={'contained'} className={classes.estimateButton}>
+                                    Place Request
+                                    <img src={send} alt={'paper airplane'} style={{marginLeft: '0.5em'}}/>
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>

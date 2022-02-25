@@ -12,7 +12,7 @@ import {MobileApps} from "./services/main/MobileApps";
 import {Websites} from "./services/main/websites/Websites";
 import {Revolution} from "./revolution/Revolution";
 import {About} from "./about/About";
-import {Estimate} from "./Estimate";
+import {Estimate} from "./estimate/Estimate";
 
 
 const App = () => {
