@@ -448,9 +448,10 @@ export const Estimate = () => {
         if (questions.length > 2) {
             const userCost = questions
                 .find(question => question.title === 'How many users do you expect?').options
-                .find(option=>option.selected).cost
-            cost -= userCost;
-            cost *= userCost;
+                .find(option=>option.selected);
+            setUsers(userCost.title);
+            cost -= userCost.cost;
+            cost *= userCost.cost;
         }
 
         setTotal(cost);
@@ -506,6 +507,16 @@ export const Estimate = () => {
                     .filter((feature, index) => index !== features.length - 1)
                     .forEach(feature => featuresString += `${feature}, `);
                 return featuresString + ` and ${features[features.length - 1]}.`
+        }
+    }
+
+    const getCustomFeatures = () => {
+        if (questions.length>2){
+            const newCustomFeatures = questions
+                .find(question => question.title === 'What type of custom features do you expect to need?').options
+                .find(option => option.selected).title.toLowerCase();
+
+            setCustomFeatures(newCustomFeatures);
         }
     }
 
@@ -633,6 +644,7 @@ export const Estimate = () => {
                             getTotal();
                             getPlatforms();
                             getFeatures();
+                            getCustomFeatures();
                         }}
                     >
                         Get Estimate
@@ -713,14 +725,10 @@ export const Estimate = () => {
                                         <>You want {service} {getPlatformsString()}</>
                                     </Expectation>
                                     <Expectation>{getFeaturesString()}</Expectation>
-                                    <Grid item container alignItems={'center'}>
-                                        <Grid item>
-                                            <img src={check} alt={'checkmark'}/>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant={'body1'}>third options check</Typography>
-                                        </Grid>
-                                    </Grid>
+                                    <Expectation>
+                                        The custom features will be of {customFeatures} and the project will be used
+                                        by about {users} users.
+                                    </Expectation>
                                 </Grid>
                             </Grid>
                             <Grid item>
