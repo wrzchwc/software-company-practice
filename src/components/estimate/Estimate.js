@@ -384,17 +384,12 @@ export const Estimate = () => {
 
     const handleSelect = id => {
         const newQuestions = cloneDeep(questions);
-
-        const currentlyActive = newQuestions.filter(question => question.active);
-        const activeIndex = currentlyActive[0].id - 1;
-
+        const currentlyActive = newQuestions.find(question => question.active);
+        const activeIndex = currentlyActive.id - 1;
         const newSelected = newQuestions[activeIndex].options[id - 1];
+        const previousSelected = currentlyActive.options.filter(option => option.selected);
 
-        const previousSelected = currentlyActive[0].options.filter(
-            option => option.selected
-        );
-
-        switch (currentlyActive[0].subtitle) {
+        switch (currentlyActive.subtitle) {
             case "Select one.":
                 if (previousSelected[0]) {
                     previousSelected[0].selected = !previousSelected[0].selected;
@@ -449,7 +444,8 @@ export const Estimate = () => {
         const selections = questions
             .map(question => question.options.filter(option => option.selected))
             .filter(question => question.length > 0);
-        selections.map(options => options.map(option => cost += option.cost));
+
+        selections.forEach(options => options.map(option => cost += option.cost));
 
         if (questions.length > 2) {
             const userCost = questions
@@ -458,6 +454,7 @@ export const Estimate = () => {
             cost -= userCost;
             cost *= userCost;
         }
+
         setTotal(cost);
     }
 
