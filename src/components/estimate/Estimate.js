@@ -345,6 +345,7 @@ export const Estimate = () => {
     const [total, setTotal] = useState(0);
     const [service, setService] = useState([]);
     const [platforms, setPlatforms] = useState([]);
+    const [features, setFeatures] = useState([]);
     const [customFeatures, setCustomFeatures] = useState('');
     const [category, setCategory] = useState('');
     const [users, setUsers] = useState('');
@@ -466,8 +467,19 @@ export const Estimate = () => {
             questions
                 .filter(question => question.title === 'Which platforms do you need supported?')
                 .map(question => question.options.filter(option => option.selected))[0]
-                .map(option => newPlatforms.push(option.title));
+                .forEach(option => newPlatforms.push(option.title));
             setPlatforms(newPlatforms);
+        }
+    };
+
+    const getFeatures = () => {
+        if (questions.length > 2) {
+            let newFeatures = [];
+            questions
+                .filter(question => question.title === 'Which features do you expect to use?')
+                .map(question => question.options.filter(option => option.selected))
+                .forEach(option => option.forEach(newFeature => newFeatures.push(newFeature.title)));
+            setFeatures(newFeatures);
         }
     };
 
@@ -482,6 +494,23 @@ export const Estimate = () => {
                 return 'for a Web Application, an iOS Application, and an Android Application.';
             default:
                 return null;
+        }
+    }
+
+    const getFeaturesString = () => {
+        switch (features.length) {
+            case 0:
+                return null;
+            case 1:
+                return `with ${features[0]}.`;
+            case 2:
+                return `with ${features[0]} and ${features[1]}.`;
+            default:
+                let featuresString = 'with ';
+                features
+                    .filter((feature, index) => index !== features.length - 1)
+                    .forEach(feature => featuresString += `${feature}, `);
+                return featuresString + ` and ${features[features.length - 1]}.`
         }
     }
 
@@ -608,6 +637,7 @@ export const Estimate = () => {
                             setDialogOpen(true);
                             getTotal();
                             getPlatforms();
+                            getFeatures();
                         }}
                     >
                         Get Estimate
@@ -687,14 +717,7 @@ export const Estimate = () => {
                                     <Expectation>
                                         <>You want {service} {getPlatformsString()}</>
                                     </Expectation>
-                                    <Grid item container alignItems={'center'}>
-                                        <Grid item>
-                                            <img src={check} alt={'checkmark'}/>
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant={'body1'}>second options check</Typography>
-                                        </Grid>
-                                    </Grid>
+                                    <Expectation>{getFeaturesString()}</Expectation>
                                     <Grid item container alignItems={'center'}>
                                         <Grid item>
                                             <img src={check} alt={'checkmark'}/>
