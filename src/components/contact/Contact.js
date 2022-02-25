@@ -12,11 +12,11 @@ import {
     Typography,
     useMediaQuery
 } from '@material-ui/core';
-import background from "../assets/background.jpg";
-import mobileBackground from '../assets/mobileBackground.jpg';
-import phoneIcon from "../assets/phone.svg";
-import emailIcon from "../assets/email.svg";
-import airplane from "../assets/send.svg";
+import background from "../../assets/background.jpg";
+import mobileBackground from '../../assets/mobileBackground.jpg';
+import phoneIcon from "../../assets/phone.svg";
+import emailIcon from "../../assets/email.svg";
+import airplane from "../../assets/send.svg";
 
 const useStyles = makeStyles(theme => ({
     background: {
