@@ -516,7 +516,37 @@ export const Estimate = () => {
 
             setCustomFeatures(newCustomFeatures);
         }
+    };
+
+    const getCategory = () => {
+        if (questions.length === 2) {
+            const newCategory = questions
+                .find(question => question.title === 'Which type of website are you wanting?').options
+                .find(option => option.selected).title;
+            setCategory(newCategory);
+        }
     }
+
+    const softwareSelection = (
+        <Grid container direction={'column'}>
+            <Expectation>
+                <>You want {service} {getPlatformsString()}</>
+            </Expectation>
+            <Expectation>{getFeaturesString()}</Expectation>
+            <Expectation>
+                The custom features will be of {customFeatures} and the project will be used
+                by about {users} users.
+            </Expectation>
+        </Grid>
+    );
+
+    const websiteSelection = (
+        <Grid container direction={'column'}>
+            <Expectation>
+                <>You want {`${category === 'Basic' ? 'a' : 'an'} ${category} Website.`}</>
+            </Expectation>
+        </Grid>
+    );
 
     return (
         <Grid container>
@@ -643,6 +673,7 @@ export const Estimate = () => {
                             getPlatforms();
                             getFeatures();
                             getCustomFeatures();
+                            getCategory();
                         }}
                     >
                         Get Estimate
@@ -717,18 +748,7 @@ export const Estimate = () => {
                             </Grid>
                         </Grid>
                         <Grid item container md={5} direction={'column'}>
-                            <Grid item>
-                                <Grid container direction={'column'}>
-                                    <Expectation>
-                                        <>You want {service} {getPlatformsString()}</>
-                                    </Expectation>
-                                    <Expectation>{getFeaturesString()}</Expectation>
-                                    <Expectation>
-                                        The custom features will be of {customFeatures} and the project will be used
-                                        by about {users} users.
-                                    </Expectation>
-                                </Grid>
-                            </Grid>
+                            <Grid item>{questions.length > 2 ? softwareSelection : websiteSelection}</Grid>
                             <Grid item>
                                 <Button variant={'contained'} className={classes.estimateButton}>
                                     Place Request
