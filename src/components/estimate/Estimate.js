@@ -447,8 +447,8 @@ export const Estimate = () => {
 
         if (questions.length > 2) {
             const userCost = questions
-                .filter(question => question.title === 'How many users do you expect?')
-                .map(question => question.options.filter(option => option.selected))[0][0].cost;
+                .find(question => question.title === 'How many users do you expect?').options
+                .find(option=>option.selected).cost
             cost -= userCost;
             cost *= userCost;
         }
