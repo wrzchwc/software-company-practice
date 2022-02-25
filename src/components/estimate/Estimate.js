@@ -352,34 +352,32 @@ export const Estimate = () => {
 
     const nextQuestion = () => {
         const newQuestions = cloneDeep(questions);
-        const currentlyActive = newQuestions.filter(question => question.active);
-        const activeIndex = currentlyActive[0].id - 1;
+        const currentlyActive = newQuestions.find(question => question.active);
+        const activeIndex = currentlyActive.id - 1;
         const nextIndex = activeIndex + 1;
 
-        newQuestions[activeIndex] = {...currentlyActive[0], active: false};
+        newQuestions[activeIndex] = {...currentlyActive, active: false};
         newQuestions[nextIndex] = {...newQuestions[nextIndex], active: true};
         setQuestions(newQuestions);
     }
 
     const previousQuestion = () => {
         const newQuestions = cloneDeep(questions);
-        const currentlyActive = newQuestions.filter(question => question.active);
-        const activeIndex = currentlyActive[0].id - 1;
+        const currentlyActive = newQuestions.find(question => question.active);
+        const activeIndex = currentlyActive.id - 1;
         const nextIndex = activeIndex - 1;
 
-        newQuestions[activeIndex] = {...currentlyActive[0], active: false};
+        newQuestions[activeIndex] = {...currentlyActive, active: false};
         newQuestions[nextIndex] = {...newQuestions[nextIndex], active: true};
         setQuestions(newQuestions);
     }
 
     const navigationPreviousDisabled = () => {
-        const currentlyActive = questions.filter(question => question.active);
-        return currentlyActive[0].id === 1;
+        return questions.find(question => question.active).id === 1;
     }
 
     const navigationNextDisabled = () => {
-        const currentlyActive = questions.filter(question => question.active);
-        return currentlyActive[0].id === questions[questions.length - 1].id;
+        return questions.find(question => question.active).id === questions[questions.length - 1].id;
     }
 
     const handleSelect = id => {
