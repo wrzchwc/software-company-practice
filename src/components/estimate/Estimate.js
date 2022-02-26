@@ -6,6 +6,7 @@ import {
     Dialog,
     DialogContent,
     Grid,
+    Hidden,
     IconButton,
     makeStyles,
     TextField,
@@ -14,7 +15,6 @@ import {
 } from "@material-ui/core";
 import {animationOptions} from "../services/animationOptions";
 
-import check from '../../assets/check.svg';
 import send from '../../assets/send.svg';
 import software from '../../assets/software.svg';
 import mobile from '../../assets/mobile.svg';
@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
     message: {
         border: `2px solid ${theme.palette.common.blue}`,
         borderRadius: "5",
-        marginTop: "5em"
+        margin: '3em 0 2em 0'
     },
     specialText: {
         fontFamily: 'Raleway',
@@ -332,7 +332,8 @@ const websiteQuestions = [
 export const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
-    const matchesXS = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+    const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [questions, setQuestions] = useState(defaultQuestions);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -529,10 +530,10 @@ export const Estimate = () => {
 
     const softwareSelection = (
         <Grid container direction={'column'}>
-            <Expectation>
+            <Expectation style={{marginBottom: '1.25em'}}>
                 <>You want {service} {getPlatformsString()}</>
             </Expectation>
-            <Expectation>{getFeaturesString()}</Expectation>
+            <Expectation style={{marginBottom: '1.25em'}}>{getFeaturesString()}</Expectation>
             <Expectation>
                 The custom features will be of {customFeatures} and the project will be used
                 by about {users} users.
@@ -541,7 +542,7 @@ export const Estimate = () => {
     );
 
     const websiteSelection = (
-        <Grid container direction={'column'}>
+        <Grid container direction={'column'} style={{marginTop: '14em'}}>
             <Expectation>
                 <>You want {`${category === 'Basic' ? 'a' : 'an'} ${category} Website.`}</>
             </Expectation>
@@ -550,21 +551,37 @@ export const Estimate = () => {
 
     return (
         <Grid container>
-            <Grid item container lg direction={'column'}>
-                <Grid item style={{margin: '2em 0 0 5em'}}>
-                    <Typography variant={'h2'}>Estimate</Typography>
+            <Grid item container lg direction={'column'} alignItems={matchesMD ? 'center' : undefined}>
+                <Grid
+                    item
+                    style={{
+                        marginTop: '2em',
+                        marginLeft: matchesMD ? 0 : '5em'
+                    }}
+                >
+                    <Typography variant={'h2'} align={matchesMD ? 'center' : undefined}>Estimate</Typography>
                 </Grid>
                 <Grid
                     item
                     style={{
                         maxWidth: '50em',
-                        margin: '7.5em 10em 0 0'
+                        marginTop: '7.5em',
+                        marginRight: matchesMD ? 0 : '10em'
                     }}
                 >
                     <Lottie options={animationOptions(estimateAnimation)} height={'100%'} width={'100%'}/>
                 </Grid>
             </Grid>
-            <Grid item container lg direction={'column'} alignItems={'center'} style={{margin: '0 2em 25em 0'}}>
+            <Grid
+                item
+                container
+                lg direction={'column'}
+                alignItems={'center'}
+                style={{
+                    marginTop: '25em',
+                    marginBottom: matchesMD ? 0 : '2em'
+                }}
+            >
                 {
                     questions.filter(question => question.active).map((question, index) => {
                         return (
@@ -575,9 +592,9 @@ export const Estimate = () => {
                                         align={'center'}
                                         style={{
                                             fontWeight: 500,
-                                            marginTop: '5em',
                                             fontSize: '2.25rem',
-                                            lineHeight: 1.25
+                                            lineHeight: 1.25,
+                                            margin: matchesSM ? '5em 1em 0 1em' : '5em 0 0 0'
                                         }}
                                     >
                                         {question.title}
@@ -607,7 +624,8 @@ export const Estimate = () => {
                                                     textTransform: 'none',
                                                     backgroundColor:
                                                         option.selected ? theme.palette.common.orange : null,
-                                                    borderRadius: 0
+                                                    borderRadius: 0,
+                                                    marginBottom: matchesSM ? '1.5em' : 0
                                                 }}
                                             >
                                                 <Grid item style={{maxWidth: '14em'}}>
@@ -680,15 +698,27 @@ export const Estimate = () => {
                     </Button>
                 </Grid>
             </Grid>
-            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <Dialog
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                fullWidth
+                fullScreen={matchesSM}
+                maxWidth={'lg'}
+                style={{zIndex: 1302}}
+            >
                 <Grid container justify={'center'}>
-                    <Grid item>
+                    <Grid item style={{margin: '1em 0 1em 0'}}>
                         <Typography variant={'h2'} align={'center'}>Estimate</Typography>
                     </Grid>
                 </Grid>
                 <DialogContent>
-                    <Grid container>
-                        <Grid item container md={7} direction={'column'}>
+                    <Grid
+                        container
+                        justify={'space-around'}
+                        direction={matchesSM ? 'column' : 'row'}
+                        alignItems={matchesSM ? 'center' : undefined}
+                    >
+                        <Grid item container md={7} direction={'column'} style={{maxWidth: '20em'}}>
                             <Grid item style={{marginBottom: "0.5em"}}>
                                 <TextField
                                     label={"name"}
@@ -722,7 +752,7 @@ export const Estimate = () => {
                                     onChange={onChange}
                                 />
                             </Grid>
-                            <Grid item style={{maxWidth: matchesXS ? '100%' : '20em'}}>
+                            <Grid item>
                                 <TextField
                                     InputProps={{disableUnderline: true}}
                                     value={message}
@@ -731,30 +761,50 @@ export const Estimate = () => {
                                     id={"message"}
                                     multiline
                                     rows={10}
-                                    onChange={event => {
-                                        setMessage(event.target.value)
-                                    }}
+                                    onChange={event => setMessage(event.target.value)}
                                 />
                             </Grid>
                             <Grid item>
-                                <Typography variant={'body1'} paragraph>
+                                <Typography variant={'body1'} paragraph align={matchesSM?'center':undefined}>
                                     We can create this digital solution for estimated for an estimated
                                     <span className={classes.specialText}> ${total.toFixed(2)}</span>
                                 </Typography>
-                                <Typography variant={'body1'} paragraph>
+                                <Typography variant={'body1'} paragraph align={matchesSM?'center':undefined}>
                                     Fill out your name, phone number and email, place your request and we'll get back
                                     to you with details moving forward and a final price.
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container md={5} direction={'column'}>
-                            <Grid item>{questions.length > 2 ? softwareSelection : websiteSelection}</Grid>
+                        <Grid
+                            item
+                            container
+                            md={5}
+                            direction={'column'}
+                            alignItems={matchesSM ? 'center' : undefined}
+                            style={{maxWidth: '30em'}}
+                        >
+                            <Hidden smDown>
+                                <Grid item>
+                                    {questions.length > 2 ? softwareSelection : websiteSelection}
+                                </Grid>
+                            </Hidden>
                             <Grid item>
                                 <Button variant={'contained'} className={classes.estimateButton}>
                                     Place Request
                                     <img src={send} alt={'paper airplane'} style={{marginLeft: '0.5em'}}/>
                                 </Button>
                             </Grid>
+                            <Hidden mdUp>
+                                <Grid item style={{marginBottom: matchesSM ? '5em' : 0}}>
+                                    <Button
+                                        style={{fontWeight: 300}}
+                                        color={'primary'}
+                                        onClick={() => setDialogOpen(false)}
+                                    >
+                                        Cancel
+                                    </Button>
+                                </Grid>
+                            </Hidden>
                         </Grid>
                     </Grid>
                 </DialogContent>

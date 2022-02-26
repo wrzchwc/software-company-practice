@@ -12,11 +12,11 @@ import {
     Typography,
     useMediaQuery
 } from '@material-ui/core';
-import background from "../../assets/background.jpg";
-import mobileBackground from '../../assets/mobileBackground.jpg';
-import phoneIcon from "../../assets/phone.svg";
-import emailIcon from "../../assets/email.svg";
-import airplane from "../../assets/send.svg";
+import background from "../assets/background.jpg";
+import mobileBackground from '../assets/mobileBackground.jpg';
+import phoneIcon from "../assets/phone.svg";
+import emailIcon from "../assets/email.svg";
+import airplane from "../assets/send.svg";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -191,7 +191,7 @@ export const Contact = () => {
                                 </Typography>
                             </Grid>
                         </Grid>
-                        <Grid item container direction={"column"} style={{maxWidth: "20em"}}>
+                        <Grid item container direction={"column"} style={{width: "20em"}}>
                             <Grid item style={{marginBottom: "0.5em"}}>
                                 <TextField
                                     label={"name"}
@@ -226,7 +226,7 @@ export const Contact = () => {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid item style={{maxWidth: "20em"}}>
+                        <Grid item style={{width: "20em"}}>
                             <TextField
                                 InputProps={{disableUnderline: true}}
                                 value={message}
@@ -262,12 +262,12 @@ export const Contact = () => {
                     style: {
                         paddingTop: matchesXS ? '1em' : '5em',
                         paddingBottom: matchesXS ? '1em' : '5em',
-                        paddingLeft: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '10em' : '20em',
-                        paddingRight: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '10em' : '20em'
+                        paddingLeft: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '15em' : '25em',
+                        paddingRight: matchesXS ? 0 : matchesSM ? '5em' : matchesMD ? '15em' : '25em'
                     }
                 }}
                 style={{zIndex: 1302}}
-                fullScreen={matchesXS}
+                fullScreen={matchesSM}
             >
                 <DialogContent>
                     <Grid container direction={"column"}>
@@ -307,7 +307,7 @@ export const Contact = () => {
                                 onChange={onChange}
                             />
                         </Grid>
-                        <Grid item style={{maxWidth: matchesXS ? '100%' : '20em'}}>
+                        <Grid item style={{width: matchesSM ? '100%' : '20em'}}>
                             <TextField
                                 InputProps={{disableUnderline: true}}
                                 value={message}
