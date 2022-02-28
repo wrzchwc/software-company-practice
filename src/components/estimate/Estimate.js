@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {cloneDeep} from "lodash";
+import axios from 'axios';
 import Lottie from 'react-lottie';
 import {
     Button,
+    CircularProgress,
     Dialog,
     DialogContent,
     Grid,
     Hidden,
     IconButton,
     makeStyles,
+    Snackbar,
     TextField,
     Typography, useMediaQuery,
     useTheme
@@ -288,7 +291,6 @@ const softwareQuestions = [
     }
 ];
 
-
 const websiteQuestions = [
     {...defaultQuestions[0], active: false},
     {
@@ -328,7 +330,6 @@ const websiteQuestions = [
     }
 ];
 
-
 export const Estimate = () => {
     const classes = useStyles();
     const theme = useTheme();
@@ -350,6 +351,12 @@ export const Estimate = () => {
     const [customFeatures, setCustomFeatures] = useState('');
     const [category, setCategory] = useState('');
     const [users, setUsers] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [alert, setAlert] = useState({
+        open: false,
+        message: '',
+        backgroundColor: ''
+    })
 
     const nextQuestion = () => {
         const newQuestions = cloneDeep(questions);
@@ -549,6 +556,48 @@ export const Estimate = () => {
         </Grid>
     );
 
+    const sendEstimate = () => {
+        setLoading(true);
+        //successful API request simulation
+        setTimeout(
+            ()=>{
+                setLoading(false);
+                setAlert({
+                    open: true,
+                    message: 'Estimate placed successfully!',
+                    backgroundColor: '#4BB543'
+                });
+                setDialogOpen(false);
+            },
+            1000
+        )
+    }
+
+    const estimateDisabled = () => {
+        const emptySelections = questions
+            .map(question => question.options.filter(option => option.selected))
+            .filter(question => question.length === 0);
+
+        if (questions.length === 2 && emptySelections.length === 1) {
+            return false
+        } else if (questions.length === 1) {
+            return true;
+        } else if (emptySelections.length < 3 && questions[questions.length - 1].options.filter(o => o.selected).length > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    const canBeSent = () => {
+        return name.length === 0 ||
+            message.length === 0 ||
+            phoneHelper.length !== 0 ||
+            emailHelper.length !== 0 ||
+            email.length === 0 ||
+            phone.length === 0;
+    }
+
     return (
         <Grid container>
             <Grid item container lg direction={'column'} alignItems={matchesMD ? 'center' : undefined}>
@@ -685,6 +734,7 @@ export const Estimate = () => {
                     <Button
                         variant={'contained'}
                         className={classes.estimateButton}
+                        disabled={estimateDisabled()}
                         onClick={() => {
                             setDialogOpen(true);
                             getTotal();
@@ -759,17 +809,23 @@ export const Estimate = () => {
                                     className={classes.message}
                                     fullWidth
                                     id={"message"}
+                                    placeholder={'Tell us more about your project'}
                                     multiline
                                     rows={10}
                                     onChange={event => setMessage(event.target.value)}
                                 />
                             </Grid>
                             <Grid item>
-                                <Typography variant={'body1'} paragraph align={matchesSM?'center':undefined}>
+                                <Typography
+                                    variant={'body1'}
+                                    paragraph
+                                    align={matchesSM ? 'center' : undefined}
+                                    style={{lineHeight: 1.25}}
+                                >
                                     We can create this digital solution for estimated for an estimated
                                     <span className={classes.specialText}> ${total.toFixed(2)}</span>
                                 </Typography>
-                                <Typography variant={'body1'} paragraph align={matchesSM?'center':undefined}>
+                                <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>
                                     Fill out your name, phone number and email, place your request and we'll get back
                                     to you with details moving forward and a final price.
                                 </Typography>
@@ -789,9 +845,22 @@ export const Estimate = () => {
                                 </Grid>
                             </Hidden>
                             <Grid item>
-                                <Button variant={'contained'} className={classes.estimateButton}>
-                                    Place Request
-                                    <img src={send} alt={'paper airplane'} style={{marginLeft: '0.5em'}}/>
+                                <
+                                    Button
+                                    variant={'contained'}
+                                    className={classes.estimateButton}
+                                    onClick={sendEstimate}
+                                    disabled={canBeSent()}
+                                >
+                                    {
+                                        loading ?
+                                            <CircularProgress/>
+                                            :
+                                            <React.Fragment>
+                                                Place Request
+                                                <img src={send} alt={'paper airplane'} style={{marginLeft: '0.5em'}}/>
+                                            </React.Fragment>
+                                    }
                                 </Button>
                             </Grid>
                             <Hidden mdUp>
@@ -809,6 +878,22 @@ export const Estimate = () => {
                     </Grid>
                 </DialogContent>
             </Dialog>
+            <Snackbar
+                open={alert.open}
+                message={alert.message}
+                ContentProps={{style: {backgroundColor: alert.backgroundColor}}}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center'
+                }}
+                onClose={() => {
+                    setAlert({
+                        ...alert,
+                        open: false
+                    })
+                }}
+                autoHideDuration={4000}
+            />
         </Grid>
     );
 }

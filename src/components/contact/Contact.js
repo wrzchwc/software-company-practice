@@ -12,11 +12,12 @@ import {
     Typography,
     useMediaQuery
 } from '@material-ui/core';
-import background from "../assets/background.jpg";
-import mobileBackground from '../assets/mobileBackground.jpg';
-import phoneIcon from "../assets/phone.svg";
-import emailIcon from "../assets/email.svg";
-import airplane from "../assets/send.svg";
+import background from "../../assets/background.jpg";
+import mobileBackground from '../../assets/mobileBackground.jpg';
+import phoneIcon from "../../assets/phone.svg";
+import emailIcon from "../../assets/email.svg";
+import airplane from "../../assets/send.svg";
+import {canRequestBeSent} from "./request";
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -233,6 +234,7 @@ export const Contact = () => {
                                 className={classes.message}
                                 fullWidth
                                 id={"message"}
+                                placeholder={'Tell us more about your project'}
                                 multiline
                                 rows={10}
                                 onChange={event => {
@@ -243,7 +245,7 @@ export const Contact = () => {
                         <Grid item container justify={"center"} style={{marginTop: "2em"}}>
                             <Button
                                 variant={"contained"}
-                                disabled={canBeSent()}
+                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper, email, phone)}
                                 className={classes.sendButton}
                                 onClick={() => {
                                     setOpen(true)
@@ -343,7 +345,7 @@ export const Contact = () => {
                         <Grid item>
                             <Button
                                 variant={"contained"}
-                                disabled={canBeSent()}
+                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper, email, phone)}
                                 className={classes.sendButton}
                                 onClick={onConfirm}
                             >
