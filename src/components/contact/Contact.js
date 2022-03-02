@@ -99,16 +99,6 @@ export const Contact = () => {
                 break;
         }
     }
-
-    const canBeSent = () => {
-        return name.length === 0 ||
-            message.length === 0 ||
-            phoneHelper.length !== 0 ||
-            emailHelper.length !== 0 ||
-            email.length === 0 ||
-            phone.length === 0;
-    }
-
     const onConfirm = () => {
         setLoading(true);
         // successful API request simulation

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {cloneDeep} from "lodash";
-import axios from 'axios';
 import Lottie from 'react-lottie';
 import {
     Button,
