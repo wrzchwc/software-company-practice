@@ -3,7 +3,7 @@ import Header from "./ui/Header";
 import {ThemeProvider} from "@material-ui/core/styles";
 import theme from "./ui/Theme"
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {Footer} from "./ui/Footer";
+import {Footer} from "./ui/footer/Footer";
 import {Contact} from "./contact/Contact";
 import {LandingPage} from "./landing-page/LandingPage";
 import {Services} from "./services/main/Services";
