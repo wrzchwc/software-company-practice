@@ -1,6 +1,5 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import "./Footer.css";
 import {Grid, Hidden, makeStyles} from "@material-ui/core";
 import footerAdornment from "../../assets/Footer Adornment.svg";
 import facebook from '../../assets/facebook.svg'
@@ -8,6 +7,10 @@ import twitter from '../../assets/twitter.svg'
 import instagram from '../../assets/instagram.svg'
 
 const useStyles = makeStyles(theme => ({
+    adornment: {
+        width: '25em',
+        verticalAlign: 'bottom'
+    },
     footer: {
         backgroundColor: theme.palette.common.blue,
         position: "relative",
@@ -25,6 +28,16 @@ const useStyles = makeStyles(theme => ({
         position: "absolute",
         marginTop: "-6rem",
         right: "1.5em"
+    },
+    mainContainer: {
+        position: 'absolute'
+    },
+    link: {
+        color: '#FFF',
+        fontFamily: 'Arial',
+        fontSize: '0.75.rem',
+        fontWeight: 'bold',
+        textDecoration: 'none'
     }
 }))
 
@@ -33,12 +46,12 @@ export const Footer = ({setValue, setSelectedIndex}) => {
     return (
         <footer className={classes.footer}>
             <Hidden mdDown>
-                <Grid className={"mainContainer"} container justify={"center"}>
+                <Grid className={classes.mainContainer} container justify={"center"}>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(0);
@@ -53,7 +66,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         <Grid container direction={"column"} spacing={2}>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(1);
@@ -65,7 +78,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(1);
@@ -77,7 +90,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(1);
@@ -89,7 +102,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(1);
@@ -105,7 +118,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         <Grid container direction={"column"} spacing={2}>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(2);
@@ -116,7 +129,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(2);
@@ -127,7 +140,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(2);
@@ -138,7 +151,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(2);
@@ -153,7 +166,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         <Grid container direction={"column"} spacing={2}>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(3);
@@ -164,7 +177,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(3);
@@ -175,7 +188,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                             </Grid>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(3);
@@ -190,7 +203,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         <Grid container direction={"column"} spacing={2}>
                             <Grid
                                 component={Link}
-                                className={"link"}
+                                className={classes.link}
                                 item
                                 onClick={() => {
                                     setValue(4);
@@ -203,7 +216,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                     </Grid>
                 </Grid>
             </Hidden>
-            <img className={"adornment"} src={footerAdornment} alt="black decorative slash"/>
+            <img className={classes.adornment} src={footerAdornment} alt="black decorative slash"/>
             <Grid className={classes.socialContainer} container justify={"flex-end"} spacing={2}>
                 <Grid item component={"a"} href="https://www.instagram.com" rel="noopener noreferrer" target={"_blank"}>
                     <img className={classes.icon} src={instagram} alt="instagram"/>
