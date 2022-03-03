@@ -54,7 +54,7 @@ export const ServiceDescription = props => {
                                     key={index}
                                     variant={'body1'}
                                     paragraph
-                                    align={matchesMD ? 'center' : undefined}
+                                    align={'justify'}
                                 >
                                     {child}
                                 </Typography>

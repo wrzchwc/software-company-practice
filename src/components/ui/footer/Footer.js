@@ -116,12 +116,12 @@ export const Footer = ({setValue, setSelectedIndex}) => {
             <Hidden mdDown>
                 <Grid className={classes.mainContainer} container justify={"center"}>
                     <Grid className={classes.gridItem} item>
-                        <Grid container direction={"column"} spacing={2}>
+                        <Grid container direction={"column"} style={{margin: 0}} spacing={2}>
                             <FooterLink onClick={links.home.onClick} to={links.home.to}>Home</FooterLink>
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
-                        <Grid container direction={"column"} spacing={2}>
+                        <Grid container direction={"column"} style={{margin: 0}} spacing={2}>
                             <FooterLink onClick={links.services.onClick} to={links.services.to}>Services</FooterLink>
                             <FooterLink onClick={links.customSoftware.onClick} to={links.customSoftware.to}>
                                 Custom Software Development
@@ -135,7 +135,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
-                        <Grid container direction={"column"} spacing={2}>
+                        <Grid container direction={"column"} style={{margin: 0}} spacing={2}>
                             {
                                 labels.revolution.map((label, index)=>{
                                     return (
@@ -152,7 +152,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
-                        <Grid container direction={"column"} spacing={2}>
+                        <Grid container direction={"column"} style={{margin: 0}} spacing={2}>
                             {
                                 labels.about.map((label, index)=>{
                                     return (
@@ -165,7 +165,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
-                        <Grid container direction={"column"} spacing={2}>
+                        <Grid container direction={"column"} style={{margin: 0}} spacing={2}>
                             <FooterLink onClick={links.contact.onClick} to={links.contact.to}>Contact Us</FooterLink>
                         </Grid>
                     </Grid>

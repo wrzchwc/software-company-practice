@@ -18,7 +18,7 @@ export const TitledParagraphs = props => {
                                 key={index}
                                 variant={'body1'}
                                 paragraph
-                                align={props.paragraphAlignment}
+                                align={'justify'}
                                 style={props.paragraphStyle}
                             >
                                 {child}

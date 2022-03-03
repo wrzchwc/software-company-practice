@@ -35,14 +35,14 @@ export const CustomSoftware = props => {
     const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
 
     const navigation = {
-        back:{
-            to:'/services',
-            onClick:() => props.setSelectedIndex(0),
+        back: {
+            to: '/services',
+            onClick: () => props.setSelectedIndex(0),
             alt: 'back to services page'
         },
-        forward:{
-            to:'/mobile-apps',
-            onClick:() => props.setSelectedIndex(2),
+        forward: {
+            to: '/mobile-apps',
+            onClick: () => props.setSelectedIndex(2),
             alt: 'forward to iOS/Android App Development'
         }
     }
@@ -84,10 +84,11 @@ export const CustomSoftware = props => {
             <Grid
                 item
                 container
-                justify={'space-between'}
+                justify={matchesMD ? 'center' : 'space-between'}
                 alignItems={matchesMD ? 'center' : undefined}
                 direction={matchesMD ? 'column' : 'row'}
                 className={classes.rowContainer}
+                style={{display: matchesMD ? 'grid' : undefined}}
             >
                 <Grid
                     item
@@ -104,15 +105,15 @@ export const CustomSoftware = props => {
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 Reduce Errors. Reduce Waste. Reduce Costs.
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 Billions are spent annually on the purchasing, printing and distribution of paper. On
                                 top of the massive environmental impact this has, it causes harm to your bottom line as
                                 well.
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 By utilizing digital forms and documents you can remove these obsolete expenses,
                                 accelerate your communication and help the Earth.
                             </Typography>
@@ -144,7 +145,7 @@ export const CustomSoftware = props => {
                             <Typography variant={'h4'} align={matchesSM ? 'center' : 'right'}>Scale</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 Whether you're a large brand, just getting started or taking off right now, our
                                 application architecture ensures pain-free growth and reliability.
                             </Typography>
@@ -179,8 +180,11 @@ export const CustomSoftware = props => {
                 container
                 alignItems={matchesMD ? 'center' : undefined}
                 direction={matchesMD ? 'column' : 'row'}
-                justify={'space-between'}
-                style={{marginBottom: '20em'}}
+                justify={matchesMD ? 'center' : 'space-between'}
+                style={{
+                    marginBottom: '20em',
+                    display: matchesMD ? 'grid' : undefined
+                }}
                 className={classes.rowContainer}
             >
                 <Grid
@@ -193,17 +197,17 @@ export const CustomSoftware = props => {
                 >
                     <Grid item container direction={'column'} md>
                         <Grid item>
-                            <Typography variant={'h4'} align={matchesSM ? 'center' : 'right'}>Automation</Typography>
+                            <Typography variant={'h4'} align={matchesSM ? 'center' : undefined}>Automation</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 Why waste time when you don't have to?
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 We can help you identify processes with time or event based actions which can now
                                 easily be automated.
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 Increasing efficiency increases profits, laving you more time to focus on your
                                 business, not busywork.
                             </Typography>
@@ -235,13 +239,13 @@ export const CustomSoftware = props => {
                                 Design</Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 A good design that isn't usable isn't a good design.
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 So why are so many pieces of software complicated, confusing and frustrating?
                             </Typography>
-                            <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : 'right'}>
+                            <Typography variant={'body1'} paragraph align={'justify'}>
                                 By prioritizing users and the real ways they interact with technology we're able to
                                 develop unique, personable experiences that solve problems rather then create new ones.
                             </Typography>

@@ -99,7 +99,8 @@ export const Revolution = props => {
         },
         review: {
             src: review,
-            alt: 'magnifying glass'
+            alt: 'magnifying glass',
+            style: {maxWidth: '40em'}
         },
         design: {
             src: design,
@@ -147,16 +148,12 @@ export const Revolution = props => {
                         src={vision}
                         alt={'mountain through binoculars'}
                         style={{
-                            maxWidth: '40em',
+                            maxWidth: matchesSM ? 300 : '40em',
                             margin: matchesMD ? '0 0 5em 0' : '0 5em 0 0'
                         }}
                     />
                 </Grid>
-                <TitledParagraphs
-                    title={titles.vision}
-                    paragraphAlignment={matchesMD ? 'center' : 'right'}
-                    style={{maxWidth: matchesSM ? 300 : '40em'}}
-                >
+                <TitledParagraphs title={titles.vision} style={{maxWidth: matchesSM ? 300 : '40em'}}>
                     <>
                         The rise of computers and subsequently the internet, has completely altered every
                         aspect of human life. This has increased our comfort, broadened our connections and
@@ -191,11 +188,7 @@ export const Revolution = props => {
                 alignItems={'center'}
                 style={{margin: '10em 0 10em 0'}}
             >
-                <TitledParagraphs
-                    title={titles.technology}
-                    paragraphAlignment={matchesMD ? 'center' : undefined}
-                    style={{maxWidth: '40em'}}
-                >
+                <TitledParagraphs title={titles.technology} style={{maxWidth: '40em'}}>
                     <>
                         In 2013, Facebook invented a new way of building websites. This new system, React.js,
                         completely revolutionizes the process and practice of website development.
@@ -246,11 +239,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.consultation}
                 img={images.consultation}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
-                style={{
-                    backgroundColor: '#B3B3B3',
-                    height: '90em'
-                }}
+                style={{backgroundColor: '#B3B3B3'}}
             >
                 <>
                     Our process begins the moment you realize you need a piece of technology for your business.
@@ -272,11 +261,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.mockup}
                 img={images.mockup}
-                style={{
-                    backgroundColor: '#FF7373',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#FF7373'}}
             >
                 <>
                     After we settle on the best path forward and decide on a solution to pursue, details like the cost
@@ -296,11 +281,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.review}
                 img={images.review}
-                style={{
-                    backgroundColor: '#39B54A',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#39B54A'}}
             >
                 <>
                     Before moving any farther we come back to you with our progress. This gives you the freedom to
@@ -320,11 +301,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.design}
                 img={images.design}
-                style={{
-                    backgroundColor: '#A67C52',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#A67C52'}}
             >
                 <>
                     Using the mockups and notes taken during the consultation as guides, we will start ironing out what
@@ -340,11 +317,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.review}
                 img={images.review}
-                style={{
-                    backgroundColor: '#39B54A',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#39B54A'}}
             >
                 <>
                     A second round of review is essential to our goal of creating exactly what you want, exactly how
@@ -360,11 +333,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.build}
                 img={images.build}
-                style={{
-                    backgroundColor: '#FBB03B',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#FBB03B'}}
             >
                 <>Here’s where we get down to business.</>
                 <>
@@ -392,11 +361,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.launch}
                 img={images.launch}
-                style={{
-                    backgroundColor: '#C1272D',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#C1272D'}}
             >
                 <>The moment we’ve all been waiting for.</>
                 <>
@@ -413,11 +378,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.maintain}
                 img={images.maintain}
-                style={{
-                    backgroundColor: '#8E45CE',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#8E45CE'}}
             >
                 <>Our work doesn't end there.</>
                 <>
@@ -435,11 +396,7 @@ export const Revolution = props => {
                 className={classes.rowContainer}
                 title={titles.iterate}
                 img={images.iterate}
-                style={{
-                    backgroundColor: '#29ABE2',
-                    height: '90em'
-                }}
-                paragraphAlignment={matchesMD ? 'center' : undefined}
+                style={{backgroundColor: '#29ABE2'}}
             >
                 <>
                     The cycle repeats whenever you come up with a new idea for extending your current project, or

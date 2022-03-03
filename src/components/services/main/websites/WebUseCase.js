@@ -40,7 +40,7 @@ export const WebUseCase = props => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item style={props.paragraphSectionStyle}>
+            <Grid item style={props.paragraphSectionStyle} className={classes.paragraphContainer}>
                 {
                     children.map((child, index) => {
                         return (
@@ -48,7 +48,7 @@ export const WebUseCase = props => {
                                 key={index}
                                 variant={'body1'}
                                 paragraph={props.paragraph}
-                                align={matchesSM ? 'center' : undefined}
+                                align={'justify'}
                             >
                                 {child}
                             </Typography>

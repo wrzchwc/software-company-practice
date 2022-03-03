@@ -82,7 +82,7 @@ export const About = props => {
                 <Grid item>
                     <Grid item container direction={'column'} lg style={{maxWidth: '35em'}}>
                         <Grid item>
-                            <Typography variant={'h4'} gutterBottom align={matchesMD ? 'center' : undefined}>
+                            <Typography variant={'h4'} gutterBottom align={'justify'}>
                                 History
                             </Typography>
                         </Grid>

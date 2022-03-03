@@ -1,6 +1,6 @@
 import React from 'react';
 import {TitledParagraphs} from "./TitledParagraphs";
-import {Grid, useMediaQuery,useTheme} from "@material-ui/core";
+import {Grid, useMediaQuery, useTheme} from "@material-ui/core";
 
 export const ProcessPhase = props => {
     let {img} = props;
@@ -14,7 +14,10 @@ export const ProcessPhase = props => {
             direction={matchesMD ? 'column' : 'row'}
             justify={matchesMD ? 'center' : undefined}
             className={props.className}
-            style={props.style}
+            style={{
+                ...props.style,
+                height: '90em'
+            }}
         >
             <TitledParagraphs
                 title={props.title}
@@ -22,7 +25,6 @@ export const ProcessPhase = props => {
                     color: '#FFF',
                     maxWidth: '20em'
                 }}
-                paragraphAlignment={props.paragraphAlignment}
             >
                 {props.children}
             </TitledParagraphs>

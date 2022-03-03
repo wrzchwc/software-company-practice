@@ -61,7 +61,8 @@ export const MobileApps = props => {
             >
                 <Grid item container direction={'column'} md>
                     <Grid item>
-                        <Typography variant={'h4'} gutterBottom align={matchesSM ? 'center' : undefined}>Integration</Typography>
+                        <Typography variant={'h4'} gutterBottom
+                                    align={matchesSM ? 'center' : undefined}>Integration</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant={'body1'} paragraph align={matchesSM ? 'center' : undefined}>
@@ -77,7 +78,13 @@ export const MobileApps = props => {
                     </Grid>
                 </Grid>
                 <Grid item md>
-                    <Lottie options={animationOptions(integrationAnimation)} style={{maxWidth: '20em'}}/>
+                    <Lottie
+                        options={animationOptions(integrationAnimation)}
+                        style={{
+                            maxWidth: matchesMD ? '15em' : '20em',
+                            height: matchesMD ? '20em' : undefined
+                        }}
+                    />
                 </Grid>
                 <Grid item container direction={'column'} md>
                     <Grid item>
@@ -102,7 +109,10 @@ export const MobileApps = props => {
                 container
                 className={classes.rowContainer}
                 direction={matchesMD ? 'column' : 'row'}
-                style={{marginBottom: '15em'}}
+                style={{
+                    marginBottom: '15em',
+                    display: matchesMD ? 'grid' : undefined
+                }}
             >
                 <IconImage label={'Extend Functionality'} src={swiss} alt={'swiss army knife'}/>
                 <IconImage
