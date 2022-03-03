@@ -1,11 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Grid, Hidden, makeStyles} from "@material-ui/core";
+import Shortcut from "./Shortcut";
+
 import footerAdornment from "../../../assets/Footer Adornment.svg";
 import facebook from '../../../assets/facebook.svg'
 import twitter from '../../../assets/twitter.svg'
 import instagram from '../../../assets/instagram.svg'
-import Shortcut from "./Shortcut";
+import FooterLink from "./FooterLink";
 
 const useStyles = makeStyles(theme => ({
     adornment: {
@@ -20,10 +22,6 @@ const useStyles = makeStyles(theme => ({
     },
     gridItem: {
         margin: "3em"
-    },
-    icon: {
-        height: "4rem",
-        width: "4rem",
     },
     socialContainer: {
         position: "absolute",
@@ -68,175 +66,107 @@ export const Footer = ({setValue, setSelectedIndex}) => {
             href: 'https://www.facebook.com'
         }
     ]
+
+    const links = {
+        home: {
+            to: '/',
+            onClick: () => setValue(0)
+        },
+        services: {
+            to: '/services',
+            onClick: () => {
+                setValue(1);
+                setSelectedIndex(0);
+            }
+        },
+        customSoftware: {
+            to: '/custom-software',
+            onClick: () => {
+                setValue(1);
+                setSelectedIndex(1);
+            }
+        },
+        mobileApps: {
+            to: '/mobile-apps',
+            onClick: () => {
+                setValue(1);
+                setSelectedIndex(2);
+            }
+        },
+        websites: {
+            to: '/websites',
+            onClick: () => {
+                setValue(1);
+                setSelectedIndex(3);
+            }
+        },
+        revolution: {
+            to: '/revolution',
+            onClick: () => setValue(2),
+        },
+        about: {
+            to: '/about',
+            onClick: () => setValue(3),
+        },
+        contact: {
+            to: '/contact',
+            onClick: () => setValue(4)
+        }
+    }
+
+    const labels = {
+        revolution: ['The Revolution', 'Vision', 'Technology', 'Process'],
+        about: ['About Us', 'History', 'Team']
+    }
     return (
         <footer className={classes.footer}>
             <Hidden mdDown>
                 <Grid className={classes.mainContainer} container justify={"center"}>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(0);
-                                }}
-                                to={"/"}
-                            >
-                                Home
-                            </Grid>
+                            <FooterLink onClick={links.home.onClick} to={links.home.to}>Home</FooterLink>
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(1);
-                                    setSelectedIndex(0);
-                                }}
-                                to={"/services"}
-                            >
-                                Services
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(1);
-                                    setSelectedIndex(1);
-                                }}
-                                to={"/custom-software"}
-                            >
+                            <FooterLink onClick={links.services.onClick} to={links.services.to}>Services</FooterLink>
+                            <FooterLink onClick={links.customSoftware.onClick} to={links.customSoftware.to}>
                                 Custom Software Development
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(1);
-                                    setSelectedIndex(2);
-                                }}
-                                to={"/mobile-apps"}
-                            >
+                            </FooterLink>
+                            <FooterLink onClick={links.mobileApps.onClick} to={links.mobileApps.to}>
                                 iOS/Android App Development
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(1);
-                                    setSelectedIndex(3);
-                                }}
-                                to={"/websites"}
-                            >
+                            </FooterLink>
+                            <FooterLink onClick={links.websites.onClick} to={links.websites.to}>
                                 Website Development
-                            </Grid>
+                            </FooterLink>
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(2);
-                                }}
-                                to={"/revolution"}
-                            >
+                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
                                 The Revolution
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(2);
-                                }}
-                                to={"/revolution"}
-                            >
+                            </FooterLink>
+                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
                                 Vision
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(2);
-                                }}
-                                to={"/revolution"}
-                            >
+                            </FooterLink>
+                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
                                 Technology
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(2);
-                                }}
-                                to={"/revolution"}
-                            >
+                            </FooterLink>
+                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
                                 Process
-                            </Grid>
+                            </FooterLink>
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(3);
-                                }}
-                                to={"/about"}
-                            >
-                                About us
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(3);
-                                }}
-                                to={"/about"}
-                            >
-                                History
-                            </Grid>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(3);
-                                }}
-                                to={"/about"}
-                            >
-                                Team
-                            </Grid>
+                            <FooterLink onClick={links.about.onClick} to={links.about.to}>About Us</FooterLink>
+                            <FooterLink onClick={links.about.onClick} to={links.about.to}>History</FooterLink>
+                            <FooterLink onClick={links.about.onClick} to={links.about.to}>Team</FooterLink>
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <Grid
-                                component={Link}
-                                className={classes.link}
-                                item
-                                onClick={() => {
-                                    setValue(4);
-                                }}
-                                to={"/contact"}
-                            >
-                                Contact us
-                            </Grid>
+                            <FooterLink onClick={links.contact.onClick} to={links.contact.to}>Contact Us</FooterLink>
                         </Grid>
                     </Grid>
                 </Grid>
