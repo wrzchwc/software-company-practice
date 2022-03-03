@@ -141,6 +141,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
         setOpenMenu(false);
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const menuOptions = [
         {
             name: "Services",
@@ -168,6 +169,7 @@ const Header = ({selectedIndex, setSelectedIndex, setValue, value}) => {
         }
     ];
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const routes = [
         {
             name: "Home",
