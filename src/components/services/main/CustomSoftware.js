@@ -181,10 +181,7 @@ export const CustomSoftware = props => {
                 alignItems={matchesMD ? 'center' : undefined}
                 direction={matchesMD ? 'column' : 'row'}
                 justify={matchesMD ? 'center' : 'space-between'}
-                style={{
-                    marginBottom: '20em',
-                    display: matchesMD ? 'grid' : undefined
-                }}
+                style={{display: matchesMD ? 'grid' : undefined}}
                 className={classes.rowContainer}
             >
                 <Grid
@@ -253,7 +250,7 @@ export const CustomSoftware = props => {
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item>
+            <Grid item style={{marginTop: '20em'}}>
                 <CallToAction setValue={props.setValue}/>
             </Grid>
         </Grid>

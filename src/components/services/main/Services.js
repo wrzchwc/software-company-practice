@@ -39,8 +39,8 @@ export const Services = props => {
         }
         return (
             <>
-                'Complete digital solutions, from investigation '
-                <span className={classes.specialText}>celebration.</span>
+                Complete digital solutions, from investigation
+                <span className={classes.specialText}> celebration.</span>
             </>
         );
     }
