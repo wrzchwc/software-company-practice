@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {Grid, Hidden, makeStyles} from "@material-ui/core";
 import Shortcut from "./Shortcut";
 
@@ -30,13 +29,6 @@ const useStyles = makeStyles(theme => ({
     },
     mainContainer: {
         position: 'absolute'
-    },
-    link: {
-        color: '#FFF',
-        fontFamily: 'Arial',
-        fontSize: '0.75.rem',
-        fontWeight: 'bold',
-        textDecoration: 'none'
     }
 }))
 
@@ -118,6 +110,7 @@ export const Footer = ({setValue, setSelectedIndex}) => {
         revolution: ['The Revolution', 'Vision', 'Technology', 'Process'],
         about: ['About Us', 'History', 'Team']
     }
+
     return (
         <footer className={classes.footer}>
             <Hidden mdDown>
@@ -143,25 +136,32 @@ export const Footer = ({setValue, setSelectedIndex}) => {
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
-                                The Revolution
-                            </FooterLink>
-                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
-                                Vision
-                            </FooterLink>
-                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
-                                Technology
-                            </FooterLink>
-                            <FooterLink onClick={links.revolution.onClick} to={links.revolution.to}>
-                                Process
-                            </FooterLink>
+                            {
+                                labels.revolution.map((label, index)=>{
+                                    return (
+                                        <FooterLink
+                                            key={index}
+                                            onClick={links.revolution.onClick}
+                                            to={links.revolution.to}
+                                        >
+                                            {label}
+                                        </FooterLink>
+                                    );
+                                })
+                            }
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
                         <Grid container direction={"column"} spacing={2}>
-                            <FooterLink onClick={links.about.onClick} to={links.about.to}>About Us</FooterLink>
-                            <FooterLink onClick={links.about.onClick} to={links.about.to}>History</FooterLink>
-                            <FooterLink onClick={links.about.onClick} to={links.about.to}>Team</FooterLink>
+                            {
+                                labels.about.map((label, index)=>{
+                                    return (
+                                        <FooterLink key={index} onClick={links.about.onClick} to={links.about.to}>
+                                            {label}
+                                        </FooterLink>
+                                    );
+                                })
+                            }
                         </Grid>
                     </Grid>
                     <Grid className={classes.gridItem} item>
