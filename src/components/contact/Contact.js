@@ -235,7 +235,7 @@ export const Contact = () => {
                         <Grid item container justify={"center"} style={{marginTop: "2em"}}>
                             <Button
                                 variant={"contained"}
-                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper, email, phone)}
+                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper)}
                                 className={classes.sendButton}
                                 onClick={() => {
                                     setOpen(true)
@@ -335,7 +335,7 @@ export const Contact = () => {
                         <Grid item>
                             <Button
                                 variant={"contained"}
-                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper, email, phone)}
+                                disabled={canRequestBeSent(name, message, phoneHelper, emailHelper)}
                                 className={classes.sendButton}
                                 onClick={onConfirm}
                             >
