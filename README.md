@@ -2,7 +2,7 @@
 
 ## Context
 
-This project has been created during participation in 
+This project has been created during participation in a
 [video course](https://www.udemy.com/course/implement-high-fidelity-designs-with-material-ui-and-reactjs/) by 
 Zachary Reece at Udemy. The graphical design is exactly the same as presented in the course, however variety of 
 optimizations and improvements have been applied to improve code quality.
